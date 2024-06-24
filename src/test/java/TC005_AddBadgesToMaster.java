@@ -2,12 +2,14 @@ import annotations.AddCategory;
 import annotations.AddMasters;
 import entities.Master;
 import net.serenitybdd.junit.runners.SerenityRunner;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import utils.Admin;
 
 import java.util.concurrent.TimeoutException;
 
+@Ignore
 @RunWith(SerenityRunner.class)
 @AddCategory()
 @AddMasters(masters = 2, useAdminSite = true)

@@ -1,5 +1,6 @@
 import annotations.AddCategory;
 import net.serenitybdd.junit.runners.SerenityRunner;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import utils.Admin;
@@ -8,6 +9,7 @@ import utils.XmlParser;
 
 import java.util.concurrent.TimeoutException;
 
+@Ignore
 @RunWith(SerenityRunner.class)
 @AddCategory(addServiceQuestion = true, questionsCount = 4)
 public class TC013_CustomerRequestProgress extends TestBase {

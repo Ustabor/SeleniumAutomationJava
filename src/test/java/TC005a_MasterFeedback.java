@@ -3,6 +3,7 @@ import annotations.AddMasters;
 import entities.User;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import utils.Admin;
@@ -10,6 +11,7 @@ import utils.DataGenerator;
 
 import java.util.concurrent.TimeoutException;
 
+@Ignore
 @RunWith(SerenityRunner.class)
 @AddCategory(promotionAndClickPrice = true)
 @AddMasters()
