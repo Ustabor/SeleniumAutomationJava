@@ -117,7 +117,7 @@ public class PlaceOrderPage extends BasePage {
 
         for (int i = 0; i < attempts; i++) {
             var smsCode = Admin.getInstance().getSmsCode(user.getPhoneNumber());
-            if (smsCode.isEmpty() || smsCode.equals(user.getPhoneCode())) {
+            if (smsCode.isEmpty() || smsCode.equals(user.getPhoneCode()) || smsCode.equals(user.getLastSmsCode())) {
                 Thread.sleep(1000);
             } else {
                 return smsCode;

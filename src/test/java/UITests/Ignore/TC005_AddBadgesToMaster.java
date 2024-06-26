@@ -1,3 +1,6 @@
+package UITests.Ignore;
+
+import UITests.TestBase;
 import annotations.AddCategory;
 import annotations.AddMasters;
 import entities.Master;

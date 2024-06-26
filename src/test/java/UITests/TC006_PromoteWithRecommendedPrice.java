@@ -1,3 +1,5 @@
+package UITests;
+
 import annotations.AddCategory;
 import annotations.AddMasters;
 import entities.Master;
@@ -10,7 +12,7 @@ import java.util.concurrent.TimeoutException;
 
 @RunWith(SerenityRunner.class)
 @AddCategory(promotionAndClickPrice = true)
-@AddMasters(masters = 1, useAdminSite = true)
+@AddMasters(useAdminSite = true)
 public class TC006_PromoteWithRecommendedPrice extends TestBase {
 
     @Test

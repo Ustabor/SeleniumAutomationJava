@@ -11,6 +11,7 @@ public class User {
     private String aboutMe;
     private String city;
     private String profileId = null;
+    private String lastSmsCode = "";
 
     public User() { }
 
@@ -91,6 +92,10 @@ public class User {
     public void setProfileId(String profileId) {
         this.profileId = profileId;
     }
+
+    public String getLastSmsCode() { return lastSmsCode; }
+
+    public void setLastSmsCode(String lastSmsCode) { this.lastSmsCode = lastSmsCode; }
 
     @Override
     public String toString() {

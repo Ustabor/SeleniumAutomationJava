@@ -1,8 +1,9 @@
+package UITests;
+
 import net.serenitybdd.junit.runners.SerenityRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import utils.DataGenerator;
-
 
 @RunWith(SerenityRunner.class)
 public class TC004_MasterLoginFailure extends TestBase {

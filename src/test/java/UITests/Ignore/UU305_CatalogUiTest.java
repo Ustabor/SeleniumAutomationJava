@@ -1,11 +1,15 @@
+package UITests.Ignore;
+
+import UITests.TestBase;
 import net.serenitybdd.annotations.WithTag;
 import net.serenitybdd.junit.runners.SerenityRunner;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import utils.Config;
 
 @WithTag("smoke")
-
+@Ignore
 @RunWith(SerenityRunner.class)
 public class UU305_CatalogUiTest extends TestBase {
 

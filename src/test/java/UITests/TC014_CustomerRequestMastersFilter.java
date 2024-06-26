@@ -1,3 +1,5 @@
+package UITests;
+
 import annotations.AddCategory;
 import annotations.AddMasters;
 import net.serenitybdd.junit.runners.SerenityRunner;

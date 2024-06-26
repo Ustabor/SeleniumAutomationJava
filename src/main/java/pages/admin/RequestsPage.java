@@ -13,6 +13,9 @@ public class RequestsPage extends BaseAdminPage {
     @FindBy(xpath = "//form//input[@class='ui-autocomplete-input']")
     private WebElementFacade masterNameInput;
 
+    @FindBy(xpath = "//li[@class='ui-menu-item']")
+    private WebElementFacade masterSuggestion;
+
     @FindBy(xpath = "//div[@class='exists-block']//div[@class='menu-btn']")
     private WebElementFacade actionsBtn;
 
@@ -77,7 +80,7 @@ public class RequestsPage extends BaseAdminPage {
 
     public void findMaster(String masterId) {
         masterNameInput.sendKeys(masterId);
-
+        masterSuggestion.click();
     }
 
     public void submitMasterAssign() {

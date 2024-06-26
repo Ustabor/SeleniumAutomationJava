@@ -1,3 +1,6 @@
+package UITests.Ignore;
+
+import UITests.TestBase;
 import net.serenitybdd.annotations.WithTag;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import org.junit.Ignore;

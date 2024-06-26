@@ -1,3 +1,5 @@
+package UITests;
+
 import entities.User;
 import net.serenitybdd.annotations.WithTag;
 import net.serenitybdd.junit.runners.SerenityRunner;

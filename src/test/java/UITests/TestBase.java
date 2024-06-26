@@ -1,3 +1,5 @@
+package UITests;
+
 import annotations.AddCategory;
 import annotations.AddMasters;
 import entities.Category;
@@ -28,10 +30,10 @@ public class TestBase {
     public Watcher watcher = new Watcher();
 
     @Steps
-    UserSteps user;
+    public UserSteps user;
 
     @Steps
-    AdminSteps admin;
+    public AdminSteps admin;
 
     @Managed
     public WebDriver driver;
@@ -111,7 +113,7 @@ public class TestBase {
         setCountryLanguageAndLocation();
     }
 
-    String getText(String key) {
+    public String getText(String key) {
         return XmlParser.getTextByKey(key);
     }
 
@@ -122,7 +124,7 @@ public class TestBase {
         return Integer.parseInt(df.format(date));
     }
 
-    void setBrowserMobileWindowSize() {
+    public void setBrowserMobileWindowSize() {
         driver.manage().window().setSize(new Dimension(375, 667));
         driver.navigate().refresh();
     }

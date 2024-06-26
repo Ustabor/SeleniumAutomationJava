@@ -9,13 +9,6 @@ public class MasterWalletPageSteps extends MasterProfileSteps {
 
     @Step
     public void pageShouldBeVisible() {
-//        if (Config.isFixListKg()) {
-            masterWalletPage.transactionsHistoryShouldBeVisible();
-//        } else {
-//            masterWalletPage.balanceAmountShouldBeVisible();
-//            masterWalletPage.amountInputShouldBeVisible();
-//            masterWalletPage.paymentTypeSelectorShouldBeVisible();
-//            masterWalletPage.submitBtnShouldBeVisible();
-//        }
+        masterWalletPage.walletTabsShouldBeVisible();
     }
 }

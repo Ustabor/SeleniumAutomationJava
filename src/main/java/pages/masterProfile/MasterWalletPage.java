@@ -5,10 +5,10 @@ import org.openqa.selenium.support.FindBy;
 
 public class MasterWalletPage extends MasterProfileBasePage{
 
-    @FindBy(xpath = "//div[@class='l']")
-    private WebElementFacade transactionsHistorySpoiler;
+    @FindBy(xpath = "//div[@class='wallet-tabs']")
+    private WebElementFacade walletTabs;
 
-    public void transactionsHistoryShouldBeVisible() {
-        transactionsHistorySpoiler.shouldBeVisible();
+    public void walletTabsShouldBeVisible() {
+        walletTabs.shouldBeVisible();
     }
 }
