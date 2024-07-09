@@ -9,14 +9,10 @@ public class SearchBlock extends BasePage {
 
     @FindBy(xpath = "//input[@name='quicksearch']")
     private WebElementFacade searchInput;
-
-    @FindBy(xpath = "//div[@class='search']//button[@type='submit']")
+    @FindBy(xpath = "//form//button[@type='submit']")
     private WebElementFacade searchBtn;
-
-
     @FindBy(xpath = "//ul[contains(@class, 'ui-autocomplete')]")
     private WebElementFacade suggestionDropdown;
-
     @FindBy(xpath = "//ul[contains(@class, 'ui-autocomplete')]/li")
     private List<WebElementFacade> suggestionsOptionsList;
 
@@ -28,10 +24,9 @@ public class SearchBlock extends BasePage {
         searchInput.clear();
     }
 
-    public void ClickSearchBtn() {
+    public void clickSearchBtn() {
         searchBtn.click();
     }
-
 
     public void suggestionListShouldBeVisible() {
         suggestionDropdown.shouldBeVisible();

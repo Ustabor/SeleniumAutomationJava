@@ -44,7 +44,7 @@ public class MasterProfilePage extends MasterProfileBasePage {
         aboutMeText.shouldContainText(aboutMe);
     }
 
-    public void masterCityShouldBeEqual(String city) {
+    public void verifyMasterCity(String city) {
         masterCity.shouldContainText(city);
     }
 

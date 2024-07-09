@@ -279,10 +279,6 @@ public class BasePage extends PageObject {
         headerCountriesBtn.click();
     }
 
-    public void openFooterCountriesDropDown() {
-        footerCountryBtn.click();
-    }
-
     public List<String> getCountries() {
         openHeaderCountriesDropDown();
         return countriesList
@@ -290,25 +286,6 @@ public class BasePage extends PageObject {
                 .map(x -> x.getAttribute("class"))
                 .map(x -> x.substring(0, x.lastIndexOf(" ")))
                 .collect(Collectors.toList());
-    }
-
-    public void setCountry(String country) {
-        if (!isCountrySelectorVisible() || headerCountriesBtn.getText().equals(country)) {
-            return;
-        }
-
-        openHeaderCountriesDropDown();
-        WebElementFacade item = countriesList
-                .stream()
-                .filter(s -> s.getText().equals(country))
-                .findFirst()
-                .orElse(null);
-
-        if (item == null) {
-            throw new NullPointerException();
-        }
-
-        item.click();
     }
 
     public void setCountryByCode(String countryCode) {
@@ -370,10 +347,6 @@ public class BasePage extends PageObject {
         return headerLangBtn.getText();
     }
 
-    public void openFooterLangDropDown() {
-        footerLangBtn.click();
-    }
-
     public void verifyLangPopupIsVisible() {
         langsList.forEach(WebElementState::shouldBeVisible);
     }
@@ -391,6 +364,9 @@ public class BasePage extends PageObject {
         placeOrderBtn.click();
     }
 
+    public void scrollPageToTop() {
+        evaluateJavascript("window.scrollTo(0,0);");
+    }
     public void scrollPageToBottom() {
         evaluateJavascript("window.scrollTo(0,document.body.scrollHeight);");
     }
@@ -411,5 +387,9 @@ public class BasePage extends PageObject {
 
     public void resendCode() {
         repeatSendCode.click();
+    }
+
+    public void verifyHeaderSite(String site) {
+        sitesMenuBtn.shouldContainText(site);
     }
 }

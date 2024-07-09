@@ -135,4 +135,14 @@ public class PlaceOrderPageSteps extends ScenarioSteps {
     public void verifyMastersCount(int i) {
         placeOrderPage.verifyMastersCount(i);
     }
+
+    @Step
+    public void verifyCategory(String text) {
+        placeOrderPage.verifyCategory(text);
+    }
+
+    @Step
+    public void clickCategoryTab() {
+        placeOrderPage.clickCategoryTab();
+    }
 }

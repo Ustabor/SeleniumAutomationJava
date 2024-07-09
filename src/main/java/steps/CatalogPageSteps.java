@@ -17,22 +17,11 @@ public class CatalogPageSteps extends CommonSteps {
     }
 
     @Step
-    public void verifyAllFoundProjectsHaveCategory(String expectedCategory) {
-        catalogPage.verifyAllFoundProfilesHaveCategory(expectedCategory);
-    }
-
-    @Step
     public void openMasterContactsAndVerify(String projectName) {
         catalogPage.openMasterContactsByName(projectName);
         catalogPage.projectContactPopupShouldBeVisible();
         catalogPage.closeContactPopup();
         catalogPage.contactPopupShouldNotBeVisible();
-    }
-
-    @Step
-    public void enterSearchText(String text) {
-        catalogPage.cleanSearchInput();
-        catalogPage.enterSearchText(text);
     }
 
     @Step
@@ -53,20 +42,13 @@ public class CatalogPageSteps extends CommonSteps {
     public void selectFilterCityAndDistrict(String cityName, String district) {
         catalogPage.openFilterCityDropdown();
         catalogPage.selectCity(cityName);
+        catalogPage.waitForLoaderDisappears();
 
         if (!district.isEmpty()) {
             catalogPage.openDistrictDropdown();
             catalogPage.selectDistrict(district);
-
         }
-        catalogPage.ClickSearchBtn();
     }
-
-    @Step
-    public int getProjectsCounterValue() {
-        return catalogPage.getProjectsCounterValue();
-    }
-
     @Step
     public void verifyFilterContainsValues(String city, String district) {
         catalogPage.openFilter();
@@ -79,40 +61,6 @@ public class CatalogPageSteps extends CommonSteps {
 
     public boolean isSearchResultEmpty() {
         return catalogPage.isSearchCatalogEmpty();
-    }
-
-    @Step
-    public void openFilterAndVerify() {
-        catalogPage.openFilter();
-        catalogPage.filterCategoryBtnShouldBeVisible();
-        catalogPage.filterCityBtnShouldBeVisible();
-        catalogPage.filterSortingBtnShouldBeVisible();
-        catalogPage.filterSearchBtnShouldBeVisible();
-        catalogPage.filterResetBtnShouldBeVisible();
-        catalogPage.filterCloseBtnShouldBeVisible();
-    }
-
-    @Step
-    public void openFilterCategoriesAndVerify() {
-        catalogPage.openFilterCategoryPopup();
-        catalogPage.filterCategoryWindowShouldBeVisible();
-    }
-
-    @Step
-    public void closeFilterCategoryWindow() {
-        catalogPage.closeFilterCategoryWindow();
-    }
-
-    @Step
-    public void openFilterCityDropdownAndVerify() {
-        catalogPage.openFilterCityDropdown();
-        catalogPage.filterCityDropdownShouldBeVisible();
-        catalogPage.closeFilter();
-    }
-
-    @Step
-    public Master openRandomMasterProfile() {
-        return catalogPage.openRandomMasterProfile();
     }
 
     @Step
@@ -131,18 +79,131 @@ public class CatalogPageSteps extends CommonSteps {
     }
 
     @Step
-    public void sortMastersByRating() {
-        catalogPage.openFilter();
-        catalogPage.applyFilter();
-    }
-
     public void openMastersCatalog() {
         catalogPage.openPage();
     }
 
     @Step
-    public void enterTextAndSearch(String text) {
-        enterSearchText(text);
-        catalogPage.ClickSearchBtn();
+    public void clickPricesTab() {
+        catalogPage.clickPricesTab();
+    }
+
+    @Step
+    public void verifyTabShowPricesForCategory(String text) {
+        catalogPage.verifyPricesShowsForCategory(text);
+    }
+
+    @Step
+    public void verifyCatalogPage() {
+        catalogPage.verifyTabsAreVisible();
+        catalogPage.verifyFilterButtonIsVisible();
+        catalogPage.verifyMastersCardsAreVisible();
+    }
+
+    @Step
+    public void clickLoadMore() {
+        catalogPage.clickLoadMoreButton();
+        catalogPage.waitForLoaderDisappears();
+        catalogPage.scrollPageToTop();
+    }
+
+    @Step
+    public int getMastersCardsCount() {
+        return catalogPage.getMastersCardsCount();
+    }
+
+    @Step
+    public void openFilter() {
+        catalogPage.openFilter();
+    }
+
+    @Step
+    public void verifyFilter() {
+        catalogPage.filterCategoryBtnShouldBeVisible();
+        catalogPage.filterCityBtnShouldBeVisible();
+        catalogPage.filterSortingBtnShouldBeVisible();
+        catalogPage.filterResetBtnShouldBeVisible();
+        catalogPage.filterCloseBtnShouldBeVisible();
+        catalogPage.filterSearchBtnShouldBeVisible();
+    }
+
+    @Step
+    public void openFilterCategory() {
+        catalogPage.openFilterCategoryPopup();
+    }
+
+    @Step
+    public void verifyFilterCategoriesAreVisible() {
+        catalogPage.filterSearchBtnShouldBeVisible();
+        catalogPage.closeFilterCategoryWindow();
+    }
+
+    @Step
+    public void resetFilter() {
+        catalogPage.clickFilterReset();
+    }
+
+    @Step
+    public void closeFilter() {
+        catalogPage.closeFilter();
+    }
+
+    @Step
+    public void openRandomMaster() {
+        catalogPage.openRandomMasterProfile();
+    }
+
+    @Step
+    public void selectFilterSiteAndCategory(String site, String category) {
+        catalogPage.openFilterCategoryPopup();
+        catalogPage.selectFilterSite(site);
+        catalogPage.selectFilterCategory(category);
+    }
+
+    @Step
+    public void selectFilterCategory(String category) {
+        catalogPage.openFilter();
+        catalogPage.openFilterCategoryPopup();
+        catalogPage.selectFilterCategory(category);
+        catalogPage.applyFilter();
+    }
+
+    @Step
+    public void verifyOpenedCategory(String category) {
+        catalogPage.verifyOpenedCategory(category);
+    }
+
+    @Step
+    public void applyFilter() {
+        catalogPage.applyFilter();
+        catalogPage.waitForLoaderDisappears();
+    }
+
+    @Step
+    public int getCategoryMastersCount() {
+        return catalogPage.getCategoryMastersCount();
+    }
+
+    @Step
+    public void applyFilterSort(String sort) {
+        catalogPage.openFilter();
+        catalogPage.openFilterSort();
+        catalogPage.selectSort(sort);
+        catalogPage.applyFilter();
+    }
+
+    @Step
+    public void verifyAllMastersHaveQuickCallBadge() {
+        catalogPage.verifyMastersHaveQuickCallBadge();
+    }
+
+    @Step
+    public void verifyAllMastersHave24HoursBadge() {
+        catalogPage.verifyAllMastersHave24HoursBadge();
+    }
+
+    @Step
+    public void verifySortByReviewsCount() {
+        catalogPage.verifySortByReviewsCount();
     }
 }

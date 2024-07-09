@@ -23,6 +23,6 @@ public class TC001_MasterRegistration extends TestBase {
 
         user.atMasterProfilePage.masterFullNameShouldContain(master.getLastName());
         user.atMasterProfilePage.aboutMeShouldBe(master.getAboutMe());
-        user.atMasterProfilePage.masterCityShouldBe(master.getCity());
+        user.atMasterProfilePage.verifyMasterCity(master.getCity());
     }
 }

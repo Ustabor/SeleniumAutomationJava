@@ -14,6 +14,8 @@ public class PlaceOrderPage extends BasePage {
     //region First page
     @FindBy(xpath = "//div[@class='site-items']/a[1]")
     private WebElementFacade buildDomain;
+    @FindBy(xpath = "//a[@class='catalog']")
+    private WebElementFacade categoryTab;
     //endregion
 
     //region Second page
@@ -149,5 +151,13 @@ public class PlaceOrderPage extends BasePage {
 
     public void verifyMastersCount(int i) {
         mastersCount.shouldContainOnlyText(Integer.toString(i));
+    }
+
+    public void verifyCategory(String text) {
+        categoryTab.shouldContainText(text);
+    }
+
+    public void clickCategoryTab() {
+        categoryTab.click();
     }
 }

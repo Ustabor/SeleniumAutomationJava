@@ -297,4 +297,10 @@ public class HomePageSteps extends ScenarioSteps {
     public void selectCity(String city) {
         homePage.selectCity(city);
     }
+
+    @Step
+    public void enterTextAndSearch(String text) {
+        homePage.enterSearchText(text);
+        homePage.clickSearchBtn();
+    }
 }

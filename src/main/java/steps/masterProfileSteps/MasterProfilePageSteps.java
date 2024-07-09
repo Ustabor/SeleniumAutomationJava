@@ -34,8 +34,8 @@ public class MasterProfilePageSteps extends MasterProfileSteps {
     }
 
     @Step
-    public void masterCityShouldBe(String city) {
-        masterProfilePage.masterCityShouldBeEqual(city);
+    public void verifyMasterCity(String city) {
+        masterProfilePage.verifyMasterCity(city);
     }
 
     @Step

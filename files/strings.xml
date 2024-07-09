@@ -37,10 +37,19 @@
     <string name="CategoryBathroom">Ванные комнаты</string>
     <string name="CategoryArch">Архитекторы</string>
 
+    <string name="FilterSortQuickCall">Срочный вызов</string>
+    <string name="FilterSort24Hours">24/7</string>
+    <string name="FilterSortRating">По кол-ву оценок</string>
+
     <string name="SiteDomainBuild_Short1">Стро</string>
     <string name="SiteDomainBuild_Short2">Строй</string>
     <string name="SiteDomainBuild_Full">Строительный</string>
+    <string name="SearchRequestPlumber">Сантехник</string>
+    <string name="FilterCategoryPlumber">Сантехники</string>
+
     <string name="SiteDomainAuto">Авто</string>
+    <string name="FilterCategoryCallAuto">Вызов мастера на место</string>
+
     <string name="SiteDomainTech">Техника</string>
     <string name="SiteDomainHome">Бытовые услуги</string>
     <string name="SiteDomainHome_fixinglist">Дом быта</string>
@@ -65,11 +74,12 @@
 
     <string name="FilterCity_kz_ustabor">Астана</string>
     <string name="FilterCity_uz_ustabor">Ташкент</string>
+    <string name="FilterCity_uz_ustabor_1">Самарканд</string>
 
     <string name="FilterCity_kz_fixinglist">Астана</string>
     <string name="FilterCity_uz_fixinglist">Ташкент</string>
 
-    <string name="FilterDistrict_uz"></string>
+    <string name="FilterDistrict_uz">Сергелийский район</string>
     <string name="FilterDistrict_kz"></string>
     <string name="FilterDistrict_ua"></string>
 
@@ -104,5 +114,4 @@
     <string name="Category_ustabor">Chilangarlar</string>
 
     <string name="InsufficientFunds">На вашем счете недостаточно средств</string>string>
-
 </resources>

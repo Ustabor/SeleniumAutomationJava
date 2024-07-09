@@ -1,22 +1,16 @@
 package pages;
 
 import entities.Master;
-import entities.Project;
 import freemarker.template.utility.NullArgumentException;
 import net.serenitybdd.core.pages.WebElementFacade;
-import net.serenitybdd.core.pages.WebElementState;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import utils.Admin;
-import utils.Config;
 
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,33 +21,38 @@ public class CatalogPage extends SearchBlock {
     private static final String ratingXpath = ".//div[contains(@class,'rating')]";
     private static final String reviewsCountXpath = ".//span[@class='reviews-count']";
     private static final String avatarXpath = ".//div[@class='image']";
-    private static final String districtXpath = "//div[contains(@class, 'district expanded')]//div[@class='item'and text()='%s']";
+    private static final String districtXpath = "//div[@class='item-wrapper' and text()='%s']";
+    private static final String sortXpath = "//div[@class='item-wrapper' and text()='%s']";
+    private static final String filterSite = "//div[@id='categories']//li[text()='%s']";
+    private static final String filterCategory = "//a[./span[text()='%s']]";
 
     private static final Logger logger = LoggerFactory.getLogger(CatalogPage.class);
 
-    @FindBy(xpath = "//a[@class='btn-catalog']")
-    private WebElementFacade mastersCatalog;
+    @FindBy(xpath = "//div[contains(@class, 'row-sites')]//a[@class='btn-catalog']")
+    private WebElementFacade catalogButton;
 
-    @FindBy(xpath = "//nav[@class='breadcrumbs']/a")
-    private List<WebElementFacade> headerNavigationElements;
-
-    @FindBy(xpath = "//div[@class='ui-selectbox icon category']")
-    private WebElementFacade selectedCategory;
-
-    @FindBy(xpath = "//div[@id='projects-gallery']/a[@class='item project']")
-    private List<WebElementFacade> projectsList;
-
-    @FindBy(xpath = "//div[contains(@class,'window-contacts')]")
-    private WebElementFacade projectContactPopup;
-
-    @FindBy(xpath = "//div[contains(@class,'window-contacts')]//div[@class='btn-close']")
-    private WebElementFacade closeContactPopup;
-
-    @FindBy(xpath = "//div[@class='results']")
-    private WebElementFacade projectsCounter;
-
-    @FindBy(xpath = "//div[@class='catalog-search-empty']//div[@class='text']")
-    private WebElementFacade emptyCatalogMessage;
+    //region Catalog header elements
+    @FindBy(xpath = "//a[contains(@class, 'catalog')]")
+    private WebElementFacade mastersTab;
+    @FindBy(xpath = "//a[@class='prices']")
+    private WebElementFacade pricesTab;
+    @FindBy(xpath = "//a[@class='services']")
+    private WebElementFacade servicesTab;
+    @FindBy(xpath = "//div[@class='chat']")
+    private WebElementFacade chatTab;
+    @FindBy(xpath = "//div[@id='btn-filter']")
+    private WebElementFacade filterButton;
+    @FindBy(xpath = "//div[@class='ui-selectbox-button']")
+    private WebElementFacade dropdownSelectedCategory;
+    @FindBy(xpath = "//div[@id='projects-gallery']//a[not(contains(@data-ad, '1'))]")
+    private List<WebElementFacade> mastersCards;
+    @FindBy(xpath = "//div[@id='projects-gallery']//a[not(contains(@data-ad, '1'))]//span[@class='emergency']")
+    private List<WebElementFacade> emergencyBadges;
+    @FindBy(xpath = "//div[@id='projects-gallery']//a[not(contains(@data-ad, '1'))]//span[@class='b24_7']")
+    private List<WebElementFacade> hours24Badges;
+    @FindBy(xpath = "//button[@id='load-more']")
+    private WebElementFacade loadMoreButton;
+    //endregion
 
     //region Filter elements
     @FindBy(xpath = "//div[@id='btn-filter']")
@@ -65,7 +64,7 @@ public class CatalogPage extends SearchBlock {
     @FindBy(xpath = "//div[./select[@id='city_id']]/div")
     private WebElementFacade filterCityBtn;
 
-    @FindBy(xpath = "//div[@class='menu-popup']/div[contains(@class, 'district')]")
+    @FindBy(xpath = "//div[@class='ui-selectbox district']")
     private WebElementFacade filterDistrictBtn;
 
     @FindBy(xpath = "//div[contains(@class,'item')]")
@@ -88,121 +87,83 @@ public class CatalogPage extends SearchBlock {
 
     @FindBy(xpath = "//div[@class='window window-categories']//div[@class='btn-close']")
     private WebElementFacade filterCategoryWindowCloseBtn;
+
+    @FindBy(xpath = "//div[contains(@class, 'ui-selectbox icon order')]")
+    private WebElementFacade filterOrderButton;
     //endregion
+
+
+
+
+
+
+
+    @FindBy(xpath = "//nav[@class='breadcrumbs']/a")
+    private List<WebElementFacade> headerNavigationElements;
+
+    @FindBy(xpath = "//div[@class='ui-selectbox icon category']")
+    private WebElementFacade selectedCategory;
+
+    @FindBy(xpath = "//div[contains(@class,'window-contacts')]")
+    private WebElementFacade projectContactPopup;
+
+    @FindBy(xpath = "//div[contains(@class,'window-contacts')]//div[@class='btn-close']")
+    private WebElementFacade closeContactPopup;
+
+    @FindBy(xpath = "//div[@class='results']")
+    private WebElementFacade projectsCounter;
+
+    @FindBy(xpath = "//div[@class='catalog-search-empty']//div[@class='text']")
+    private WebElementFacade emptyCatalogMessage;
 
     //region New
     @FindBy(xpath = "//div[@id='projects-gallery']/a")
     private List<WebElementFacade> mastersList;
     //endregion
 
-    public void verifySelectedCategoryEquals(String expectedCategory) {
-        assertThat(selectedCategory.getText()).isEqualTo(expectedCategory);
+    public void openPage() {
+        catalogButton.click();
     }
 
-    public void verifyAllFoundProfilesHaveCategory(String expectedCategory) {
-        List<String> categories = projectsList.stream()
-                .map(project -> project.findElement(By.xpath(".//div[@class='category']")).getText())
-                .collect(Collectors.toList());
-
-        categories.forEach(c -> assertThat(c).isEqualTo(expectedCategory));
+    public void clickPricesTab() {
+        pricesTab.click();
     }
 
+    public void verifyOpenedCategory(String category) {
+        mastersTab.shouldContainText(category);
+    }
+
+    public void verifyPricesShowsForCategory(String text) {
+        dropdownSelectedCategory.shouldContainText(text);
+    }
+
+    public void verifyTabsAreVisible() {
+        mastersTab.shouldBeVisible();
+        pricesTab.shouldBeVisible();
+        servicesTab.shouldBeVisible();
+        chatTab.shouldBeVisible();
+    }
+
+    public void verifyFilterButtonIsVisible() {
+        filterButton.shouldBeVisible();
+    }
+
+    public void verifyMastersCardsAreVisible() {
+        assertThat(mastersCards.isEmpty()).isFalse();
+    }
+
+    public void clickLoadMoreButton() {
+        loadMoreButton.click();
+    }
+
+    public int getMastersCardsCount() {
+        return mastersCards.size();
+    }
+
+    //region Filter actions
     public void openFilter() {
         filterBtn.click();
         waitForLoaderDisappears();
-    }
-
-    public void closeFilter() {
-        filterCloseBtn.click();
-    }
-
-    public void openMasterContactsByName(String masterName) {
-        var master = mastersList.stream()
-                .filter(p -> p.getText().contains(masterName)).findFirst().orElse(null);
-
-        if (master == null) {
-            throw new NullPointerException(String.format("%s was not found", masterName));
-        }
-
-        master.findElement(By.xpath(".//button[@class='button-contacts icon']")).click();
-    }
-
-    public void projectContactPopupShouldBeVisible(){
-        projectContactPopup.shouldBeVisible();
-    }
-
-    public void closeContactPopup() {
-        closeContactPopup.click();
-    }
-
-    public Master openRandomMasterProfile() {
-        var number = ThreadLocalRandom.current().nextInt(5, mastersList.size() - 5);
-        logger.info("Master number: " + number);
-        var randomMaster = mastersList.get(number);
-        var master = getMasterInfo(randomMaster);
-        randomMaster.findElement(By.xpath(avatarXpath)).click();
-
-        return master;
-    }
-
-    public void contactPopupShouldNotBeVisible() {
-        projectContactPopup.shouldNotBeVisible();
-    }
-
-    public void verifyCategoryFilterBtnTextIsNot(String text) {
-        assertThat(filterCategoryBtn.getText()).isNotEqualTo(text);
-    }
-
-    public void verifyCityFilterTextIsNot(String city) {
-        assertThat(filterCityBtn.getText()).isNotEqualTo(city);
-    }
-
-    public void selectCity(String expectedCity) {
-        WebElementFacade foundCity = filterCitiesList.stream()
-                .filter(city -> expectedCity.contains(city.getText()))
-                .findFirst()
-                .orElse(null);
-
-        if (foundCity == null) throw new NullArgumentException(
-                String.format("%s is not in cities list", expectedCity));
-
-        foundCity.click();
-    }
-
-    public void selectDistrict(String districtName) {
-        getDriver().findElement(By.xpath(String.format(districtXpath, districtName))).click();
-    }
-
-    public void verifyCityFilterText(String city) {
-        assertThat(filterCityBtn.getText()).isEqualTo(city);
-    }
-
-    public void verifyDistrictFilterText(String district) {
-        assertThat(filterDistrictBtn.getText()).isEqualTo(district);
-    }
-
-    public void openFilterCityDropdown() {
-        filterCityBtn.click();
-    }
-
-    public void openDistrictDropdown() {
-        filterDistrictBtn.click();
-    }
-
-    public int getProjectsCounterValue() {
-        if (isSearchCatalogEmpty()) {
-            return 0;
-        }
-        return Integer.parseInt(projectsCounter
-                .getText()
-                .replaceAll("[^0-9]", ""));
-    }
-
-    public boolean isSearchCatalogEmpty() {
-        setTimeouts(1, ChronoUnit.SECONDS);
-        boolean result = emptyCatalogMessage.isVisible();
-        resetTimeouts();
-        return result;
     }
 
     public void filterCategoryBtnShouldBeVisible() {
@@ -233,17 +194,155 @@ public class CatalogPage extends SearchBlock {
         filterCategoryBtn.click();
     }
 
-    public void filterCategoryWindowShouldBeVisible() {
-        filterCategoryWindow.shouldBeVisible();
+    public void selectFilterSite(String site) {
+        getDriver().findElement(By.xpath(String.format(filterSite, site))).click();
+    }
+
+    public void selectFilterCategory(String category) {
+        getDriver().findElement(By.xpath(String.format(filterCategory, category))).click();
     }
 
     public void closeFilterCategoryWindow() {
         filterCategoryWindowCloseBtn.click();
     }
 
-    public void filterCityDropdownShouldBeVisible() {
-        assertThat(filterCitiesList.size()).isGreaterThan(1);
-        filterCitiesList.forEach(WebElementState::shouldBeVisible);
+    public void openFilterCityDropdown() {
+        filterCityBtn.click();
+    }
+
+    public void selectCity(String expectedCity) {
+        WebElementFacade foundCity = filterCitiesList.stream()
+                .filter(city -> expectedCity.contains(city.getText()))
+                .findFirst()
+                .orElse(null);
+
+        if (foundCity == null) throw new NullArgumentException(
+                String.format("%s is not in cities list", expectedCity));
+
+        foundCity.click();
+    }
+
+    public void openDistrictDropdown() {
+        filterDistrictBtn.click();
+    }
+
+    public void selectDistrict(String districtName) {
+        getDriver().findElement(By.xpath(String.format(districtXpath, districtName))).click();
+    }
+
+    public void openFilterSort() {
+        filterOrderButton.click();
+    }
+
+    public void selectSort(String sort) {
+        getDriver().findElement(By.xpath(String.format(sortXpath, sort))).click();
+    }
+
+    public void applyFilter() {
+        filterSubmitBtn.click();
+    }
+
+    public void clickFilterReset() {
+        filterResetBtn.click();
+    }
+
+    public void closeFilter() {
+        filterCloseBtn.click();
+    }
+    //endregion
+
+    public void openRandomMasterProfile() {
+        var number = ThreadLocalRandom.current().nextInt(5, mastersList.size() - 5);
+        logger.info("Master number: " + number);
+        var randomMaster = mastersList.get(number);
+        var master = getMasterInfo(randomMaster);
+        randomMaster.findElement(By.xpath(avatarXpath)).click();
+    }
+
+    public void verifyMastersHaveQuickCallBadge() {
+        assertThat(mastersCards.size()).isEqualTo(emergencyBadges.size());
+    }
+
+    public void verifyAllMastersHave24HoursBadge() {
+        assertThat(mastersCards.size()).isEqualTo(hours24Badges.size());
+    }
+
+    public void verifySortByReviewsCount() {
+        var first = mastersCards.get(0)
+                .findElement(By.xpath("//span[@class='reviews-count']"))
+                .getText()
+                .replaceAll("[^0-9]", "");
+        var second = mastersCards.get(1)
+                .findElement(By.xpath("//span[@class='reviews-count']"))
+                .getText()
+                .replaceAll("[^0-9]", "");
+        assertThat(Integer.valueOf(first)).isGreaterThanOrEqualTo(Integer.valueOf(second));
+    }
+
+    public int getCategoryMastersCount() {
+        var count = mastersTab.findElement(By.xpath("//i")).getText();
+        return Integer.parseInt(count);
+    }
+
+
+
+    public void verifySelectedCategoryEquals(String expectedCategory) {
+        assertThat(selectedCategory.getText()).isEqualTo(expectedCategory);
+    }
+
+    public void openMasterContactsByName(String masterName) {
+        var master = mastersList.stream()
+                .filter(p -> p.getText().contains(masterName)).findFirst().orElse(null);
+
+        if (master == null) {
+            throw new NullPointerException(String.format("%s was not found", masterName));
+        }
+
+        master.findElement(By.xpath(".//button[@class='button-contacts icon']")).click();
+    }
+
+    public void projectContactPopupShouldBeVisible(){
+        projectContactPopup.shouldBeVisible();
+    }
+
+    public void closeContactPopup() {
+        closeContactPopup.click();
+    }
+
+    public void contactPopupShouldNotBeVisible() {
+        projectContactPopup.shouldNotBeVisible();
+    }
+
+    public void verifyCategoryFilterBtnTextIsNot(String text) {
+        assertThat(filterCategoryBtn.getText()).isNotEqualTo(text);
+    }
+
+    public void verifyCityFilterTextIsNot(String city) {
+        assertThat(filterCityBtn.getText()).isNotEqualTo(city);
+    }
+
+    public void verifyCityFilterText(String city) {
+        assertThat(filterCityBtn.getText()).isEqualTo(city);
+    }
+
+    public void verifyDistrictFilterText(String district) {
+        assertThat(filterDistrictBtn.getText()).isEqualTo(district);
+    }
+
+    public int getProjectsCounterValue() {
+        if (isSearchCatalogEmpty()) {
+            return 0;
+        }
+        return Integer.parseInt(projectsCounter
+                .getText()
+                .replaceAll("[^0-9]", ""));
+    }
+
+    public boolean isSearchCatalogEmpty() {
+        setTimeouts(1, ChronoUnit.SECONDS);
+        boolean result = emptyCatalogMessage.isVisible();
+        resetTimeouts();
+        return result;
     }
 
     private Master getMasterInfo(WebElementFacade selectedMaster) {
@@ -294,15 +393,7 @@ public class CatalogPage extends SearchBlock {
         assertThat(masterRating).isEqualTo(rating);
     }
 
-    public void applyFilter() {
-        filterSubmitBtn.click();
-    }
-
     public boolean isBreadcrumbsLongEnough() {
         return headerNavigationElements.size() > 3;
-    }
-
-    public void openPage() {
-        mastersCatalog.click();
     }
 }

@@ -5,10 +5,8 @@ import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.core.pages.WebElementState;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
-import utils.Config;
 
 import java.time.Duration;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Random;
 

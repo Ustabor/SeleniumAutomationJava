@@ -2,7 +2,6 @@ package UITests;
 
 import net.serenitybdd.annotations.WithTag;
 import net.serenitybdd.junit.runners.SerenityRunner;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import utils.Config;
@@ -12,49 +11,54 @@ import java.util.concurrent.TimeoutException;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @WithTag("smoke")
-@Ignore
 @RunWith(SerenityRunner.class)
 public class UU201_CatalogTest extends TestBase {
 
     @Test
-    public void verifyCatalogCategoriesAndSearch() throws TimeoutException {
-
+    public void catalogFilterTest() throws TimeoutException {
         user.atCatalogPage.openMastersCatalog();
-        user.atCatalogPage.enterSearchText(getText("SearchRequestFurniture"));
-        user.atHomePage.selectSuggestionCategoryAndSearch(getText("SearchRequestSuggestion"));
-        user.atCatalogPage.verifySelectedCategoryEquals(getText("CategoryBathroom"));
+        user.atCatalogPage.verifySiteAtHeader(getText("SiteDomainBuild_Short2"));
 
-        user.atCatalogPage.enterSearchText(getText("SearchRequestFurnitureShort"));
-        user.atCatalogPage.suggestionDropdownShouldBeVisible();
+        user.atCatalogPage.selectFilterCategory(getText("FilterCategoryPlumber"));
+        user.atCatalogPage.verifyOpenedCategory(getText("FilterCategoryPlumber"));
+
+        var oldMastersCount = user.atCatalogPage.getCategoryMastersCount();
+        var city1 = getText("FilterCity_" + Config.getCountryCode() + "_" + Config.getEnv() + "_1");
+        user.atCatalogPage.openFilter();
+        user.atCatalogPage.selectFilterCityAndDistrict(city1, "");
+        user.atCatalogPage.applyFilter();
+        var newMastersCount = user.atCatalogPage.getCategoryMastersCount();
+        assertThat(oldMastersCount).isGreaterThan(newMastersCount);
+
+        user.atCatalogPage.openRandomMaster();
+        user.atMasterProfilePage.verifyMasterCity(city1);
+
+
         user.atHomePage.openHomePage();
+        user.atCatalogPage.openMastersCatalog();
+        user.atCatalogPage.openFilter();
+        var city = getText("FilterCity_" + Config.getCountryCode() + "_" + Config.getEnv());
+        user.atCatalogPage.selectFilterCityAndDistrict(city, "");
+        user.atCatalogPage.selectFilterSiteAndCategory(
+                getText("SiteDomainAuto"),
+                getText("FilterCategoryCallAuto")
+        );
+        user.atCatalogPage.applyFilter();
+        user.atCatalogPage.verifyOpenedCategory(getText("FilterCategoryCallAuto"));
 
-        var sitesNamesList = user.atCatalogPage.getSitesNames();
-        for (String siteName : sitesNamesList) {
-            user.atHomePage.openHomePage();
-            user.atCatalogPage.openSiteWithName(siteName);
-            user.atCatalogPage.correctSiteShouldBeVisible(siteName);
-        }
+        user.atCatalogPage.openRandomMaster();
+        user.atMasterProfilePage.verifyMasterCity(city);
 
-        user.atCatalogPage.openSiteWithName(getText("SiteDomainBuild_Short1"));
-        user.atCatalogPage.openSiteMap();
+        user.atHomePage.openHomePage();
+        user.atCatalogPage.openMastersCatalog();
+        user.atCatalogPage.applyFilterSort(getText("FilterSortQuickCall"));
+        user.atCatalogPage.verifyAllMastersHaveQuickCallBadge();
 
-        if (!user.atSiteMapPage.isMapEmpty()) {
-            user.atSiteMapPage.openRandomUrl();
-            user.atCatalogPage.verifyFilterValues();
+        user.atCatalogPage.applyFilterSort(getText("FilterSort24Hours"));
+        user.atCatalogPage.verifyAllMastersHave24HoursBadge();
 
-            var city = getText("FilterCity_" + Config.getCountryCode() + "_" + Config.getEnv());
-            var district = getText("FilterDistrict_" + Config.getCountryCode());
+        user.atCatalogPage.applyFilterSort(getText("FilterSortRating"));
+        user.atCatalogPage.verifySortByReviewsCount();
 
-            user.atCatalogPage.selectFilterCityAndDistrict(city, district);
-            user.atCatalogPage.verifyFilterContainsValues(city, district);
-        }
-
-        for (int i = 0; i < 3; i++) {
-            user.atHomePage.openHomePage();
-            user.atCatalogPage.openMastersCatalog();
-            if (!user.atCatalogPage.isSearchResultEmpty()) {
-                assertThat(user.atCatalogPage.getProjectsCounterValue()).isGreaterThan(0);
-            }
-        }
     }
 }
