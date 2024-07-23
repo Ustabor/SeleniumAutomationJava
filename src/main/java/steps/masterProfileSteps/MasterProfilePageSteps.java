@@ -39,15 +39,6 @@ public class MasterProfilePageSteps extends MasterProfileSteps {
     }
 
     @Step
-    public void verifyProfilePage(Master master) {
-        masterProfilePage.masterFullNameShouldContain(master.getFirstName());
-        masterProfilePage.masterRatingShouldBe(master.getRating());
-        if (!master.getFeedback().isBlank()) {
-            masterProfilePage.masterFeedbackShouldContain(master.getFeedback());
-        }
-    }
-
-    @Step
     public void openProfileSettings() {
         masterProfilePage.openProfileSettings();
     }
@@ -59,5 +50,26 @@ public class MasterProfilePageSteps extends MasterProfileSteps {
     @Step
     public void selectService() throws InterruptedException {
         masterProfilePage.selectService();
+    }
+
+    @Step
+    public void changeMasterInfo(Master newMasterData) {
+        masterProfilePage.enterName(newMasterData.getFirstName());
+//        masterProfilePage.enterEmail(newMasterData.getEmail());
+//        masterProfilePage.enterPhoneNumber(newMasterData.getPhoneNumber());
+        masterProfilePage.changeCity();
+        masterProfilePage.changeExperience();
+        masterProfilePage.enterAboutMeInfo(newMasterData.getAboutMe());
+    }
+
+    @Step
+    public void saveChanges() {
+        masterProfilePage.clickSaveButton();
+    }
+
+    @Step
+    public void verifyMasterInfo(Master newMasterData) {
+        masterProfilePage.masterNameInputShouldContain(newMasterData.getFirstName());
+        masterProfilePage.masterAboutMeInfoShouldContain(newMasterData.getAboutMe());
     }
 }

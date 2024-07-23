@@ -206,4 +206,19 @@ public class CatalogPageSteps extends CommonSteps {
     public void verifySortByReviewsCount() {
         catalogPage.verifySortByReviewsCount();
     }
+
+    @Step
+    public void orderCallback(String phoneNumber) {
+        catalogPage.clickCallMasterButton();
+        catalogPage.clickCallbackButton();
+        catalogPage.enterCustomerPhoneNumber(phoneNumber);
+        catalogPage.selectTimePeriod();
+        catalogPage.submitCallback();
+        catalogPage.closeCallbackForm();
+    }
+
+    @Step
+    public void verifyMasterServicePresent() {
+        catalogPage.verifyMasterServicePresent();
+    }
 }

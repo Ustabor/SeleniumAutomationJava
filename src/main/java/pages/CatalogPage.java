@@ -31,6 +31,9 @@ public class CatalogPage extends SearchBlock {
     @FindBy(xpath = "//div[contains(@class, 'row-sites')]//a[@class='btn-catalog']")
     private WebElementFacade catalogButton;
 
+    @FindBy(xpath = "//table[@class='services']")
+    private WebElementFacade masterServicesTable;
+
     //region Catalog header elements
     @FindBy(xpath = "//a[contains(@class, 'catalog')]")
     private WebElementFacade mastersTab;
@@ -92,8 +95,20 @@ public class CatalogPage extends SearchBlock {
     private WebElementFacade filterOrderButton;
     //endregion
 
-
-
+    //region Callback form
+    @FindBy(xpath = "//a//button[@class='button-contacts icon']")
+    private WebElementFacade callMasterButton;
+    @FindBy(xpath = "//div[contains(@class, 'master-info')]/div[@class='btn']")
+    private WebElementFacade callbackButton;
+    @FindBy(xpath = "//input[@type='tel']")
+    private WebElementFacade callbackPhoneInput;
+    @FindBy(xpath = "//div[@class='radio-item']")
+    private WebElementFacade morningTimePeriod;
+    @FindBy(xpath = "//form[@id='form-callback']//button[@class='btn-submit']")
+    private WebElementFacade submitCallback;
+    @FindBy(xpath = "//div[@class='window-shadow' and .//div[@id='window-master-contact']]//div[@class='btn-close']")
+    private WebElementFacade closeCallback;
+    //endregion
 
 
 
@@ -395,5 +410,34 @@ public class CatalogPage extends SearchBlock {
 
     public boolean isBreadcrumbsLongEnough() {
         return headerNavigationElements.size() > 3;
+    }
+
+    public void clickCallMasterButton() {
+        callMasterButton.click();
+    }
+
+    public void clickCallbackButton() {
+        callbackButton.click();
+    }
+
+    public void enterCustomerPhoneNumber(String phoneNumber) {
+        callbackPhoneInput.sendKeys(phoneNumber);
+    }
+
+    public void selectTimePeriod() {
+        morningTimePeriod.click();
+    }
+
+    public void submitCallback() {
+        submitCallback.click();
+    }
+
+    public void closeCallbackForm() {
+        closeCallback.click();
+    }
+
+    public void verifyMasterServicePresent() {
+        masterServicesTable.shouldContainText("Autotest");
+        masterServicesTable.shouldContainText("100");
     }
 }

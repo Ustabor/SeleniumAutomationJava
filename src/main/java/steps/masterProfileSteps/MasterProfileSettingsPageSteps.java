@@ -36,4 +36,9 @@ public class MasterProfileSettingsPageSteps extends MasterProfileSteps {
     public void openChangePasswordForm() {
         masterProfileSettingsPage.openPasswordFormIfNeeded();
     }
+
+    public void deleteProfile() {
+        masterProfileSettingsPage.clickDeleteProfile();
+        masterProfileSettingsPage.submitProfileDeleting();
+    }
 }

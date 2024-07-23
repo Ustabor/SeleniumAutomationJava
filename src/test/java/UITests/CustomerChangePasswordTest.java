@@ -1,7 +1,6 @@
 package UITests;
 
 import entities.User;
-import net.serenitybdd.annotations.WithTag;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import org.junit.After;
 import org.junit.Test;
@@ -10,27 +9,36 @@ import utils.DataGenerator;
 
 import java.util.concurrent.TimeoutException;
 
-//Заказчик - удаление профиля
+import static org.assertj.core.api.Assertions.assertThat;
 
-@WithTag("smoke")
+//Заказчик - изменить пароль
+
 @RunWith(SerenityRunner.class)
-public class TC008_CustomerRegistration extends TestBase {
+public class CustomerChangePasswordTest extends TestBase {
 
     private User customer;
 
     @Test
-    public void customerRegistration() throws InterruptedException {
+    public void customerChangePassword() throws InterruptedException {
         customer = DataGenerator.getCustomer();
         watcher.users.add(customer);
 
         user.atHomePage.registerAsCustomer(customer);
-
         var smsCode = user.getSmsCode(customer);
-
         user.atHomePage.enterAuthCodeAndSubmit(smsCode, customer.getPhoneNumber());
-        user.atCustomerProfilePersonalInfoPage.openCustomerProfilePage();
 
+        user.atCustomerProfilePersonalInfoPage.openCustomerProfilePage();
         customer.setProfileId(user.atCustomerProfilePersonalInfoPage.getCustomerProfileId());
+
+        var newPassword = DataGenerator.getPassword();
+        user.atCustomerProfilePersonalInfoPage.changePassword(newPassword);
+
+        user.atCustomerProfilePersonalInfoPage.logsOut();
+        assertThat(user.atHomePage.login(customer.getLogin(), customer.getPassword(), true))
+                .isFalse();
+
+        user.atHomePage.login(customer.getLogin(), newPassword, false);
+        user.atHomePage.verifyUserIsLoggedIn();
     }
 
     @After

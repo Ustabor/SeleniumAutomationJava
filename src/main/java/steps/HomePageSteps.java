@@ -84,27 +84,6 @@ public class HomePageSteps extends ScenarioSteps {
     }
 
     @Step
-    public void selectSuggestionCategoryAndSearch(String suggestion) {
-        homePage.suggestionListShouldBeVisible();
-        homePage.selectSuggestion(suggestion);
-    }
-
-    @Step
-    public List<String> getCountriesList() {
-        return homePage.getCountries();
-    }
-
-    @Step
-    public void setCountryByCode(String countryCode) {
-        homePage.setCountryByCode(countryCode);
-    }
-
-    @Step
-    public void currentDomainNameShouldBe(String country) {
-        homePage.currentDomainNameShouldBe(country);
-    }
-
-    @Step
     public void openLoginFormAndVerify() {
         homePage.openLoginForm();
         homePage.loginInputShouldBeVisible();
@@ -131,6 +110,7 @@ public class HomePageSteps extends ScenarioSteps {
         homePage.regMasterFormEnterFirstName(master.getFirstName());
         homePage.regMasterFormEnterLastName(master.getLastName());
         homePage.regMasterFormEnterPhoneNumber(master.getPhoneNumber());
+        homePage.regMasterFormEnterEmail(master.getEmail());
         master.setPhoneCode(homePage.getMasterPhoneCountryCode());
         homePage.regFormEnterPassword(master.getPassword());
 

@@ -12,4 +12,9 @@ public class MasterNotificationsPageSteps extends MasterProfileSteps {
         masterNotificationsPage.notificationsBtnShpuldBeVisible();
         masterNotificationsPage.feedbacksBtnShouldBeVisible();
     }
+
+    @Step
+    public void verifyNewCallbackNotification() {
+        masterNotificationsPage.verifyNewCallbackNotificationIsVisible();
+    }
 }

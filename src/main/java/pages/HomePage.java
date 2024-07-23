@@ -92,7 +92,8 @@ public class HomePage extends SearchBlock {
 
     @FindBy(xpath = "//input[@id='form_registration_master_name']")
     private WebElementFacade regMasterNameInput;
-
+    @FindBy(xpath = "//input[@id='form_registration_master_email']")
+    private WebElementFacade regMasterEmailInput;
     @FindBy(xpath = "//input[@id='form_registration_master_surname']")
     private WebElementFacade regMasterSurnameInput;
 
@@ -237,6 +238,9 @@ public class HomePage extends SearchBlock {
     //endregion
 
     //region Master registration form methods
+    public void regMasterFormEnterEmail(String email) {
+        regMasterEmailInput.sendKeys(email);
+    }
     public void regMasterFormEnterFirstName(String name) {
         regMasterNameInput.sendKeys(name);
     }

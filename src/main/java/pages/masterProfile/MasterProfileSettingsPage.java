@@ -14,25 +14,22 @@ public class MasterProfileSettingsPage extends MasterProfilePage {
 
     @FindBy(xpath = "//input[@id='form_user_presentation']")
     private WebElementFacade userNameInput;
-
-
     @FindBy(xpath = "//a[@id='button-password']")
     private WebElementFacade changePasswordBtn;
-
     @FindBy(xpath = "//form[@id='form-password']//input[@name='password[password]']")
     private WebElementFacade newPasswordInput;
-
     @FindBy(xpath = "//form[@id='form-password']//input[@name='password[password_confirm]']")
     private WebElementFacade confirmPasswordInput;
-
     @FindBy(xpath = "//form[@id='form-password']//button[@type='submit']")
     private WebElementFacade saveNewPasswordBtn;
-
     @FindBy(xpath = "//div[@class='window-body']")
     private WebElementFacade successPopup;
-
     @FindBy(xpath = "//form/h3//button[@type='submit']")
     private WebElementFacade saveChangesBtn;
+    @FindBy(xpath = "//a[@id='button-delete']")
+    private WebElementFacade deleteProfileBtn;
+    @FindBy(xpath = "//button[text()='OK']")
+    private WebElementFacade okButton;
 
     public void openPasswordFormIfNeeded() {
         setTimeouts(3, SECONDS);
@@ -70,5 +67,13 @@ public class MasterProfileSettingsPage extends MasterProfilePage {
 
     public void saveChanges() {
         saveChangesBtn.click();
+    }
+
+    public void clickDeleteProfile() {
+        deleteProfileBtn.click();
+    }
+
+    public void submitProfileDeleting() {
+        okButton.click();
     }
 }

@@ -58,4 +58,13 @@ public class CustomerProfilePersonalInfoPageSteps extends ScenarioSteps {
     public String getCustomerProfileId() {
         return customerProfilePersonalInfoPage.getCustomerId();
     }
+
+    @Step
+    public void changePassword(String newPassword) {
+        customerProfilePersonalInfoPage.clickChangePassword();
+        customerProfilePersonalInfoPage.typeNewPassword(newPassword);
+        customerProfilePersonalInfoPage.repeatNewPassword(newPassword);
+        customerProfilePersonalInfoPage.clickSaveNewPassword();
+        customerProfilePersonalInfoPage.clickCloseChangePasswordForm();
+    }
 }
