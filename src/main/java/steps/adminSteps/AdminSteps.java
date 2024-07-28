@@ -6,6 +6,7 @@ import net.serenitybdd.annotations.Step;
 import net.serenitybdd.annotations.Steps;
 import net.thucydides.core.steps.ScenarioSteps;
 import pages.admin.AddMasterPage;
+import pages.admin.AddServicePage;
 
 public class AdminSteps extends ScenarioSteps {
 
@@ -31,7 +32,7 @@ public class AdminSteps extends ScenarioSteps {
     public RequestsPageSteps atRequestsPage;
 
     @Steps
-    public AddServicePageSteps atAddEditServicePage;
+    public AddRequestPageSteps atAddEditRequestPage;
 
     @Steps
     public CronTasksPageSteps atCronTasksPage;
@@ -40,6 +41,8 @@ public class AdminSteps extends ScenarioSteps {
     public AddMasterPage atAddMasterPage;
     @Steps
     public ServicePricePageSteps atServicePricesPage;
+    @Steps
+    AddServicePage atAddServicePage;
 
     public void addTestCategory(Category category) {
         atAdminHomePage.loginAsAdmin();
@@ -66,12 +69,12 @@ public class AdminSteps extends ScenarioSteps {
     }
 
     public void addCategoryService(Category category, boolean price) {
-        atAddEditServicePage.openPage();
-        atAddEditServicePage.fillAddServiceForm(category);
+        atAddEditRequestPage.openPage();
+        atAddEditRequestPage.fillAddServiceForm(category);
         if (price) {
-            atAddEditServicePage.setPrices();
+            atAddEditRequestPage.setPrices();
         }
-        atAddEditServicePage.saveService();
+        atAddEditRequestPage.saveService();
     }
 
     public void setServicePrices(String country, String minPrice, String maxPrice) {
@@ -92,5 +95,10 @@ public class AdminSteps extends ScenarioSteps {
         atAddMasterPage.createMaster(master);
         atAddMasterPage.openMasterPage(master);
         atAddMasterPage.setCategoryToMaster(master);
+    }
+
+    public void addService(Category category) {
+        atAddServicePage.openPage();
+        atAddServicePage.createService(category);
     }
 }

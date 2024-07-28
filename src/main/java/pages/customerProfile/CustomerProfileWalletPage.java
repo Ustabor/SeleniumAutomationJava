@@ -1,22 +1,14 @@
-package pages.masterProfile;
+package pages.customerProfile;
 
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertTrue;
 
-public class MasterWalletPage extends MasterProfileBasePage {
-
+public class CustomerProfileWalletPage extends CustomerProfileBasePage {
     @FindBy(xpath = "//div[@class='wallet-tabs']")
     private WebElementFacade walletTabs;
-    @FindBy(xpath = "//input[@id='form_data_sum']")
-    private WebElementFacade amountInput;
-    @FindBy(xpath = "//select[@id='form_data_payment']")
-    private WebElementFacade paymentSystemSelect;
-    @FindBy(xpath = "//form//button")
-    private WebElementFacade submitFormButton;
     @FindBy(xpath = "//div[@class='wallet-tabs']/a[last()]")
     private WebElementFacade cardsSection;
     @FindBy(xpath = "//div[@id='btn-add-card']")
@@ -33,36 +25,11 @@ public class MasterWalletPage extends MasterProfileBasePage {
     private WebElementFacade humoCard;
     @FindBy(xpath = "//label[@for='form_data_is_main']")
     private WebElementFacade mainCheckbox;
+    @FindBy(xpath = "//form//button")
+    private WebElementFacade submitFormButton;
 
-    public void walletTabsShouldBeVisible() {
-        walletTabs.shouldBeVisible();
-    }
-
-    public void enterAmount(String amount) {
-        amountInput.clear();
-        amountInput.sendKeys(amount);
-    }
-
-    public void selectClickSystem() {
-        paymentSystemSelect.click();
-        paymentSystemSelect.selectByIndex(1);
-    }
-
-    public void selectPaycomSystem() {
-        paymentSystemSelect.click();
-        paymentSystemSelect.selectByIndex(2);
-    }
-
-    public void clickSubmitFormButton() {
-        submitFormButton.click();
-    }
-
-    public void verifyClickSystemPage() {
-        assertTrue(getDriver().getCurrentUrl().contains("my.click.uz"));
-    }
-
-    public void verifyPaycomSystemPage() {
-        assertTrue(getDriver().getCurrentUrl().contains("payme.uz"));
+    public void clickWalletTab() {
+        walletTabs.click();
     }
 
     public void clickCardsSection() {
@@ -113,5 +80,9 @@ public class MasterWalletPage extends MasterProfileBasePage {
 
     public void clickHumoDelete() {
         humoCard.findElement(By.xpath("//div[@class='more']//a[@class='btn-delete']"));
+    }
+
+    public void clickSubmitFormButton() {
+        submitFormButton.click();
     }
 }

@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface AddCategory {
+    boolean addService() default false;
     boolean promotionAndClickPrice() default false;
     boolean addServiceQuestion() default false;
     boolean addServicePrice() default false;

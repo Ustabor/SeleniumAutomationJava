@@ -76,6 +76,9 @@ public class BasePage extends PageObject {
 
     @FindBy(xpath = "//div[./input[@id='catalog-input']]/button")
     private WebElementFacade placeOrderBtn;
+
+    @FindBy(xpath = "//a[@class='btn-services']")
+    private WebElementFacade servicesHeaderButton;
     //endregion
 
     //region Footer elements
@@ -106,10 +109,9 @@ public class BasePage extends PageObject {
     @FindBy(xpath = "//div[@class='refresh-wrap']/a")
     private WebElementFacade resendCode;
 
-    public void clickResendCode() {
-        resendCode.click();
+    public void openServices() {
+        servicesHeaderButton.click();
     }
-
     public boolean isRefreshLinkVisible() {
         setTimeouts(2, ChronoUnit.SECONDS);
         var state = resendCode.isVisible();

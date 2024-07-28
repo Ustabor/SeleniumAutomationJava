@@ -1,9 +1,6 @@
 package UITests;
 
-import annotations.AddMasters;
-import entities.User;
 import net.serenitybdd.junit.runners.SerenityRunner;
-import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import utils.DataGenerator;

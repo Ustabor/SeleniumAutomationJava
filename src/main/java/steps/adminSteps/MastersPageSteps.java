@@ -10,6 +10,11 @@ public class MastersPageSteps extends ScenarioSteps {
     private MastersPage mastersPage;
 
     @Step
+    public void openMasterPage(String masterId) {
+        mastersPage.openMasterPageByDirectUrl(masterId);
+    }
+
+    @Step
     public void addMoneyToMaster(int amount, String masterId) {
         mastersPage.openMasterPageByDirectUrl(masterId);
         mastersPage.addMoneyToAccount(amount);
@@ -19,5 +24,10 @@ public class MastersPageSteps extends ScenarioSteps {
     public void addAllBadgesToMaster(Master master) {
         mastersPage.openMasterPageByDirectUrl(master.getProfileId());
         mastersPage.addAllBadgesToMaster();
+    }
+
+    @Step
+    public void verifyOnlyOneTransactionExist(String amount) {
+        mastersPage.verifyOnlyOneTransactionExist(amount);
     }
 }

@@ -8,11 +8,11 @@ public class Category {
     private String url = "autotest";
     private String systemId;
     private String promoId;
-    private Project project;
+    private Service service;
 
     public Category() {
-        project = new Project();
-        var random = + new Random().nextInt(999999);
+        service = new Service();
+        var random = new Random().nextInt(999999);
         name += random;
         url += random;
     }
@@ -45,11 +45,11 @@ public class Category {
         this.promoId = promoId;
     }
 
-    public Project getProject() {
-        return project;
+    public Service getService() {
+        return service;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
+    public void setService(Service service) {
+        this.service = service;
     }
 }

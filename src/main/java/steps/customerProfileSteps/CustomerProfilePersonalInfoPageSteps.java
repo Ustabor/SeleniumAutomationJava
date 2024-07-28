@@ -30,7 +30,10 @@ public class CustomerProfilePersonalInfoPageSteps extends ScenarioSteps {
     public void logsOut(){
         customerProfilePersonalInfoPage.logsOut();
     }
-
+    @Step
+    public void openCustomerProfile() {
+        customerProfilePersonalInfoPage.clickProfileBtn();
+    }
     @Step
     public void openCustomerProfilePage() {
         customerProfilePersonalInfoPage.clickProfileBtn();

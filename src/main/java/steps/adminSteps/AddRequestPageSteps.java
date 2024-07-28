@@ -2,11 +2,11 @@ package steps.adminSteps;
 
 import entities.Category;
 import net.thucydides.core.steps.ScenarioSteps;
-import pages.admin.AddServicePage;
+import pages.admin.AddRequestPage;
 
-public class AddServicePageSteps extends ScenarioSteps {
+public class AddRequestPageSteps extends ScenarioSteps {
 
-    private AddServicePage servicePage;
+    private AddRequestPage servicePage;
 
     public void openPage() {
         servicePage.openPage();

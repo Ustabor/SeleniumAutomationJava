@@ -76,6 +76,10 @@ public class TestBase {
                         "200",
                         "1000");
             }
+
+            if (annotation.addService()) {
+                admin.addService(category);
+            }
         }
 
         if (this.getClass().isAnnotationPresent(AddMasters.class)) {
