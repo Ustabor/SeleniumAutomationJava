@@ -33,7 +33,6 @@ public class UU201_CatalogTest extends TestBase {
         user.atCatalogPage.openRandomMaster();
         user.atMasterProfilePage.verifyMasterCity(city1);
 
-
         user.atHomePage.openHomePage();
         user.atCatalogPage.openMastersCatalog();
         user.atCatalogPage.openFilter();

@@ -71,6 +71,7 @@
     <string name="FilterCity_kz_test">Астана</string>
     <string name="FilterCity_uz_test">Джизак</string>
     <string name="FilterCity_ua_test">Одесса</string>
+    <string name="FilterCity_uz_test_1">Самарканд</string>
 
     <string name="FilterCity_kz_ustabor">Астана</string>
     <string name="FilterCity_uz_ustabor">Ташкент</string>
@@ -79,7 +80,7 @@
     <string name="FilterCity_kz_fixinglist">Астана</string>
     <string name="FilterCity_uz_fixinglist">Ташкент</string>
 
-    <string name="FilterDistrict_uz">Сергелийский район</string>
+    <string name="FilterDistrict_uz">Арнасайский район</string>
     <string name="FilterDistrict_kz"></string>
     <string name="FilterDistrict_ua"></string>
 

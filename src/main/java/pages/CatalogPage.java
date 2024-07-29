@@ -35,6 +35,8 @@ public class CatalogPage extends SearchBlock {
     private WebElementFacade masterServicesTable;
 
     //region Catalog header elements
+    @FindBy(xpath = "//a[contains(@class, 'request')]")
+    private WebElementFacade requestsTab;
     @FindBy(xpath = "//a[contains(@class, 'catalog')]")
     private WebElementFacade mastersTab;
     @FindBy(xpath = "//a[@class='prices']")
@@ -132,7 +134,7 @@ public class CatalogPage extends SearchBlock {
     private WebElementFacade emptyCatalogMessage;
 
     //region New
-    @FindBy(xpath = "//div[@id='projects-gallery']/a")
+    @FindBy(xpath = "//div[@id='projects-gallery']/a[not(@data-ad)]")
     private List<WebElementFacade> mastersList;
     //endregion
 
@@ -153,10 +155,10 @@ public class CatalogPage extends SearchBlock {
     }
 
     public void verifyTabsAreVisible() {
+        requestsTab.shouldBeVisible();
         mastersTab.shouldBeVisible();
         pricesTab.shouldBeVisible();
         servicesTab.shouldBeVisible();
-        chatTab.shouldBeVisible();
     }
 
     public void verifyFilterButtonIsVisible() {
@@ -267,10 +269,8 @@ public class CatalogPage extends SearchBlock {
     //endregion
 
     public void openRandomMasterProfile() {
-        var number = ThreadLocalRandom.current().nextInt(5, mastersList.size() - 5);
-        logger.info("Master number: " + number);
+        var number = ThreadLocalRandom.current().nextInt(mastersList.size());
         var randomMaster = mastersList.get(number);
-        var master = getMasterInfo(randomMaster);
         randomMaster.findElement(By.xpath(avatarXpath)).click();
     }
 
