@@ -47,11 +47,6 @@ public class CustomerServicePageSteps extends ScenarioSteps {
     }
 
     @Step
-    public void enterAddress() {
-        customerServicesPage.enterAddress();
-    }
-
-    @Step
     public void verifyConfirmationInfo(User customer, String price) {
         customerServicesPage.verifyPriceConfirmation(price);
         customerServicesPage.verifyCustomerPhoneNumber(customer.getPhoneNumber());
@@ -85,5 +80,39 @@ public class CustomerServicePageSteps extends ScenarioSteps {
     @Step
     public void verifyOrderFormIsVisible() {
         customerServicesPage.verifyOrderConfirmationFormIsVisible();
+    }
+
+    @Step
+    public void enterCustomerInfo(User customer) {
+        customerServicesPage.enterCustomerFirstName(customer.getFirstName());
+        customerServicesPage.enterCustomerPhoneNumber(customer.getPhoneNumber());
+        customerServicesPage.enterCustomerAddress("Test Address");
+    }
+
+    @Step
+    public void waitForCodeForm() {
+        customerServicesPage.waitForSubmitCodeForm();
+    }
+
+    @Step
+    public String getSmsCode(User customer) throws InterruptedException {
+        return customerServicesPage.getSmsCode(customer);
+    }
+
+    @Step
+    public void confirmPhoneNumber(String code, String number) throws InterruptedException {
+        customerServicesPage.enterSmsCode(code);
+        customerServicesPage.clickCodeConfirm();
+    }
+
+    @Step
+    public void enterOrderConfirmationCode(String code) {
+        customerServicesPage.enterOrderConfirmationCode(code);
+        customerServicesPage.submitOrder();
+    }
+
+    @Step
+    public void verifyOrderConfirmedIsVisible() {
+        customerServicesPage.verifyOrderConfirmedIsVisible();
     }
 }

@@ -41,12 +41,6 @@ public class PlaceOrderPage extends BasePage {
     //endregion
 
     //region Confirmation form
-    @FindBy(xpath = "//input[@id='form_confirmation_code']")
-    private WebElementFacade codeInput;
-
-    @FindBy(xpath = "//form[@id='form-confirmation']//button[@type='submit']")
-    private WebElementFacade codeConfirm;
-
     @FindBy(xpath = "//form//button[@type='submit']")
     private WebElementFacade confirmBtn;
     //endregion
@@ -85,11 +79,6 @@ public class PlaceOrderPage extends BasePage {
         phoneInput.sendKeys(phone);
     }
 
-    public void enterSmsCode(String smsCode) {
-        codeInput.clear();
-        codeInput.sendKeys(smsCode);
-    }
-
     public void clickConfirmButton() {
         confirmBtn.click();
     }
@@ -114,21 +103,6 @@ public class PlaceOrderPage extends BasePage {
         additionalInfoInput.sendKeys(info);
     }
 
-    public String getSmsCode(User user) throws InterruptedException {
-        var attempts = 5;
-
-        for (int i = 0; i < attempts; i++) {
-            var smsCode = Admin.getInstance().getSmsCode(user.getPhoneNumber());
-            if (smsCode.isEmpty() || smsCode.equals(user.getPhoneCode()) || smsCode.equals(user.getLastSmsCode())) {
-                Thread.sleep(1000);
-            } else {
-                return smsCode;
-            }
-        }
-
-        throw new InterruptedException("Reached maximum attempts to get SMS code");
-    }
-
     public void selectBuildDomain() {
         buildDomain.click();
     }
@@ -139,10 +113,6 @@ public class PlaceOrderPage extends BasePage {
 
     public void selectStartTimeMorning() {
         startTimeMorning.click();
-    }
-
-    public void clickCodeConfirm() {
-        codeConfirm.click();
     }
 
     public void verifyProgress(int percent) {

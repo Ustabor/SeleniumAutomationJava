@@ -1,5 +1,6 @@
 package pages;
 
+import entities.User;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
@@ -7,6 +8,7 @@ import net.serenitybdd.core.pages.WebElementState;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import utils.Admin;
 import utils.Config;
 import utils.WaitHelper;
 import utils.XmlParser;
@@ -105,9 +107,36 @@ public class BasePage extends PageObject {
 
     @FindBy(xpath = "//nav[@class='footer']/a[contains(@href,'sitemap')]")
     private WebElementFacade siteMapLink;
-
     @FindBy(xpath = "//div[@class='refresh-wrap']/a")
     private WebElementFacade resendCode;
+    @FindBy(xpath = "//input[@id='form_confirmation_code']")
+    private WebElementFacade codeInput;
+    @FindBy(xpath = "//form[@id='form-confirmation']//button[@type='submit']")
+    private WebElementFacade codeConfirm;
+
+    public void clickCodeConfirm() {
+        codeConfirm.click();
+    }
+
+    public void enterSmsCode(String smsCode) {
+        codeInput.clear();
+        codeInput.sendKeys(smsCode);
+    }
+
+    public String getSmsCode(User user) throws InterruptedException {
+        var attempts = 5;
+
+        for (int i = 0; i < attempts; i++) {
+            var smsCode = Admin.getInstance().getSmsCode(user.getPhoneNumber());
+            if (smsCode.isEmpty() || smsCode.equals(user.getPhoneCode()) || smsCode.equals(user.getLastSmsCode())) {
+                Thread.sleep(1000);
+            } else {
+                return smsCode;
+            }
+        }
+
+        throw new InterruptedException("Reached maximum attempts to get SMS code");
+    }
 
     public void openServices() {
         servicesHeaderButton.click();

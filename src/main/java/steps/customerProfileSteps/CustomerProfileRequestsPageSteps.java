@@ -1,5 +1,6 @@
 package steps.customerProfileSteps;
 
+import entities.Service;
 import net.serenitybdd.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
 import pages.customerProfile.CustomerProfileRequestsPage;
@@ -50,5 +51,10 @@ public class CustomerProfileRequestsPageSteps extends ScenarioSteps {
     @Step
     public void closePopup() {
         customerProfileRequestsPage.closePopup();
+    }
+
+    @Step
+    public void verifyServiceRequestCreated(Service service) {
+        customerProfileRequestsPage.verifyServiceRequestCreated(service.getName());
     }
 }

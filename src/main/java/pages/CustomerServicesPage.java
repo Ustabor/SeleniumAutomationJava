@@ -34,6 +34,16 @@ public class CustomerServicesPage extends BasePage {
     private WebElementFacade cardNumberInput;
     @FindBy(xpath = "//form//input[@id='form_data_expire']")
     private WebElementFacade cardExpiryDateInput;
+    @FindBy(xpath = "//form//input[@id='form_data_name']")
+    private WebElementFacade userNameInput;
+    @FindBy(xpath = "//form//input[@id='form_data_phone']")
+    private WebElementFacade userPhoneInput;
+    @FindBy(xpath = "//form//input[@id='form_data_address']")
+    private WebElementFacade userAddressInput;
+    @FindBy(xpath = "//input[@id='form_data_code']")
+    private WebElementFacade orderConfirmationCode;
+    @FindBy(xpath = "//div[@class='order-confirmed-content']")
+    private WebElementFacade orderConfirmed;
 
     public void selectCategory(String name) {
         var xpath = String.format("//div[@class='service-categories']/a[text()='%s']", name);
@@ -57,7 +67,7 @@ public class CustomerServicesPage extends BasePage {
     }
 
     public void verifyOrderFormServicePrice(String price) {
-        orderFormPrice.shouldContainText(price);
+        assertThat(orderFormPrice.getText().replaceAll( " ", "")).contains(price);
     }
 
     public void submitOrder() {
@@ -69,7 +79,7 @@ public class CustomerServicesPage extends BasePage {
     }
 
     public void verifyPriceConfirmation(String price) {
-        orderConfirmationInfo.shouldContainText(price);
+        assertThat(orderConfirmationInfo.getText().replaceAll(" ", "")).contains(price);
     }
 
     public void verifyCustomerPhoneNumber(String customer) {
@@ -110,5 +120,25 @@ public class CustomerServicesPage extends BasePage {
 
     public void clickServiceDetailsOrder() {
         serviceDetailsOrderButton.click();
+    }
+
+    public void enterCustomerFirstName(String firstName) {
+        userNameInput.sendKeys(firstName);
+    }
+
+    public void enterCustomerPhoneNumber(String phoneNumber) {
+        userPhoneInput.sendKeys(phoneNumber);
+    }
+
+    public void enterCustomerAddress(String testAddress) {
+        userAddressInput.sendKeys(testAddress);
+    }
+
+    public void enterOrderConfirmationCode(String code) {
+        orderConfirmationCode.sendKeys(code);
+    }
+
+    public void verifyOrderConfirmedIsVisible() {
+        orderConfirmed.shouldBeVisible();
     }
 }
