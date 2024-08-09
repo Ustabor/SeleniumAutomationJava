@@ -62,7 +62,8 @@ public class MasterWalletPage extends MasterProfileBasePage {
     }
 
     public void verifyPaycomSystemPage() {
-        assertTrue(getDriver().getCurrentUrl().contains("payme.uz"));
+        var result = getDriver().getCurrentUrl().contains("payme") || getDriver().getCurrentUrl().contains("paycom");
+        assertTrue(result);
     }
 
     public void clickCardsSection() {

@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomerProfileWalletPage extends CustomerProfileBasePage {
-    @FindBy(xpath = "//div[@class='wallet-tabs']")
+    @FindBy(xpath = "//a[@class='wallet']")
     private WebElementFacade walletTabs;
     @FindBy(xpath = "//div[@class='wallet-tabs']/a[last()]")
     private WebElementFacade cardsSection;

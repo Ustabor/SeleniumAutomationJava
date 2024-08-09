@@ -26,7 +26,7 @@ public class CustomerAddPaymentCardTest extends TestBase {
         customer.setProfileId(user.atCustomerProfilePersonalInfoPage.getCustomerProfileId());
     }
     @Test
-    public void masterAddPaymentCard() {
+    public void customerAddPaymentCard() {
         user.atCustomerProfileWalletPage.openWalletTab();
         user.atCustomerProfileWalletPage.openPaymentCardsSection();
 

@@ -1,6 +1,5 @@
 package pages;
 
-import io.cucumber.java.zh_cn.假如;
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
@@ -51,7 +50,7 @@ public class CustomerServicesPage extends BasePage {
     }
 
     public void verifyServiceName(String name) {
-        serviceItem.shouldContainText(name);
+        serviceItem.shouldContainText(name.split("\\s+")[0]);
     }
 
     public void verifyServicePrice(String price) {

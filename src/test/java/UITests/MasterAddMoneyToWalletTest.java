@@ -16,7 +16,7 @@ import java.util.concurrent.TimeoutException;
 public class MasterAddMoneyToWalletTest extends TestBase {
 
     @Test
-    public void masterChangePassword() throws TimeoutException {
+    public void addMoneyToWallet() throws TimeoutException {
         var master = watcher.getMaster();
 
         user.atHomePage.openHomePage();

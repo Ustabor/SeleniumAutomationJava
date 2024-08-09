@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import pages.masterProfile.MasterPromotionPage;
+import utils.Admin;
 import utils.DataGenerator;
 
 import java.util.concurrent.TimeoutException;
@@ -21,16 +22,20 @@ public class MasterClickWithdrawForCustomerTest extends TestBase {
 
     private User customer;
     @Before
-    public void registerAsCustomer() throws InterruptedException, TimeoutException {
+    public void clickWithdrawForCustomer() throws InterruptedException, TimeoutException {
         customer = DataGenerator.getCustomer();
         watcher.users.add(customer);
 
         user.atHomePage.openHomePage();
         user.atHomePage.registerAsCustomer(customer);
-        var smsCode = user.getSmsCode(customer);
-        user.atHomePage.enterAuthCodeAndSubmit(smsCode, customer.getPhoneNumber());
-        user.atCustomerProfilePersonalInfoPage.openCustomerProfilePage();
 
+        var smsCode = Admin.getInstance().getSmsCode(customer.getPhoneNumber());
+        user.atHomePage.enterAuthCodeAndSubmit(smsCode, customer.getPhoneNumber());
+
+        var password = Admin.getInstance().getSmsPassword(customer.getPhoneNumber());
+        customer.setPassword(password);
+
+        user.atCustomerProfilePersonalInfoPage.openCustomerProfilePage();
         customer.setProfileId(user.atCustomerProfilePersonalInfoPage.getCustomerProfileId());
         user.atCustomerProfilePersonalInfoPage.logsOut();
     }
@@ -55,6 +60,7 @@ public class MasterClickWithdrawForCustomerTest extends TestBase {
 
         user.atHomePage.openHomePage();
         user.atHomePage.login(customer, true);
+        setCountryLanguageAndLocation();
 
         user.atHomePage.openHomePage();
         user.atHomePage.openBuilderTab();
@@ -62,7 +68,7 @@ public class MasterClickWithdrawForCustomerTest extends TestBase {
         user.atCatalogPage.openMasterContactsAndVerify(master.getFirstName());
         user.atCatalogPage.openMasterContactsAndVerify(master.getFirstName());
         user.atCustomerProfilePersonalInfoPage.openCustomerProfilePage();
-        user.atCustomerProfilePersonalInfoPage.verifyMyMastersListContains(watcher.getMaster().getLastName());
+        user.atCustomerProfilePersonalInfoPage.verifyMyMastersListContains(watcher.getMaster().getFirstName());
 
         admin.atMastersPage.openMasterPage(master.getProfileId());
         admin.atMastersPage.verifyOnlyOneTransactionExist("-100");
