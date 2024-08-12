@@ -30,7 +30,7 @@ public class UU305_CatalogUiTest extends TestBase {
         user.atCatalogPage.verifyFilterCategoriesAreVisible();
 
         var city = getText("FilterCity_" + Config.getCountryCode() + "_" + Config.getEnv());
-        var district = getText("FilterDistrict_" + Config.getCountryCode());
+        var district = getText("FilterDistrict_" + Config.getCountryCode() + "_" + Config.getEnv());
         user.atCatalogPage.selectFilterCityAndDistrict(city, district);
 
         user.atCatalogPage.resetFilter();

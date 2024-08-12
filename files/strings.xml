@@ -80,7 +80,8 @@
     <string name="FilterCity_kz_fixinglist">Астана</string>
     <string name="FilterCity_uz_fixinglist">Ташкент</string>
 
-    <string name="FilterDistrict_uz">Арнасайский район</string>
+    <string name="FilterDistrict_uz_test">Арнасайский район</string>
+    <string name="FilterDistrict_uz_ustabor">Мирабадский район</string>
     <string name="FilterDistrict_kz"></string>
     <string name="FilterDistrict_ua"></string>
 

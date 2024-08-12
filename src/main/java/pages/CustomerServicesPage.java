@@ -50,7 +50,8 @@ public class CustomerServicesPage extends BasePage {
     }
 
     public void verifyServiceName(String name) {
-        serviceItem.shouldContainText(name.split("\\s+")[0]);
+        var itemText = serviceItem.getText();
+        assertThat(itemText.toLowerCase()).contains(name.split("\\s+")[0].toLowerCase());
     }
 
     public void verifyServicePrice(String price) {
