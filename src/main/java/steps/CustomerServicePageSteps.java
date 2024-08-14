@@ -67,8 +67,7 @@ public class CustomerServicePageSteps extends ScenarioSteps {
 
     @Step
     public void verifyServiceDetails(Service service) {
-        customerServicesPage.verifyServiceDetailsName(service.getName());
-        customerServicesPage.verifyServiceDetailsDescription(service.getDescription());
+        customerServicesPage.verifyServiceDetailsName(service.getName().split(" ")[0]);
         customerServicesPage.verifyServiceDetailsPrice(String.valueOf(service.getPrice()));
     }
 

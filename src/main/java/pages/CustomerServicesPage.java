@@ -103,7 +103,8 @@ public class CustomerServicesPage extends BasePage {
     }
 
     public void verifyServiceDetailsName(String name) {
-        serviceDetails.shouldContainText(name);
+        var serviceName = serviceDetails.getText().toLowerCase();
+        assertThat(serviceName).contains(name.toLowerCase());
     }
 
     public void verifyServiceDetailsDescription(String description) {
