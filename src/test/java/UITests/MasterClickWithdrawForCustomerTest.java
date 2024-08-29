@@ -3,6 +3,7 @@ package UITests;
 import annotations.AddCategory;
 import annotations.AddMasters;
 import entities.User;
+import net.serenitybdd.annotations.WithTag;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +16,7 @@ import java.util.concurrent.TimeoutException;
 
 //Заказчик - Списывание средств за клик
 
+@WithTag("smoke")
 @RunWith(SerenityRunner.class)
 @AddCategory(promotionAndClickPrice = true)
 @AddMasters(masters = 1, useAdminSite = true)

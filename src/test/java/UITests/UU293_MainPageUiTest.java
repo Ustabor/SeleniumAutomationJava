@@ -9,7 +9,6 @@ import utils.Config;
 import java.util.concurrent.TimeoutException;
 
 @WithTag("smoke")
-
 @RunWith(SerenityRunner.class)
 public class UU293_MainPageUiTest extends TestBase {
 

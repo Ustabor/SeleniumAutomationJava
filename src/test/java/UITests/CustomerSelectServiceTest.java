@@ -1,6 +1,7 @@
 package UITests;
 
 import annotations.AddCategory;
+import net.serenitybdd.annotations.WithTag;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,6 +9,7 @@ import utils.DataGenerator;
 
 //Сервисы - заказ
 
+@WithTag("smoke")
 @RunWith(SerenityRunner.class)
 @AddCategory(addService = true)
 public class CustomerSelectServiceTest extends TestBase {

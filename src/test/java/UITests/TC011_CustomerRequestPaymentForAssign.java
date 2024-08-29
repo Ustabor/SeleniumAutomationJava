@@ -2,6 +2,7 @@ package UITests;
 
 import annotations.AddCategory;
 import annotations.AddMasters;
+import net.serenitybdd.annotations.WithTag;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,6 +10,7 @@ import utils.DataGenerator;
 
 import java.util.concurrent.TimeoutException;
 
+@WithTag("smoke")
 @RunWith(SerenityRunner.class)
 @AddCategory(promotionAndClickPrice = true, addServiceQuestion = true)
 @AddMasters(masters = 1)
