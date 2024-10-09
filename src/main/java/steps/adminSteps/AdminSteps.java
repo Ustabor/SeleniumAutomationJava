@@ -42,6 +42,8 @@ public class AdminSteps extends ScenarioSteps {
     @Steps
     public ServicePricePageSteps atServicePricesPage;
     @Steps
+    public ServiceDetailsPageSteps atServiceDetailsPage;
+    @Steps
     AddServicePage atAddServicePage;
 
     public void addTestCategory(Category category) {

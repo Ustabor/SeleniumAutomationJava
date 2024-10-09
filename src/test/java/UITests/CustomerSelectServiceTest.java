@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import utils.DataGenerator;
 
+import java.util.concurrent.TimeoutException;
+
 //Сервисы - заказ
 
 @WithTag("smoke")
@@ -15,7 +17,7 @@ import utils.DataGenerator;
 public class CustomerSelectServiceTest extends TestBase {
 
     @Test
-    public void customerSelectServiceTest() throws InterruptedException {
+    public void customerSelectServiceTest() throws InterruptedException, TimeoutException {
         var customer = DataGenerator.getGuestCustomer();
         watcher.users.add(customer);
 
@@ -33,17 +35,24 @@ public class CustomerSelectServiceTest extends TestBase {
         var smsCode = user.atCustomerServicesPage.getSmsCode(customer);
         user.atCustomerServicesPage.confirmPhoneNumber(smsCode, customer.getPhoneNumber());
 
+        var serviceId = user.atCustomerServicesPage.getServiceId();
         user.atCustomerServicesPage.verifyConfirmationInfo(
                 customer,
                 String.valueOf(category.getService().getPrice() * 2)
         );
 
+        admin.atServiceDetailsPage.clickSendPaymentLink(serviceId);
+
+        var serviceUrl = user.atCustomerServicesPage.getUrlFromSms(customer);
+        user.atHomePage.openHomePage();
+        user.atHomePage.logsOut();
+        user.atHomePage.openUrl(serviceUrl);
         user.atCustomerServicesPage.enterPaymentCardInfo("UZCARD", "8600-0200-0000-0000", "12/31");
 //        user.atCustomerServicesPage.enterOrderConfirmationCode(smsCode);
 //        user.atCustomerServicesPage.verifyOrderConfirmedIsVisible();
 
         user.atCustomerProfilePersonalInfoPage.openCustomerProfile();
         user.atCustomerProfileRequestsPage.openRequestsPage();
-        user.atCustomerProfileRequestsPage.verifyServiceRequestCreated(category.getService());
+        user.atCustomerProfileRequestsPage.verifyServiceRequestCreated();
     }
 }

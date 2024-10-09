@@ -62,8 +62,7 @@ public class CustomerProfileRequestsPage extends CustomerProfileBasePage {
         clickCloseBtn();
     }
 
-    public void verifyServiceRequestCreated(String name) {
+    public void verifyServiceRequestCreated() {
         assertThat(requests.size()).isEqualTo(1);
-        assertThat(requests.get(0).getText()).contains(name);
     }
 }

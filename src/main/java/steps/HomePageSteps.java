@@ -283,4 +283,9 @@ public class HomePageSteps extends ScenarioSteps {
         homePage.enterSearchText(text);
         homePage.clickSearchBtn();
     }
+
+    @Step
+    public void openUrl(String serviceUrl) {
+        homePage.openUrl(serviceUrl);
+    }
 }

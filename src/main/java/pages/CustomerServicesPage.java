@@ -1,8 +1,10 @@
 package pages;
 
+import entities.User;
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
+import utils.Admin;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,6 +29,8 @@ public class CustomerServicesPage extends BasePage {
     private WebElementFacade address;
     @FindBy(xpath = "//div[@class='order-info']")
     private WebElementFacade orderConfirmationInfo;
+    @FindBy(xpath = "//div[@class='order-info']/div[2]/span")
+    private WebElementFacade orderId;
     @FindBy(xpath = "//form//input[@id='form_data_name']")
     private WebElementFacade cardNameInput;
     @FindBy(xpath = "//form//input[@id='form_data_number']")
@@ -141,5 +145,24 @@ public class CustomerServicesPage extends BasePage {
 
     public void verifyOrderConfirmedIsVisible() {
         orderConfirmed.shouldBeVisible();
+    }
+
+    public String getUrlFromSms(User user) throws InterruptedException {
+        var attempts = 5;
+
+        for (int i = 0; i < attempts; i++) {
+            var serviceUrl = Admin.getInstance().getSmsUrl(user.getPhoneNumber());
+            if (serviceUrl.isEmpty()) {
+                Thread.sleep(1000);
+            } else {
+                return serviceUrl;
+            }
+        }
+
+        throw new InterruptedException("Reached maximum attempts to get service URL");
+    }
+
+    public String getServiceId() {
+        return orderId.getText();
     }
 }

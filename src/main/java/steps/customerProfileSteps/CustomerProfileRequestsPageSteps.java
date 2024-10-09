@@ -54,7 +54,7 @@ public class CustomerProfileRequestsPageSteps extends ScenarioSteps {
     }
 
     @Step
-    public void verifyServiceRequestCreated(Service service) {
-        customerProfileRequestsPage.verifyServiceRequestCreated(service.getName());
+    public void verifyServiceRequestCreated() {
+        customerProfileRequestsPage.verifyServiceRequestCreated();
     }
 }

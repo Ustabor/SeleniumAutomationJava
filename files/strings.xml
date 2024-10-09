@@ -102,6 +102,7 @@
     <string name="RequestDeclined">Отклонена</string>
     <string name="RequestClosed">Закрыта для предложений</string>
 
+    <string name="SmsServiceUrl">Ссылка на оплату:</string>
     <string name="SmsAuthCode">Код подтверждения</string>
     <string name="SmsRegistration">Вы зарегистрированы Логин</string>
     <string name="SmsRegistration_fixinglist">Вы зарегистрированы Ваш логин</string>

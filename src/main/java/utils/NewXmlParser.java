@@ -11,6 +11,16 @@ public class NewXmlParser {
         document = JXDocument.create(html);
     }
 
+    public String getUrl(String phoneNumber) {
+        var sms = getSmsText(phoneNumber, XmlParser.getTextByKey("SmsServiceUrl"));
+        var split = sms.split(": ");
+
+        if (split.length > 0) {
+            return sms.split(": ")[1].replace("</td>", "");
+        }
+        return "";
+    }
+
     public String getSmsCode(String phoneNumber) {
         var sms = getSmsText(phoneNumber, XmlParser.getTextByKey("SmsAuthCode"));
 

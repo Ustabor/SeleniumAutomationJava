@@ -114,6 +114,23 @@ public class Admin {
         }
     }
 
+    public String getSmsUrl(String phoneNumber) throws InterruptedException {
+        for (int i = 0; i < 10; i++) {
+            logger.info("Getting service url for phone number: {}", phoneNumber);
+            var smsLog = getSmsLogPage();
+            var code = new NewXmlParser(smsLog).getUrl(phoneNumber);
+            if (code.equals("")) {
+                logger.info("Url not found, retry");
+                Thread.sleep(1000);
+            } else {
+                logger.info("Url: {}", code);
+                return code;
+            }
+        }
+
+        throw new NullPointerException("No SMS code found after 10 attempts");
+    }
+
     public String getSmsCode(String phoneNumber) throws InterruptedException {
         for (int i = 0; i < 10; i++) {
             logger.info("Getting SMS code for phone number: {}", phoneNumber);

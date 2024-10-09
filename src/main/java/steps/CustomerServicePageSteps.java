@@ -114,4 +114,14 @@ public class CustomerServicePageSteps extends ScenarioSteps {
     public void verifyOrderConfirmedIsVisible() {
         customerServicesPage.verifyOrderConfirmedIsVisible();
     }
+
+    @Step
+    public String getUrlFromSms(User customer) throws InterruptedException {
+        return customerServicesPage.getUrlFromSms(customer);
+    }
+
+    @Step
+    public String getServiceId() {
+        return customerServicesPage.getServiceId();
+    }
 }
