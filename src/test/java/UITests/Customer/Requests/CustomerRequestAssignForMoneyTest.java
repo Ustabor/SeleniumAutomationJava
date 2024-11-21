@@ -1,0 +1,59 @@
+package UITests.Customer.Requests;
+
+import UITests.TestBase;
+import annotations.AddCategory;
+import annotations.AddMasters;
+import net.serenitybdd.annotations.WithTag;
+import net.serenitybdd.junit.runners.SerenityRunner;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import java.util.concurrent.TimeoutException;
+
+@WithTag("smoke")
+@RunWith(SerenityRunner.class)
+@AddCategory(promotionAndClickPrice = true, addServiceQuestion = true)
+@AddMasters(masters = 2)
+public class CustomerRequestAssignForMoneyTest extends TestBase {
+
+    @Before
+    public void setUp() throws TimeoutException, InterruptedException {
+        super.setUp();
+        admin.addMoneyToMaster(10000, watcher.getMaster(0), false);
+        admin.addMoneyToMaster(10000, watcher.getMaster(1), false);
+    }
+
+    @Test
+    public void verifyRequestAssignToMasterForAmount() throws TimeoutException, InterruptedException {
+        var result = createRequest(true);
+
+        admin.atRequestsPage.openRequestById(result.requestId);
+
+        if (getTashkentHour() >= 9 && getTashkentHour() < 18) {
+            admin.atRequestsPage.assignRequestToMasterForPayment(watcher.getMaster(0));
+            admin.atRequestsPage.assignRequestToMasterForPayment(watcher.getMaster(1));
+        } else {
+            admin.atRequestsPage.reassignRequestToMasterForPayment(watcher.getMaster(0));
+            admin.atRequestsPage.reassignRequestToMasterForPayment(watcher.getMaster(1));
+        }
+
+        user.atHomePage.openHomePage();
+        user.atHomePage.login(watcher.getMaster(0), true);
+        user.atHomePage.waitForLoaderDisappears();
+
+        user.atMasterProfileRequestsPage.openRequestsPage();
+        user.atMasterProfileRequestsPage.verifyBalance(9000);
+        user.atMasterProfileRequestsPage.openRequest();
+
+        user.atMasterRequestPage.clickConnectClientButton();
+        user.atMasterRequestPage.verifyCustomerInfo(result.guest);
+        user.atMasterRequestPage.closeConnectCustomerPopup();
+
+        user.atHomePage.logsOut();
+        user.atHomePage.login(result.guest, true);
+        user.atCustomerProfileRequestsPage.openRequestsPage();
+        user.atCustomerRequestPage.openRequest();
+        user.atCustomerRequestPage.verifyMastersCount(2);
+    }
+}

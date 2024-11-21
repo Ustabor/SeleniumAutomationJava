@@ -7,7 +7,6 @@ import net.thucydides.core.steps.ScenarioSteps;
 import pages.HomePage;
 import utils.Admin;
 
-import java.util.List;
 import java.util.concurrent.TimeoutException;
 
 public class HomePageSteps extends ScenarioSteps {
@@ -30,6 +29,7 @@ public class HomePageSteps extends ScenarioSteps {
         homePage.regFormEnterUserPhone(customer.getPhoneNumber());
         homePage.regFormClickSubmit();
         homePage.waitForSubmitCodeForm();
+
     }
 
     @Step
@@ -75,12 +75,6 @@ public class HomePageSteps extends ScenarioSteps {
     @Step
     public boolean login(User user, boolean openLoginForm) {
         return login(user.getLogin(), user.getPassword(), openLoginForm);
-    }
-
-    @Step
-    public void waitForFeedbackProposalAndOpen() {
-        homePage.waitUntilFeedbackPopupIsVisible();
-        homePage.clickLeaveFeedback();
     }
 
     @Step
@@ -287,5 +281,10 @@ public class HomePageSteps extends ScenarioSteps {
     @Step
     public void openUrl(String serviceUrl) {
         homePage.openUrl(serviceUrl);
+    }
+
+    @Step
+    public void verifyUserIsLoggedOut() {
+        homePage.verifyUserLoggedOut();
     }
 }

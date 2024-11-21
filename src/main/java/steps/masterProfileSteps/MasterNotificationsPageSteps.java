@@ -9,7 +9,7 @@ public class MasterNotificationsPageSteps extends MasterProfileSteps {
 
     @Step
     public void pageShouldBeVisible() {
-        masterNotificationsPage.notificationsBtnShpuldBeVisible();
+        masterNotificationsPage.notificationsBtnShouldBeVisible();
         masterNotificationsPage.feedbacksBtnShouldBeVisible();
     }
 

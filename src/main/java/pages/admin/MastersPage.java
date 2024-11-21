@@ -19,17 +19,10 @@ public class MastersPage extends BaseAdminPage {
     private WebElementFacade submitBtn;
     @FindBy(xpath = "//div[@class='form-buttons']//button[@type='submit']")
     private WebElementFacade saveBtn;
-    @FindBy(xpath = "//div[@class='multiselect']")
-    private WebElementFacade badgesSelector;
-    @FindBy(xpath = "//div[contains(@class, 'multiselect')]//span[@class='select']")
-    private WebElementFacade selectAll;
-    @FindBy(xpath = "//a[@id='btn-master-badges']")
-    private WebElementFacade bagesPopup;
-    @FindBy(xpath = "//input[contains(@name,'badges')]")
-    private WebElementFacade badge;
     @FindBy(xpath = "//table[@class='table-grid']/tbody//tr")
     private List<WebElementFacade> transactionsList;
-
+    @FindBy(xpath = "//span[@class='price-value']")
+    private WebElementFacade masterBalance;
 
     public void openPage() {
         getDriver().get(Config.getAdminUrl() + "master");
@@ -37,10 +30,6 @@ public class MastersPage extends BaseAdminPage {
 
     public void openMasterPageByDirectUrl(String masterId) {
         getDriver().get(Config.getAdminUrl() + String.format("master/%s", masterId));
-    }
-
-    public void openEditMasterPage(String masterId) {
-        getDriver().get(Config.getAdminUrl() + String.format("master/%s/edit", masterId));
     }
 
     public void addMoneyToAccount(int amount) {
@@ -52,14 +41,6 @@ public class MastersPage extends BaseAdminPage {
         waitForLoaderDisappears();
     }
 
-    public void addAllBadgesToMaster() {
-        bagesPopup.click();
-//        badgesSelector.click();
-//        selectAll.click();
-        badge.click();
-        saveBtn.click();
-    }
-
     public void verifyOnlyOneTransactionExist(String amount) {
         var transactions = transactionsList
                 .stream()
@@ -68,5 +49,9 @@ public class MastersPage extends BaseAdminPage {
                 .collect(Collectors.toList());
 
         assertThat(transactions.size()).isEqualTo(1);
+    }
+
+    public void verifyMasterBalance(int balance) {
+        assertThat(masterBalance.getText()).contains(String.valueOf(balance));
     }
 }

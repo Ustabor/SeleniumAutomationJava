@@ -3,7 +3,6 @@ package utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
@@ -28,7 +27,7 @@ public class PropertyReader {
         Properties props = new Properties();
         FileReader fileReader = null;
         try {
-            fileReader = new FileReader(new File(propertyFile));
+            fileReader = new FileReader(propertyFile);
             props.load(fileReader);
             return props;
         } catch (IOException ex) {

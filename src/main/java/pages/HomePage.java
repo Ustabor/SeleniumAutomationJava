@@ -510,4 +510,8 @@ public class HomePage extends SearchBlock {
                 .findElement(By.xpath(String.format(countryCityXpath, city)))
                 .click();
     }
+
+    public void verifyUserLoggedOut() {
+        assertThat(isLoggedIn()).isFalse();
+    }
 }

@@ -4,8 +4,7 @@ public enum SystemProperties {
 
     SITE("site"),
     LANG("lang"),
-    COUNTRY("country"),
-    BROWSER("browser");
+    COUNTRY("country");
 
     private final String prop;
 

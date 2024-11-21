@@ -1,7 +1,6 @@
 package pages.admin;
 
 import net.serenitybdd.core.pages.WebElementFacade;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import utils.Config;
 
@@ -52,8 +51,27 @@ public class RequestsPage extends BaseAdminPage {
     @FindBy(xpath = "//button[contains(@class, 'btn-submit')]")
     private WebElementFacade submitBtn;
 
+    @FindBy(xpath = "//select[@id='request_category_id']")
+    private WebElementFacade categorySelector;
+
+    @FindBy(xpath = "//select[@id='request_city_id']")
+    private WebElementFacade citySelector;
+
+    @FindBy(xpath = "//input[@id='request_username']")
+    private WebElementFacade nameInput;
+
+    @FindBy(xpath = "//input[@id='request_address']")
+    private WebElementFacade addressInput;
+
+    @FindBy(xpath = "//div[@class='btn-close']")
+    private WebElementFacade closeButton;
+
     public void openPage(String requestId) {
         getDriver().get(Config.getAdminUrl() + String.format("request/%s",requestId));
+    }
+
+    public void openEditPage(String requestId) {
+        getDriver().get(Config.getAdminUrl() + String.format("request/%s/edit",requestId));
     }
 
     public void verifyCustomerLogin(String firstName) {
@@ -119,5 +137,29 @@ public class RequestsPage extends BaseAdminPage {
         actionsBtn.click();
         remove.click();
         waitForLoaderDisappears(3000);
+    }
+
+    public void selectCategory(String categoryId) {
+        categorySelector.selectByValue(categoryId);
+    }
+
+    public void selectCity() {
+        citySelector.selectByIndex(1);
+    }
+
+    public void enterName() {
+        nameInput.sendKeys("Test User");
+    }
+
+    public void enterAddress() {
+        addressInput.sendKeys("Test Address");
+    }
+
+    public void clickSubmit() {
+        submitBtn.click();
+    }
+
+    public void closeAssignMasterForm() {
+        closeButton.click();
     }
 }

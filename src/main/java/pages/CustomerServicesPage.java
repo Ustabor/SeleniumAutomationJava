@@ -17,6 +17,8 @@ public class CustomerServicesPage extends BasePage {
     private WebElementFacade serviceDetailsButton;
     @FindBy(xpath = "//div[@class='service-item']")
     private WebElementFacade serviceDetails;
+    @FindBy(xpath = "//div[@class='price']")
+    private WebElementFacade servicePrice;
     @FindBy(xpath = "//div[@class='service-item']//a[@class='btn-order']")
     private WebElementFacade serviceDetailsOrderButton;
     @FindBy(xpath = "//div[@class='btn increase']")
@@ -51,6 +53,7 @@ public class CustomerServicesPage extends BasePage {
     public void selectCategory(String name) {
         var xpath = String.format("//div[@class='service-categories']/a[text()='%s']", name);
         getDriver().findElement(By.xpath(xpath)).click();
+        waitForLoaderDisappears();
     }
 
     public void verifyServiceName(String name) {
@@ -116,7 +119,7 @@ public class CustomerServicesPage extends BasePage {
     }
 
     public void verifyServiceDetailsPrice(String price) {
-        assertThat(serviceDetails.getText().replaceAll(" ", "")).contains(price);
+        assertThat(servicePrice.getText().replaceAll(" ", "")).contains(price);
     }
 
     public void verifyOrderConfirmationFormIsVisible() {
@@ -164,5 +167,9 @@ public class CustomerServicesPage extends BasePage {
 
     public String getServiceId() {
         return orderId.getText();
+    }
+
+    public void closeServiceDetails() {
+        getDriver().navigate().back();
     }
 }

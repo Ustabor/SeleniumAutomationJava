@@ -45,4 +45,9 @@ public class CustomerRequestPageSteps extends ScenarioSteps {
         customerRequestPage.clickHiddenOffersBtn();
         customerRequestPage.verifyHiddenOfferIsPresent();
     }
+
+    @Step
+    public void verifyMastersCount(int count) {
+        customerRequestPage.verifyMastersCount(count);
+    }
 }

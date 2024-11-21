@@ -13,6 +13,9 @@ import steps.customerProfileSteps.CustomerProfileWalletPageSteps;
 import steps.masterProfileSteps.*;
 import utils.Admin;
 
+import java.net.URISyntaxException;
+import java.util.concurrent.TimeoutException;
+
 public class UserSteps extends ScenarioSteps {
 
     @Steps
@@ -22,15 +25,11 @@ public class UserSteps extends ScenarioSteps {
     @Steps
     public CustomerProfilePersonalInfoPageSteps atCustomerProfilePersonalInfoPage;
     @Steps
-    public FeedbackPageSteps atFeedbackPage;
-    @Steps
     public MasterProfilePageSteps atMasterProfilePage;
     @Steps
     public MasterProjectsPageSteps atMasterProjectsPage;
     @Steps
     public MasterPromotionPageSteps atMasterPromotionPage;
-    @Steps
-    public SiteMapPageSteps atSiteMapPage;
     @Steps
     public MasterProfileSettingsPageSteps atMasterProfileSettingsPage;
     @Steps
@@ -59,11 +58,22 @@ public class UserSteps extends ScenarioSteps {
         atHomePage.registerAsMaster(master, randomCategory);
 
         var smsCode = Admin.getInstance().getSmsCode(master.getPhoneNumber());
-
         atHomePage.enterAuthCodeAndSubmit(smsCode, master.getPhoneNumber());
         atMasterProfilePage.masterProfilePagePageShouldBeVisible();
-
         master.setProfileId(atMasterProfilePage.getProfileId());
+    }
+
+    @Step
+    public void registerAsCustomer(User customer) throws InterruptedException {
+        atHomePage.registerAsCustomer(customer);
+
+        var smsCode = getSmsCode(customer);
+        atHomePage.enterAuthCodeAndSubmit(smsCode, customer.getPhoneNumber());
+        atCustomerProfilePersonalInfoPage.openCustomerProfilePage();
+        customer.setProfileId(atCustomerProfilePersonalInfoPage.getCustomerProfileId());
+
+        var password = Admin.getInstance().getSmsPassword(customer.getPhoneNumber());
+        customer.setPassword(password);
     }
 
     @Step
@@ -78,4 +88,13 @@ public class UserSteps extends ScenarioSteps {
         return Admin.getInstance().getSmsCode(user.getPhoneNumber());
     }
 
+    @Step
+    public void addMasterProfileImage(Master master, boolean logout) throws TimeoutException, URISyntaxException, InterruptedException {
+        atHomePage.openHomePage();
+        atHomePage.login(master, true);
+        atMasterProfilePage.openProfilePage();
+        atMasterProfilePage.openProfileSettings();
+        atMasterProfilePage.uploadProfileImage();
+        if (logout) atMasterProfilePage.logsOut();
+    }
 }

@@ -1,6 +1,7 @@
 package pages.masterProfile;
 
 import net.serenitybdd.core.pages.WebElementFacade;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import pages.BasePage;
 import utils.Config;
@@ -58,5 +59,10 @@ public class MasterProfileRequestsPage extends BasePage {
 
     public void verifyRequestsTableIsEmpty() {
         assertThat(requests).isEmpty();
+    }
+
+    public void openRequestWithId(String id) {
+        var xpath = "//div[contains(@class,'requests-list')]/div[.//*[contains(text(), '%s')]]//a";
+        getDriver().findElement(By.xpath(String.format(xpath, id))).click();
     }
 }

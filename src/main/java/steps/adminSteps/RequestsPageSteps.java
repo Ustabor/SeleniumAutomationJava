@@ -17,6 +17,11 @@ public class RequestsPageSteps extends ScenarioSteps {
     }
 
     @Step
+    public void openEditRequestById(String requestId) {
+        requestsPage.openEditPage(requestId);
+    }
+
+    @Step
     public void verifyRequest(User customer, Category category, String question) {
         requestsPage.verifyCustomerLogin(customer.getFirstName());
         requestsPage.verifyCategory(category.getName());
@@ -37,27 +42,20 @@ public class RequestsPageSteps extends ScenarioSteps {
     @Step
     public void assignRequestToMasterForPayment(Master master) {
         requestsPage.openAssignMasterForm();
-        requestsPage.findMaster(master.getLastName());
+        requestsPage.findMaster(master.getFirstName());
         requestsPage.assignForPayment();
         requestsPage.waitForLoaderDisappears(180000);
+        requestsPage.closeAssignMasterForm();
     }
 
     @Step
     public void reassignRequestToMasterForPayment(Master master) {
         requestsPage.openAssignMasterForm();
-        requestsPage.findMaster(master.getLastName());
+        requestsPage.findMaster(master.getFirstName());
         requestsPage.resetAssign();
         requestsPage.assignForPayment();
         requestsPage.waitForLoaderDisappears(180000);
-    }
-
-    @Step
-    public void assignRequestToAllMastersOfCategory() {
-        requestsPage.openAssignMasterForm();
-        requestsPage.setAssignToAllMasters();
-        requestsPage.setWithdrawContactPrice();
-        requestsPage.submitMasterAssign();
-        requestsPage.waitForLoaderDisappears();
+        requestsPage.closeAssignMasterForm();
     }
 
     @Step
@@ -66,5 +64,14 @@ public class RequestsPageSteps extends ScenarioSteps {
         requestsPage.clickMenu();
         requestsPage.deleteRequest();
         requestsPage.waitForLoaderDisappears();
+    }
+
+    @Step
+    public void fillRequest(Category category) {
+        requestsPage.selectCategory(category.getSystemId());
+        requestsPage.selectCity();
+        requestsPage.enterName();
+        requestsPage.enterAddress();
+        requestsPage.clickSubmit();
     }
 }

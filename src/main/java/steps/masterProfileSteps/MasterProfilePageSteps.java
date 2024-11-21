@@ -4,6 +4,8 @@ import entities.Master;
 import net.serenitybdd.annotations.Step;
 import pages.masterProfile.MasterProfilePage;
 
+import java.net.URISyntaxException;
+
 public class MasterProfilePageSteps extends MasterProfileSteps {
 
     private MasterProfilePage masterProfilePage;
@@ -55,8 +57,6 @@ public class MasterProfilePageSteps extends MasterProfileSteps {
     @Step
     public void changeMasterInfo(Master newMasterData) {
         masterProfilePage.enterName(newMasterData.getFirstName());
-//        masterProfilePage.enterEmail(newMasterData.getEmail());
-//        masterProfilePage.enterPhoneNumber(newMasterData.getPhoneNumber());
         masterProfilePage.changeCity();
         masterProfilePage.changeExperience();
         masterProfilePage.enterAboutMeInfo(newMasterData.getAboutMe());
@@ -71,5 +71,10 @@ public class MasterProfilePageSteps extends MasterProfileSteps {
     public void verifyMasterInfo(Master newMasterData) {
         masterProfilePage.masterNameInputShouldContain(newMasterData.getFirstName());
         masterProfilePage.masterAboutMeInfoShouldContain(newMasterData.getAboutMe());
+    }
+
+    @Step
+    public void uploadProfileImage() throws URISyntaxException {
+        masterProfilePage.uploadProfileImage();
     }
 }

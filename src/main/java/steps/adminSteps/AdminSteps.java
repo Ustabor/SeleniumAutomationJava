@@ -2,7 +2,6 @@ package steps.adminSteps;
 
 import entities.Master;
 import entities.Category;
-import net.serenitybdd.annotations.Step;
 import net.serenitybdd.annotations.Steps;
 import net.thucydides.core.steps.ScenarioSteps;
 import pages.admin.AddMasterPage;
@@ -12,31 +11,20 @@ public class AdminSteps extends ScenarioSteps {
 
     @Steps
     public HomePageSteps atAdminHomePage;
-
     @Steps
     public MastersPageSteps atMastersPage;
-
     @Steps
     public CategoriesPageSteps atCategoriesPage;
-
     @Steps
     public PromotionPageSteps atPromotionPage;
-
     @Steps
     public AddCategoryPageSteps atAddCategoryPage;
-
     @Steps
     public AddRequestQuestionsPageSteps atAddRequestQuestionsPage;
-
     @Steps
     public RequestsPageSteps atRequestsPage;
-
     @Steps
     public AddRequestPageSteps atAddEditRequestPage;
-
-    @Steps
-    public CronTasksPageSteps atCronTasksPage;
-
     @Steps
     public AddMasterPage atAddMasterPage;
     @Steps
@@ -81,11 +69,6 @@ public class AdminSteps extends ScenarioSteps {
 
     public void setServicePrices(String country, String minPrice, String maxPrice) {
         atAddRequestQuestionsPage.setPriceForCurrentCountry(country, minPrice, maxPrice);
-    }
-
-    @Step
-    public void waitForCronTaskCompleted(String taskId, int timeout) {
-        atCronTasksPage.waitForCronTaskCompleted(taskId, timeout);
     }
 
     public void addSubQuestion(String question) {

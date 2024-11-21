@@ -1,9 +1,8 @@
 package utils;
 
-import enums.Browsers;
 import enums.SystemProperties;
-import net.serenitybdd.core.Serenity;
 
+import java.util.Objects;
 import java.util.Properties;
 
 import static enums.SystemProperties.*;
@@ -43,7 +42,7 @@ public class Config {
 
     public static Users getUsers() {
         if (users == null) {
-            users = new Users(getEnvironmentVariableValue(SITE, true));
+            users = new Users();
         }
 
         return users;
@@ -71,7 +70,10 @@ public class Config {
 
     private static String getBaseUrl() {
         if (site == null) {
-            site = getPropertyFromEnvVariable(SITE, true);
+            site = Objects.requireNonNullElse(
+                    getConfigPropertyFromEnvVariable(SITE),
+                    "https://www.bildrlist.com"
+            );
         }
 
         return site + "/";
@@ -79,7 +81,10 @@ public class Config {
 
     public static String getLang() {
         if (lang == null) {
-            lang = getPropertyFromEnvVariable(LANG, true);
+            lang = Objects.requireNonNullElse(
+                    getConfigPropertyFromEnvVariable(LANG),
+                    "ru"
+            );
         }
         return lang;
     }
@@ -95,15 +100,12 @@ public class Config {
         if (countryCode == null) {
             if (isUstabor()) {
                 countryCode = "uz";
-            }
-            else if (isBildrlist()) {
+            } else if (isBildrlist()) {
                 countryCode = "uz";
-            }
-            else if (isFixListKg()) {
+            } else if (isFixListKg()) {
                 countryCode = "kg";
-            }
-            else {
-                countryCode = getEnvironmentVariableValue(COUNTRY, false);
+            } else {
+                countryCode = getEnvironmentVariableValue(COUNTRY);
             }
         }
         return countryCode;
@@ -111,53 +113,26 @@ public class Config {
 
     public static String getEnv() {
         if (env == null) {
-            env = getEnvironmentVariableValue(SITE, true);
+            env = Objects.requireNonNullElse(
+                    getConfigPropertyFromEnvVariable(SITE),
+                    "test"
+            );
         }
         return env;
     }
 
-    private static String getPropertyFromEnvVariable(SystemProperties variable, boolean throwIfNull) {
-        String varValue = getEnvironmentVariableValue(variable, throwIfNull);
-
-        return PropertyReader.getInstance().getProperty(variable.toString() + "." + varValue, props);
+    private static String getConfigPropertyFromEnvVariable(SystemProperties variable) {
+        var varValue = getEnvironmentVariableValue(variable);
+        return PropertyReader.getInstance().getProperty(variable + "." + varValue, props);
     }
 
-    private static String getEnvironmentVariableValue(SystemProperties variable, boolean errorIfNull) {
-        String varValue = System.getProperty(variable.toString(), null);
-
-        if (varValue == null) {
-            if (errorIfNull) {
-                Serenity.throwExceptionsImmediately();
-                throw new NullPointerException(
-                        String.format("You need to define '%s' environment variable before test run.", variable));
-            }
-        }
-        return varValue;
+    private static String getEnvironmentVariableValue(SystemProperties variable) {
+        return System.getProperty(variable.toString(), null);
     }
 
     public static boolean isMobileTag() {
         Properties properties = System.getProperties();
         return properties.getProperty("tags") != null && properties.getProperty("tags").contains("mobile");
-    }
-
-    public static String getChromeDriverPath() {
-        var os = System.getProperty("os.name").toLowerCase();
-
-        if (os.contains("win")) {
-
-            return "driver/chromedriver.exe";
-
-        } else if (os.contains("mac")) {
-
-            return "driver/chromedriver";
-
-        } else if (os.contains("nux")) {
-
-            return "/var/lib/jenkins/workspace/chromedriver";
-
-        } else {
-            throw new IndexOutOfBoundsException();
-        }
     }
 
     public static void setAgentNeeded(boolean value) {

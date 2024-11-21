@@ -124,4 +124,9 @@ public class CustomerServicePageSteps extends ScenarioSteps {
     public String getServiceId() {
         return customerServicesPage.getServiceId();
     }
+
+    @Step
+    public void closeServiceDetails() {
+        customerServicesPage.closeServiceDetails();
+    }
 }

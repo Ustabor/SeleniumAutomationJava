@@ -11,7 +11,7 @@ public class CategoriesPage extends BaseAdminPage {
 
     private static final String categoryUrlByNameXpath = "//tr[./td[text()='%s']]//a";
 
-    @FindBy(xpath = "//input[@id='quicksearch']")
+    @FindBy(xpath = "//input[@name='quicksearch']")
     private WebElementFacade categoriesSearch;
 
     @FindBy(xpath = "//form[@class='quicksearch']//button[@type='submit']")

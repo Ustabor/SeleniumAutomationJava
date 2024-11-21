@@ -3,6 +3,7 @@ package UITests;
 import annotations.AddCategory;
 import annotations.AddMasters;
 import entities.Category;
+import entities.RequestResult;
 import net.serenitybdd.annotations.Managed;
 import net.serenitybdd.core.Serenity;
 
@@ -19,8 +20,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 import java.util.concurrent.TimeoutException;
-
-import static net.serenitybdd.core.Serenity.getDriver;
 
 
 public class TestBase {
@@ -83,34 +82,13 @@ public class TestBase {
         }
 
         if (this.getClass().isAnnotationPresent(AddMasters.class)) {
-            var anno = this.getClass().getAnnotation(AddMasters.class);
-
-            if (anno.useAdminSite()) {
-                for (int i = 0; i < anno.masters(); i++) {
-                    var master = DataGenerator.getMaster(category);
-                    watcher.users.add(master);
-                    admin.addMaster(master);
-                    Thread.sleep(500);
-                }
-                return;
-            }
-
-            user.atHomePage.openHomePage();
-
-            for (int i = 0; i < anno.masters(); i++) {
-                setCountryLanguageAndLocation();
+            var mastersCount = this.getClass().getAnnotation(AddMasters.class).masters();
+            for (int i = 0; i < mastersCount; i++) {
                 var master = DataGenerator.getMaster(category);
                 watcher.users.add(master);
-
-                user.atHomePage.openHomePage();
-                user.register(master, false);
-
-                getDriver().manage().deleteAllCookies();
-                user.atHomePage.logsOut();
+                admin.addMaster(master);
+                Thread.sleep(500);
             }
-
-            setCountryLanguageAndLocation();
-            return;
         }
 
         user.atHomePage.openHomePage();
@@ -121,7 +99,7 @@ public class TestBase {
         return XmlParser.getTextByKey(key);
     }
 
-    int getTashkentHour() {
+    public int getTashkentHour() {
         var date = new Date();
         var df = new SimpleDateFormat("HH");
         df.setTimeZone(TimeZone.getTimeZone("Asia/Tashkent"));
@@ -133,7 +111,7 @@ public class TestBase {
         driver.navigate().refresh();
     }
 
-    void setCountryLanguageAndLocation() {
+    public void setCountryLanguageAndLocation() {
         user.atHomePage.setLanguage(Config.getLang());
 
         if (Config.isUstabor() || Config.isBildrlist()) {
@@ -142,5 +120,31 @@ public class TestBase {
         }
 
         user.atHomePage.selectLocation(Config.getCountry(), getText(Config.getCountryCode() + "_city"));
+    }
+
+    public RequestResult createRequest(boolean logout) throws TimeoutException, InterruptedException {
+        var guest = DataGenerator.getGuestCustomer();
+        watcher.users.add(guest);
+
+        user.atHomePage.openHomePage();
+        user.atHomePage.openPlaceOrderPage();
+        user.atPlaceOrderPage.placeOrder(guest, category);
+        user.atCustomerProfilePersonalInfoPage.openCustomerProfilePage();
+        user.atPlaceOrderPage.openRequestsPage();
+
+        guest.setProfileId(user.atCustomerProfileRequestsPage.getCustomerProfileId());
+        var requestId = user.atCustomerProfileRequestsPage.getRequestId();
+
+        if (logout) {
+            user.atHomePage.logsOut();
+        }
+
+        if (getTashkentHour() >= 9 && getTashkentHour() < 18) {
+            admin.atRequestsPage.openRequestById(requestId);
+            admin.atRequestsPage.verifyRequest(guest, category, getText("Question_0"));
+            admin.atRequestsPage.assignRequestToMasterForFree(watcher.getMaster());
+        }
+
+        return new RequestResult(requestId, guest);
     }
 }

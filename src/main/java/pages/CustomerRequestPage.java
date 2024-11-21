@@ -39,6 +39,9 @@ public class CustomerRequestPage extends BasePage {
     @FindBy(xpath = "//li[@data-tab='tab-hidden']")
     private WebElementFacade hiddenOffersBtn;
 
+    @FindBy(xpath = "//div[@id='tab-active']//div[@class='item']")
+    private List<WebElementFacade> offersCount;
+
     public void openRequest() {
         openRequestBtn.click();
     }
@@ -74,5 +77,9 @@ public class CustomerRequestPage extends BasePage {
 
     public void verifyHiddenOfferIsPresent() {
         assertThat(hiddenOffers).isNotEmpty();
+    }
+
+    public void verifyMastersCount(int count) {
+        assertThat(offersCount.size()).isEqualTo(count);
     }
 }

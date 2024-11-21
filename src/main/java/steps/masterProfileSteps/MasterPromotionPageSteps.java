@@ -2,7 +2,6 @@ package steps.masterProfileSteps;
 
 import net.serenitybdd.annotations.Step;
 import pages.masterProfile.MasterPromotionPage;
-import utils.Config;
 
 public class MasterPromotionPageSteps extends MasterProfileSteps {
 

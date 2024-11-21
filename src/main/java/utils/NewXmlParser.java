@@ -16,7 +16,11 @@ public class NewXmlParser {
         var split = sms.split(": ");
 
         if (split.length > 0) {
-            return sms.split(": ")[1].replace("</td>", "");
+            var firstIteration = sms.split(": ")[1].replace("</td>", "");
+            var split1 = firstIteration.split(". ");
+            if (split1.length > 0) {
+                return split1[0];
+            }
         }
         return "";
     }

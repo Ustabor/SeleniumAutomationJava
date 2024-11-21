@@ -16,18 +16,8 @@ public class CommonSteps extends ScenarioSteps {
     }
 
     @Step
-    public void correctSiteShouldBeVisible(String siteName) {
-        basePage.correctSiteShouldBeVisible(siteName);
-    }
-
-    @Step
     public void verifySiteAtHeader(String site) {
         basePage.verifyHeaderSite(site);
-    }
-
-    @Step
-    public void openSiteMap() {
-        basePage.openSiteMap();
     }
 
     @Step

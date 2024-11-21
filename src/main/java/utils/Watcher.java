@@ -41,10 +41,15 @@ public class Watcher extends TestWatcher {
     }
 
     public Master getMaster() {
-        return (Master) users.stream()
-                .filter(user -> user.getClass().getSimpleName().equals("Master"))
-                .findFirst()
-                .orElseThrow();
+        return getMaster(0);
     }
 
+    public Master getMaster(int index) {
+        var masters = users
+                .stream()
+                .filter(user -> user.getClass().getSimpleName().equals("Master"))
+                .toArray(User[]::new);
+
+        return (Master) masters[index];
+    }
 }

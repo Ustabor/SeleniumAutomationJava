@@ -23,6 +23,11 @@ public class MasterProfileRequestsPageSteps extends MasterProfileSteps {
     }
 
     @Step
+    public void openRequestWithId(String id) {
+        masterProfileRequestsPage.openRequestWithId(id);
+    }
+
+    @Step
     public void clickPhoneButton() {
         masterProfileRequestsPage.clickPhoneButton();
     }

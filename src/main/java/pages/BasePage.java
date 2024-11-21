@@ -186,7 +186,7 @@ public class BasePage extends PageObject {
         Serenity.throwExceptionsImmediately();
         setTimeouts(2, ChronoUnit.SECONDS);
         try {
-            WaitHelper.pollingWait(timeoutMilli, 500, () -> !loader.isVisible());
+            WaitHelper.pollingWait(timeoutMilli, 100, () -> !loader.isVisible());
         } catch (TimeoutException e) {
             e.printStackTrace();
         }
@@ -220,10 +220,12 @@ public class BasePage extends PageObject {
     }
 
     public void logsOut() {
-        for (int i=0;i<3;i++) {
+        for (int i = 0; i < 3; i++) {
             logoutBtn.waitUntilClickable();
             logoutBtn.click();
-            if (openLoginFormBtn.isVisible()) { return; }
+            if (openLoginFormBtn.isVisible()) {
+                return;
+            }
         }
     }
 

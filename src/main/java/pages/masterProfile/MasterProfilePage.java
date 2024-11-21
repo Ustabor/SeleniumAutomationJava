@@ -1,8 +1,13 @@
 package pages.masterProfile;
 
 import net.serenitybdd.core.pages.WebElementFacade;
+import net.thucydides.core.pages.components.FileToUpload;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.FindBy;
 
+import java.io.File;
+import java.nio.file.Paths;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -37,10 +42,8 @@ public class MasterProfilePage extends MasterProfileBasePage {
     private WebElementFacade masterReviews;
     @FindBy(xpath = "//button[@type='submit']")
     private WebElementFacade saveButton;
-
     @FindBy(xpath = "//table[@class='services']//td[@class='main']/div")
     private WebElementFacade service;
-
     @FindBy(xpath = "//table[@class='services']//input[@type='text']")
     private WebElementFacade servicePrice;
 
@@ -111,5 +114,17 @@ public class MasterProfilePage extends MasterProfileBasePage {
 
     public void masterNameInputShouldContain(String firstName) {
         assertThat(masterNameInput.getValue()).isEqualTo(firstName);
+    }
+
+    public void uploadProfileImage() {
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+        js.executeScript("$(\"[class='panel-body columns-wrap']\").append(\"<input type='file' id='form_user_image' tag='upload' name='user[image]'>\")");
+
+        var fileInput = getDriver().findElement(By.xpath("//*[@tag='upload']"));
+        var file = new File("files/house-icon.webp");
+        var absolutePath = file.getAbsolutePath();
+
+        fileInput.sendKeys(absolutePath);
+        saveButton.click();
     }
 }

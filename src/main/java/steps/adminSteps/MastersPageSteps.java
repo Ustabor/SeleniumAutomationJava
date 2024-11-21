@@ -21,13 +21,12 @@ public class MastersPageSteps extends ScenarioSteps {
     }
 
     @Step
-    public void addAllBadgesToMaster(Master master) {
-        mastersPage.openMasterPageByDirectUrl(master.getProfileId());
-        mastersPage.addAllBadgesToMaster();
+    public void verifyOnlyOneTransactionExist(String amount) {
+        mastersPage.verifyOnlyOneTransactionExist(amount);
     }
 
     @Step
-    public void verifyOnlyOneTransactionExist(String amount) {
-        mastersPage.verifyOnlyOneTransactionExist(amount);
+    public void verifyBalance(int balance) {
+        mastersPage.verifyMasterBalance(balance);
     }
 }

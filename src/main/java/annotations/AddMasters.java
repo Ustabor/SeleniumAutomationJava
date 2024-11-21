@@ -8,6 +8,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface AddMasters {
-    int masters() default 2;
-    boolean useAdminSite() default false;
+    int masters();
 }

@@ -5,6 +5,7 @@ import java.util.Random;
 public class Service {
     private String name = "Autotest Service " ;
     private final String description = "Autotest Service Description";
+    private final String url = "autotest";
     private final int price = 1000;
 
     public Service() {
@@ -22,5 +23,9 @@ public class Service {
 
     public int getPrice() {
         return price;
+    }
+
+    public String getUrl() {
+        return url;
     }
 }

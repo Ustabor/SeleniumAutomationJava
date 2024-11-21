@@ -1,13 +1,10 @@
 package pages;
 
-import entities.User;
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
-import enums.RequestPages;
-import utils.Admin;
 
-import java.time.Duration;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PlaceOrderPage extends BasePage {
 
@@ -16,6 +13,8 @@ public class PlaceOrderPage extends BasePage {
     private WebElementFacade buildDomain;
     @FindBy(xpath = "//a[@class='catalog']")
     private WebElementFacade categoryTab;
+    @FindBy(xpath = "//form//textarea")
+    private WebElementFacade description;
     //endregion
 
     //region Second page
@@ -36,7 +35,7 @@ public class PlaceOrderPage extends BasePage {
     @FindBy(xpath = "//input[@id='form_data_address']")
     private WebElementFacade addressInput;
 
-    @FindBy(xpath = "//textarea[@id='form_data_note']")
+    @FindBy(xpath = "//textarea[@id='form_data_text']")
     private WebElementFacade additionalInfoInput;
     //endregion
 
@@ -53,6 +52,12 @@ public class PlaceOrderPage extends BasePage {
 
     @FindBy(xpath = "//a[@class='catalog']//i")
     private WebElementFacade mastersCount;
+
+    @FindBy(xpath = "//div[contains(@class, 'step-complete')]")
+    private WebElementFacade successSection;
+
+    @FindBy(xpath = "//a[contains(@href, 'continue')]")
+    private WebElementFacade fillRequestButton;
 
     public void nameInputShouldBeVisible() {
         nameInput.shouldBeVisible();
@@ -129,5 +134,27 @@ public class PlaceOrderPage extends BasePage {
 
     public void clickCategoryTab() {
         categoryTab.click();
+    }
+
+    public void enterDescription() {
+        description.sendKeys("This is a test request");
+    }
+
+    public void verifySuccessPageIsVisible() {
+        successSection.shouldBeVisible();
+    }
+
+    public void clickFillRequest() {
+        fillRequestButton.click();
+    }
+
+    public String getRequestId() {
+        var splitUrl = getDriver().getCurrentUrl().split("/");
+        return splitUrl[splitUrl.length - 2];
+    }
+
+    public void verifyMastersCountMoreThan(int i) {
+        var count = Integer.parseInt(mastersCount.getText());
+        assertThat(count).isGreaterThan(i);
     }
 }

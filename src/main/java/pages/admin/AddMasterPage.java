@@ -5,64 +5,50 @@ import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import utils.Config;
-import utils.XmlParser;
 
 public class AddMasterPage extends BaseAdminPage {
 
     @FindBy(xpath = "//input[@id='form_data_presentation']")
     private WebElementFacade systemName;
-
     @FindBy(xpath = "//input[@id='form_data_surname']")
     private WebElementFacade firstName;
-
     @FindBy(xpath = "//input[@id='form_data_name']")
     private WebElementFacade lastName;
-
     @FindBy(xpath = "//input[@id='form_data_email']")
     private WebElementFacade email;
-
     @FindBy(xpath = "//input[@id='form_data_phone']")
     private WebElementFacade phone;
-
     @FindBy(xpath = "//select[@id='form_data_experience']")
     private WebElementFacade experience;
-
     @FindBy(xpath = "//select[@id='form_data_site_id']")
     private WebElementFacade site;
-
     @FindBy(xpath = "//input[@id='form_data_login']")
     private WebElementFacade login;
-
     @FindBy(xpath = "//input[@id='form_data_password']")
     private WebElementFacade password;
-
     @FindBy(xpath = "//textarea[@id='form_data_about']")
     private WebElementFacade about;
-
     @FindBy(xpath = "//li[@data-tab='tab-settings']")
     private WebElementFacade settingsTab;
-
     @FindBy(xpath = "//li[@data-tab='tab-about']")
     private WebElementFacade aboutTab;
-
     @FindBy(xpath = "//button[@type='submit']")
     private WebElementFacade submitButton;
-
     @FindBy(xpath = "//a[@id='btn-master-categories']")
     private WebElementFacade categories;
-
     @FindBy(xpath = "//form[./input[@id='form_data_categories']]//button[@type='submit']")
     private  WebElementFacade saveCategories;
-
     @FindBy(xpath = "//tr[./th[text()='ID']]/td")
     private WebElementFacade masterId;
+    @FindBy(xpath = "//li[@data-tab='tab-photo']")
+    private WebElementFacade photoTab;
 
     public void openPage() {
         getDriver().get(Config.getAdminUrl() + "master/create");
     }
 
     public void createMaster(Master master) {
-        var code = phone.getAttribute("placeholder").replaceAll("[^\\d]", "");
+        var code = phone.getAttribute("placeholder").replaceAll("\\D", "");
         master.setPhoneCode(code);
 
         systemName.sendKeys(master.getFirstName());
@@ -78,7 +64,6 @@ public class AddMasterPage extends BaseAdminPage {
         settingsTab.click();
         site.selectByIndex(1);
         login.sendKeys(master.getLogin());
-        master.setPassword("password");
         password.sendKeys(master.getPassword());
 
         aboutTab.click();

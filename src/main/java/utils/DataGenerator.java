@@ -12,19 +12,6 @@ public class DataGenerator {
         return new Faker().internet().password();
     }
 
-    public static User getCustomer(String email) {
-        var faker = new Faker();
-
-        var user = new User(
-                email,
-                password,
-                faker.number().digits(9));
-        user.setFirstName(faker.name().firstName());
-        user.setCity(faker.address().cityName());
-
-        return user;
-    }
-
     public static User getCustomer() {
         var faker = new Faker();
         var user = new User();

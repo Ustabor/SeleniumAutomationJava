@@ -18,7 +18,7 @@ public class XmlParser {
         try {
             String xml = "files/strings.xml";
 
-            var inputStream = new FileInputStream(new File(xml));
+            var inputStream = new FileInputStream(xml);
             var reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
             var is = new InputSource(reader);
             is.setEncoding("UTF-8");

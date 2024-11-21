@@ -1,0 +1,52 @@
+package UITests.Customer.Requests;
+
+import UITests.TestBase;
+import annotations.AddCategory;
+import net.serenitybdd.junit.runners.SerenityRunner;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import utils.DataGenerator;
+
+import java.util.concurrent.TimeoutException;
+
+//Гость - создание черновика заявки
+
+@RunWith(SerenityRunner.class)
+@AddCategory(addServiceQuestion = true)
+public class CustomerRequestDraftTest extends TestBase {
+
+    @Test
+    public void verifyUserCanCreateCustomerRequestDraft() throws TimeoutException, InterruptedException {
+        var guest = DataGenerator.getGuestCustomer();
+
+        watcher.users.add(guest);
+
+        user.atHomePage.openPlaceOrderPage();
+        user.atPlaceOrderPage.selectBuildDomain();
+
+        user.atPlaceOrderPage.enterDescription();
+        user.atPlaceOrderPage.enterPhoneNumber(guest);
+        user.atPlaceOrderPage.clickPlaceOrder();
+
+        user.atPlaceOrderPage.waitForCodeForm();
+        var smsCode = user.atPlaceOrderPage.getSmsCode(guest);
+        user.atPlaceOrderPage.confirmPhoneNumber(smsCode, guest.getPhoneNumber());
+
+        user.atPlaceOrderPage.verifySuccessPageIsVisible();
+        var requestId = user.atPlaceOrderPage.getRequestId();
+
+        admin.atRequestsPage.openEditRequestById(requestId);
+        admin.atRequestsPage.fillRequest(category);
+
+        user.atHomePage.openHomePage();
+        user.atCustomerProfilePersonalInfoPage.openCustomerProfilePage();
+        guest.setProfileId(user.atCustomerProfileRequestsPage.getCustomerProfileId());
+
+        user.atPlaceOrderPage.openRequestsPage();
+        user.atCustomerProfileRequestsPage.newRequestShouldBeVisible();
+
+        user.atCustomerProfilePersonalInfoPage
+                .openPersonalInfo()
+                .verifyProfileData(guest);
+    }
+}
