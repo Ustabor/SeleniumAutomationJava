@@ -40,20 +40,35 @@ public class Config {
         return getEnv().equals("new_test");
     }
 
-    public static Users getUsers() {
-        if (users == null) {
-            users = new Users();
+    public static String getEnv() {
+        if (env == null) {
+            env = Objects.requireNonNullElse(
+                    getEnvironmentVariableValue(SITE),
+                    "test"
+            );
         }
-
-        return users;
+        return env;
     }
 
-    public static String getAdminUrl() {
-        if (adminUrl == null) {
-            adminUrl = getBaseUrl().replace("www", "ka8rms");
+    public static String getLang() {
+        if (lang == null) {
+            lang = Objects.requireNonNullElse(
+                    getEnvironmentVariableValue(LANG),
+                    "ru"
+            );
+        }
+        return lang;
+    }
+
+    private static String getBaseUrl() {
+        if (site == null) {
+            site = Objects.requireNonNullElse(
+                    getConfigPropertyFromEnvVariable(SITE),
+                    "https://www.bildrlist.com"
+            );
         }
 
-        return adminUrl;
+        return site + "/";
     }
 
     public static String getFullUrl() {
@@ -68,32 +83,12 @@ public class Config {
         return getBaseUrl() + getLang() + "-" + getCountryCode() + "/";
     }
 
-    private static String getBaseUrl() {
-        if (site == null) {
-            site = Objects.requireNonNullElse(
-                    getConfigPropertyFromEnvVariable(SITE),
-                    "https://www.bildrlist.com"
-            );
+    public static String getAdminUrl() {
+        if (adminUrl == null) {
+            adminUrl = getBaseUrl().replace("www", "ka8rms");
         }
 
-        return site + "/";
-    }
-
-    public static String getLang() {
-        if (lang == null) {
-            lang = Objects.requireNonNullElse(
-                    getConfigPropertyFromEnvVariable(LANG),
-                    "ru"
-            );
-        }
-        return lang;
-    }
-
-    public static String getCountry() {
-        if (country == null) {
-            country = XmlParser.getTextByKey(getCountryCode());
-        }
-        return country;
+        return adminUrl;
     }
 
     public static String getCountryCode() {
@@ -105,20 +100,28 @@ public class Config {
             } else if (isFixListKg()) {
                 countryCode = "kg";
             } else {
-                countryCode = getEnvironmentVariableValue(COUNTRY);
+                countryCode = Objects.requireNonNullElse(
+                        getEnvironmentVariableValue(COUNTRY),
+                        "ru"
+                );
             }
         }
         return countryCode;
     }
 
-    public static String getEnv() {
-        if (env == null) {
-            env = Objects.requireNonNullElse(
-                    getConfigPropertyFromEnvVariable(SITE),
-                    "test"
-            );
+    public static String getCountry() {
+        if (country == null) {
+            country = XmlParser.getTextByKey(getCountryCode());
         }
-        return env;
+        return country;
+    }
+
+    public static Users getUsers() {
+        if (users == null) {
+            users = new Users();
+        }
+
+        return users;
     }
 
     private static String getConfigPropertyFromEnvVariable(SystemProperties variable) {
