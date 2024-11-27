@@ -22,7 +22,9 @@ public class CustomerRequestAssignForFreeTest extends TestBase {
 
     @Test
     public void verifyRequestAssignToMasterForFree() throws TimeoutException, InterruptedException {
-        var result = createRequest(false);
+        var result = createRequest(true, true);
+
+        user.atHomePage.openHomePage();
         user.atHomePage.login(watcher.getMaster(), true);
         user.atMasterProfileRequestsPage.openRequestsPage();
         user.atMasterProfileRequestsPage.verifyRequestId(result.requestId);

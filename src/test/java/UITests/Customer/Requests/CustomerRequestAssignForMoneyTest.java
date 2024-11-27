@@ -26,17 +26,7 @@ public class CustomerRequestAssignForMoneyTest extends TestBase {
 
     @Test
     public void verifyRequestAssignToMasterForAmount() throws TimeoutException, InterruptedException {
-        var result = createRequest(true);
-
-        admin.atRequestsPage.openRequestById(result.requestId);
-
-        if (getTashkentHour() >= 9 && getTashkentHour() < 18) {
-            admin.atRequestsPage.assignRequestToMasterForPayment(watcher.getMaster(0));
-            admin.atRequestsPage.assignRequestToMasterForPayment(watcher.getMaster(1));
-        } else {
-            admin.atRequestsPage.reassignRequestToMasterForPayment(watcher.getMaster(0));
-            admin.atRequestsPage.reassignRequestToMasterForPayment(watcher.getMaster(1));
-        }
+        var result = createRequest(true, false);
 
         user.atHomePage.openHomePage();
         user.atHomePage.login(watcher.getMaster(0), true);

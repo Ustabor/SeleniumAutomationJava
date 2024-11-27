@@ -24,8 +24,8 @@ public class CustomerRequestClientContactWithdrawTest extends TestBase {
 
     @Test
     public void verifyWithdrawForCustomerContacts() throws TimeoutException, InterruptedException {
-        var result1 = createRequest(true);
-        var result2 = createRequest(false);
+        var result1 = createRequest(true, true);
+        var result2 = createRequest(false, true);
 
         user.atHomePage.openHomePage();
         user.atHomePage.logsOut();

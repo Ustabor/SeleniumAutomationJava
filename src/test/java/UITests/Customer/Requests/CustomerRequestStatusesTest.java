@@ -19,7 +19,7 @@ public class CustomerRequestStatusesTest extends TestBase {
 
     @Test
     public void verifyCustomerRequestStatuses() throws TimeoutException, InterruptedException {
-        var result = createRequest(true);
+        var result = createRequest(true, true);
 
         user.atHomePage.openHomePage();
         user.atHomePage.login(watcher.getMaster(), true);

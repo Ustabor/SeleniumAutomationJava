@@ -74,4 +74,9 @@ public class RequestsPageSteps extends ScenarioSteps {
         requestsPage.enterAddress();
         requestsPage.clickSubmit();
     }
+
+    @Step
+    public boolean isMasterAssigned() {
+        return requestsPage.isMasterAssigned();
+    }
 }

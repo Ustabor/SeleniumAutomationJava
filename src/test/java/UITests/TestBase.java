@@ -122,7 +122,7 @@ public class TestBase {
         user.atHomePage.selectLocation(Config.getCountry(), getText(Config.getCountryCode() + "_city"));
     }
 
-    public RequestResult createRequest(boolean logout) throws TimeoutException, InterruptedException {
+    public RequestResult createRequest(boolean logout, boolean assignFree) throws TimeoutException, InterruptedException {
         var guest = DataGenerator.getGuestCustomer();
         watcher.users.add(guest);
 
@@ -139,10 +139,21 @@ public class TestBase {
             user.atHomePage.logsOut();
         }
 
-        if (getTashkentHour() >= 9 && getTashkentHour() < 18) {
-            admin.atRequestsPage.openRequestById(requestId);
-            admin.atRequestsPage.verifyRequest(guest, category, getText("Question_0"));
-            admin.atRequestsPage.assignRequestToMasterForFree(watcher.getMaster());
+        admin.atRequestsPage.openRequestById(requestId);
+        admin.atRequestsPage.verifyRequest(guest, category, getText("Question_0"));
+
+        if (assignFree) {
+            if (!admin.atRequestsPage.isMasterAssigned()) {
+                admin.atRequestsPage.assignRequestToMasterForFree(watcher.getMaster());
+            }
+        } else {
+            if (!admin.atRequestsPage.isMasterAssigned()) {
+                admin.atRequestsPage.assignRequestToMasterForPayment(watcher.getMaster(0));
+                admin.atRequestsPage.assignRequestToMasterForPayment(watcher.getMaster(1));
+            } else {
+                admin.atRequestsPage.reassignRequestToMasterForPayment(watcher.getMaster(0));
+                admin.atRequestsPage.reassignRequestToMasterForPayment(watcher.getMaster(1));
+            }
         }
 
         return new RequestResult(requestId, guest);
