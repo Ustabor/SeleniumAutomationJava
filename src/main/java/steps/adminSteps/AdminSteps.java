@@ -53,21 +53,19 @@ public class AdminSteps extends ScenarioSteps {
         atPromotionPage.approvePromotion(category);
     }
 
-    public void addServiceQuestions(Category category, String question) {
+    public void addRequestRootQuestion(Category category, String question) {
         atAddRequestQuestionsPage.openPage();
         atAddRequestQuestionsPage.addQuestionToCategory(category, question);
     }
 
-    public void addCategoryService(Category category, boolean price) {
+    public void addRequest(Category category, boolean setPrice) {
         atAddEditRequestPage.openPage();
         atAddEditRequestPage.fillAddServiceForm(category);
-        if (price) {
-            atAddEditRequestPage.setPrices();
-        }
+        if (setPrice) atAddEditRequestPage.setPrices();
         atAddEditRequestPage.saveService();
     }
 
-    public void setServicePrices(String country, String minPrice, String maxPrice) {
+    public void setRequestQuestionPrices(String country, String minPrice, String maxPrice) {
         atAddRequestQuestionsPage.setPriceForCurrentCountry(country, minPrice, maxPrice);
     }
 

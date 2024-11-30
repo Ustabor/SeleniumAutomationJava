@@ -16,9 +16,6 @@ import steps.UserSteps;
 import steps.adminSteps.AdminSteps;
 import utils.*;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
 import java.util.concurrent.TimeoutException;
 
 
@@ -39,32 +36,27 @@ public class TestBase {
 
     @Before
     public void setUp() throws TimeoutException, InterruptedException {
-        Config.setAgentNeeded(this.toString().contains("UU293"));
         Serenity.throwExceptionsImmediately();
         Admin.getInstance();
 
-        if (this.getClass().isAnnotationPresent(AddCategory.class)) {
-            var annotation = this.getClass().getAnnotation(AddCategory.class);
-
+        var annotation = this.getClass().getAnnotation(AddCategory.class);
+        if (annotation != null) {
             watcher.category = category;
             admin.addTestCategory(category);
 
-            if (annotation.addServiceQuestion()) {
-                admin.addCategoryService(category, annotation.addServicePrice());
+            if (annotation.addRequest()) {
+                admin.addRequest(category, annotation.addRequestPrice());
+                admin.addRequestRootQuestion(category, getText("Question_main"));
+                admin.setRequestQuestionPrices(Config.getCountry(), "100", "200");
 
-                for(int i = 0; i < annotation.questionsCount(); i++) {
-                    if (i == 0) {
-                        admin.addServiceQuestions(category, getText("Question_0"));
-                        continue;
-                    }
-                    var question = String.format("Question_%d", i);
-                    admin.addSubQuestion(getText(question));
+                for(int i = 1; i < annotation.requestQuestionsCount(); i++) {
+                    var question = getText(String.format("Question_%d", i));
+                    admin.addSubQuestion(question);
                     Thread.sleep(500);
-                    admin.addSubQuestion(getText(question));
+                    admin.addSubQuestion(question);
                     Thread.sleep(500);
                 }
 
-                admin.setServicePrices(Config.getCountry(), "100", "200");
                 admin.atServicePricesPage.addServicePrice(category);
             }
 
@@ -81,9 +73,9 @@ public class TestBase {
             }
         }
 
-        if (this.getClass().isAnnotationPresent(AddMasters.class)) {
-            var mastersCount = this.getClass().getAnnotation(AddMasters.class).masters();
-            for (int i = 0; i < mastersCount; i++) {
+        var mastersAnno = this.getClass().getAnnotation(AddMasters.class);
+        if (mastersAnno != null) {
+            for (int i = 0; i < mastersAnno.masters(); i++) {
                 var master = DataGenerator.getMaster(category);
                 watcher.users.add(master);
                 admin.addMaster(master);
@@ -97,13 +89,6 @@ public class TestBase {
 
     public String getText(String key) {
         return XmlParser.getTextByKey(key);
-    }
-
-    public int getTashkentHour() {
-        var date = new Date();
-        var df = new SimpleDateFormat("HH");
-        df.setTimeZone(TimeZone.getTimeZone("Asia/Tashkent"));
-        return Integer.parseInt(df.format(date));
     }
 
     public void setBrowserMobileWindowSize() {
@@ -140,7 +125,7 @@ public class TestBase {
         }
 
         admin.atRequestsPage.openRequestById(requestId);
-        admin.atRequestsPage.verifyRequest(guest, category, getText("Question_0"));
+        admin.atRequestsPage.verifyRequest(guest, category, getText("Question_main"));
 
         if (assignFree) {
             if (!admin.atRequestsPage.isMasterAssigned()) {

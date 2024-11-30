@@ -16,7 +16,7 @@ import java.util.concurrent.TimeoutException;
 //Создание заявки - количество мастеров в индикаторе
 
 @RunWith(SerenityRunner.class)
-@AddCategory(addServiceQuestion = true, addServicePrice = true)
+@AddCategory(addRequest = true, addRequestPrice = true)
 @AddMasters(masters = 2)
 public class CustomerRequestMastersFilterTest extends TestBase {
 

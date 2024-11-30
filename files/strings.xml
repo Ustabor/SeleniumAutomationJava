@@ -88,10 +88,10 @@
     <string name="LoginFailedError">Неправильный логин или пароль</string>
 
     <string name="Service">Autotest</string>
-    <string name="Question_0">This is a test question number 1</string>
-    <string name="Question_1">This is a test question number 2</string>
-    <string name="Question_2">This is a test question number 3</string>
-    <string name="Question_3">This is a test question number 4</string>
+    <string name="Question_main">This is a main test question</string>
+    <string name="Question_1">This is a test sub-question number 1</string>
+    <string name="Question_2">This is a test sub-question number 2</string>
+    <string name="Question_3">This is a test sub-question number 3</string>
 
     <string name="WithdrawError">На вашем счете недостаточно средств</string>
 

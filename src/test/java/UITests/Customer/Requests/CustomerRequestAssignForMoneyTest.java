@@ -13,7 +13,7 @@ import java.util.concurrent.TimeoutException;
 
 @WithTag("smoke")
 @RunWith(SerenityRunner.class)
-@AddCategory(promotionAndClickPrice = true, addServiceQuestion = true)
+@AddCategory(promotionAndClickPrice = true, addRequest = true)
 @AddMasters(masters = 2)
 public class CustomerRequestAssignForMoneyTest extends TestBase {
 

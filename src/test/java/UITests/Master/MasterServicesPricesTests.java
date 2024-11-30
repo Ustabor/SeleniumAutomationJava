@@ -15,7 +15,7 @@ import java.util.concurrent.TimeoutException;
 // Мастер - выставление цен для услуг
 
 @RunWith(SerenityRunner.class)
-@AddCategory(addServiceQuestion = true, addServicePrice = true)
+@AddCategory(addRequest = true, addRequestPrice = true)
 @AddMasters(masters = 1)
 public class MasterServicesPricesTests extends TestBase {
 

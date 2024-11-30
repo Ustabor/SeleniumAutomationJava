@@ -18,7 +18,7 @@ import java.util.concurrent.TimeoutException;
 //Заказчик - обратный звонок мастеру
 
 @RunWith(SerenityRunner.class)
-@AddCategory(addServiceQuestion = true, addServicePrice = true)
+@AddCategory(addRequest = true, addRequestPrice = true)
 @AddMasters(masters = 1)
 public class CustomerMasterCallbackTest extends TestBase {
     private User customer;

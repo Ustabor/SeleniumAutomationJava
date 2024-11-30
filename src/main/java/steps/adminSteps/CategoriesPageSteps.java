@@ -42,13 +42,12 @@ public class CategoriesPageSteps extends ScenarioSteps {
     }
 
     @Step
-    public void setPromotionAndClickPrice(String categoryId, String minPrice, String maxPrice, String clickPrice) throws TimeoutException {
+    public void setPromotionAndClickPrice(String categoryId, String minPrice, String maxPrice, String clickPrice) {
         categoriesPage.openPromotionPage();
         categoriesPage.selectCategory(categoryId);
         categoriesPage.selectCurrentCountry();
         categoriesPage.setPrice(minPrice, maxPrice);
         categoriesPage.setClickPrice(clickPrice);
         categoriesPage.submitPromotion();
-//        categoriesPage.waitForLoaderDisappears();
     }
 }

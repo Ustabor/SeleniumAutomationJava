@@ -25,7 +25,7 @@ public class PlaceOrderPageSteps extends ScenarioSteps {
     @Step
     public void placeOrder(User customer, Category category) throws InterruptedException {
         var request = XmlParser.getTextByKey("Service");
-        var question = XmlParser.getTextByKey("Question_0");
+        var question = XmlParser.getTextByKey("Question_main");
 
         selectBuildDomain();
         enterDescription();

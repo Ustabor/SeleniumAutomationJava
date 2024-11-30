@@ -12,7 +12,7 @@ import java.util.concurrent.TimeoutException;
 //Гость - создание черновика заявки
 
 @RunWith(SerenityRunner.class)
-@AddCategory(addServiceQuestion = true)
+@AddCategory(addRequest = true)
 public class CustomerRequestDraftTest extends TestBase {
 
     @Test

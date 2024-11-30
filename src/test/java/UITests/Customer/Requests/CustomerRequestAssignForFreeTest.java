@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
 import java.util.concurrent.TimeoutException;
 
 @RunWith(SerenityRunner.class)
-@AddCategory(addServiceQuestion = true)
+@AddCategory(addRequest = true)
 @AddMasters(masters = 1)
 public class CustomerRequestAssignForFreeTest extends TestBase {
 
