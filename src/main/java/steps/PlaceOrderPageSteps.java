@@ -27,7 +27,6 @@ public class PlaceOrderPageSteps extends ScenarioSteps {
         var request = XmlParser.getTextByKey("Service");
         var question = XmlParser.getTextByKey("Question_main");
 
-        selectBuildDomain();
         enterDescription();
         enterPhoneNumber(customer);
         clickPlaceOrder();
