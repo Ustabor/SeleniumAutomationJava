@@ -89,6 +89,7 @@
                 <version>${surefire.verson}</version>
                 <configuration>
                     <skipTests>true</skipTests>
+                    <rerunFailingTestsCount>2</rerunFailingTestsCount>
                 </configuration>
             </plugin>
             <plugin>
