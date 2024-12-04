@@ -22,7 +22,6 @@ public class CustomerRequestDraftTest extends TestBase {
         watcher.users.add(guest);
 
         user.atHomePage.openPlaceOrderPage();
-        user.atPlaceOrderPage.selectBuildDomain();
 
         user.atPlaceOrderPage.enterDescription();
         user.atPlaceOrderPage.enterPhoneNumber(guest);

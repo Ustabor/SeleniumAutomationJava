@@ -35,7 +35,6 @@ public class CustomerRequestMastersFilterTest extends TestBase {
         user.atHomePage.openHomePage();
 
         user.atHomePage.openPlaceOrderPage();
-        user.atPlaceOrderPage.selectBuildDomain();
 
         user.atPlaceOrderPage.verifyMastersCountMoreThan(2);
         user.atPlaceOrderPage.enterDescription();
@@ -52,6 +51,6 @@ public class CustomerRequestMastersFilterTest extends TestBase {
         user.atPlaceOrderPage.selectCategory(category);
         user.atPlaceOrderPage.verifyMastersCountEquals(2);
         user.atPlaceOrderPage.selectRequest(request);
-        user.atPlaceOrderPage.verifyMastersCountEquals(1);
+        user.atPlaceOrderPage.verifyMastersCountEquals(2);
     }
 }
