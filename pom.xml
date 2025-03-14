@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <serenity.version>4.0.15</serenity.version>
+        <serenity.version>4.1.6</serenity.version>
         <junit.version>4.13.2</junit.version>
         <surefire.verson>3.0.0-M3</surefire.verson>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -3,6 +3,8 @@ package steps.masterProfileSteps;
 import net.serenitybdd.annotations.Step;
 import pages.masterProfile.MasterWalletPage;
 
+import java.util.concurrent.TimeoutException;
+
 public class MasterWalletPageSteps extends MasterProfileSteps {
 
     private MasterWalletPage masterWalletPage;
@@ -35,7 +37,7 @@ public class MasterWalletPageSteps extends MasterProfileSteps {
     }
 
     @Step
-    public void verifyPaycomPaymentSystemPageIsOpened() {
+    public void verifyPaycomPaymentSystemPageIsOpened() throws TimeoutException {
         masterWalletPage.verifyPaycomSystemPage();
     }
 

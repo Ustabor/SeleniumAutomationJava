@@ -48,7 +48,7 @@ public class AddMasterPage extends BaseAdminPage {
     }
 
     public void createMaster(Master master) {
-        var code = phone.getAttribute("placeholder").replaceAll("\\D", "");
+        var code = phone.getDomAttribute("placeholder").replaceAll("\\D", "");
         master.setPhoneCode(code);
 
         systemName.sendKeys(master.getFirstName());

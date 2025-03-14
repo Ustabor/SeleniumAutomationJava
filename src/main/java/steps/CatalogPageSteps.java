@@ -190,6 +190,7 @@ public class CatalogPageSteps extends CommonSteps {
         catalogPage.openFilterSort();
         catalogPage.selectSort(sort);
         catalogPage.applyFilter();
+        catalogPage.waitForLoaderDisappears();
     }
 
     @Step

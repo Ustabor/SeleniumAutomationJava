@@ -3,6 +3,9 @@ package pages.masterProfile;
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
+import utils.WaitHelper;
+
+import java.util.concurrent.TimeoutException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -61,9 +64,12 @@ public class MasterWalletPage extends MasterProfileBasePage {
         assertTrue(getDriver().getCurrentUrl().contains("my.click.uz"));
     }
 
-    public void verifyPaycomSystemPage() {
-        var result = getDriver().getCurrentUrl().contains("payme") || getDriver().getCurrentUrl().contains("paycom");
-        assertTrue(result);
+    public void verifyPaycomSystemPage() throws TimeoutException {
+        WaitHelper.pollingWait(
+                10000,
+                100,
+                () -> getDriver().getCurrentUrl().contains("payme") || getDriver().getCurrentUrl().contains("paycom")
+        );
     }
 
     public void clickCardsSection() {

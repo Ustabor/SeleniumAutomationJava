@@ -220,13 +220,8 @@ public class BasePage extends PageObject {
     }
 
     public void logsOut() {
-        for (int i = 0; i < 3; i++) {
-            logoutBtn.waitUntilClickable();
-            logoutBtn.click();
-            if (openLoginFormBtn.isVisible()) {
-                return;
-            }
-        }
+        logoutBtn.waitUntilClickable();
+        logoutBtn.click();
     }
 
     boolean isLogoutBtnVisible() {

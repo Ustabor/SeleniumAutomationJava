@@ -36,6 +36,7 @@ public class CustomerRequestDraftTest extends TestBase {
 
         admin.atRequestsPage.openEditRequestById(requestId);
         admin.atRequestsPage.fillRequest(category);
+        Thread.sleep(5000);
 
         user.atHomePage.openHomePage();
         user.atCustomerProfilePersonalInfoPage.openCustomerProfilePage();

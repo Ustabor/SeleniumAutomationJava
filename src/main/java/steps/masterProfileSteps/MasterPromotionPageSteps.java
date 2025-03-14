@@ -18,5 +18,6 @@ public class MasterPromotionPageSteps extends MasterProfileSteps {
         masterPromotionPage.selectCategoryToPromote(categoryName);
         masterPromotionPage.selectPromotionType(promotionType);
         masterPromotionPage.sendToModeration();
+        masterPromotionPage.waitForLoaderDisappears();
     }
 }
