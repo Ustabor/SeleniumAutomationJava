@@ -44,6 +44,10 @@ public class BaseAdminPage extends PageObject {
         setWaitForTimeout(15000);
     }
 
+    public void waitForQuickSearchIsVisible() {
+        withTimeoutOf(Duration.ofSeconds(25)).waitFor(quickSearchInput).isPresent();
+    }
+
     public void waitForLogin() {
         withTimeoutOf(Duration.ofSeconds(25)).waitFor(quickSearchInput).isPresent();
     }

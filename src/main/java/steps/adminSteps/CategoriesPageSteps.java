@@ -49,5 +49,6 @@ public class CategoriesPageSteps extends ScenarioSteps {
         categoriesPage.setPrice(minPrice, maxPrice);
         categoriesPage.setClickPrice(clickPrice);
         categoriesPage.submitPromotion();
+        categoriesPage.waitForQuickSearchIsVisible();
     }
 }

@@ -63,6 +63,7 @@ public class AdminSteps extends ScenarioSteps {
         atAddEditRequestPage.fillAddServiceForm(category);
         if (setPrice) atAddEditRequestPage.setPrices();
         atAddEditRequestPage.saveService();
+        atRequestsPage.waitForPageIsOpened();
     }
 
     public void setRequestQuestionPrices(String country, String minPrice, String maxPrice) {

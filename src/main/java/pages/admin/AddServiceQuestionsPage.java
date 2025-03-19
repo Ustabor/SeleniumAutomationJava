@@ -31,6 +31,9 @@ public class AddServiceQuestionsPage extends BaseAdminPage {
     @FindBy(xpath = "(//div[@class='expand'])[last()]")
     private WebElementFacade addSubQuestion;
 
+    @FindBy(xpath = "//nav[@class='answer']")
+    private WebElementFacade addedQuestion;
+
 
     public void openPage() {
         getDriver().get(Config.getAdminUrl() + "request/answer");
@@ -39,6 +42,7 @@ public class AddServiceQuestionsPage extends BaseAdminPage {
     public void addQuestion(String question) {
         questionTextArea.sendKeys(question);
         submitQuestionBtn.click();
+        addedQuestion.shouldBeVisible();
     }
 
     public void selectCategory(String id) {

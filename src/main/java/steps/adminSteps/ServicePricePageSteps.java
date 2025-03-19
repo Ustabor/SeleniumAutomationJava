@@ -14,5 +14,6 @@ public class ServicePricePageSteps extends ScenarioSteps {
         servicePricePage.selectCategory(category.getSystemId());
         servicePricePage.enterServiceName("Autotest");
         servicePricePage.clickSave();
+        servicePricePage.waitForQuickSearchIsVisible();
     }
 }

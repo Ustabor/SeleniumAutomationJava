@@ -79,4 +79,9 @@ public class RequestsPageSteps extends ScenarioSteps {
     public boolean isMasterAssigned() {
         return requestsPage.isMasterAssigned();
     }
+
+    @Step
+    public void waitForPageIsOpened() {
+        requestsPage.waitForQuickSearchIsVisible();
+    }
 }

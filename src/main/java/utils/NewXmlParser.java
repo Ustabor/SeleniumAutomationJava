@@ -1,6 +1,10 @@
 package utils;
 
 import org.seimicrawler.xpath.JXDocument;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class NewXmlParser {
@@ -11,11 +15,13 @@ public class NewXmlParser {
         document = JXDocument.create(html);
     }
 
+    private static final Logger logger = LoggerFactory.getLogger(NewXmlParser.class);
+
     public String getUrl(String phoneNumber) {
         var sms = getSmsText(phoneNumber, XmlParser.getTextByKey("SmsServiceUrl"));
         var split = sms.split(": ");
 
-        if (split.length > 0) {
+        if (split.length > 1) {
             var firstIteration = sms.split(": ")[1].replace("</td>", "");
             var split1 = firstIteration.split(". ");
             if (split1.length > 0) {
