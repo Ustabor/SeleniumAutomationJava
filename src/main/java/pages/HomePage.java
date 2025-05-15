@@ -121,10 +121,10 @@ public class HomePage extends SearchBlock {
     @FindBy(xpath = "//div[@class='ui-selectbox-popup']//li[2]")
     private WebElementFacade regMasterExperienceSelectorFirst;
 
-    @FindBy(xpath = "//select[@id='form_registration_master_city_id']/../div")
+    @FindBy(xpath = "//div[contains(@class, 'field-city_id')]")
     private WebElementFacade regMasterCitySelector;
 
-    @FindBy(xpath = "//div[@class='ui-selectbox-popup']//li[1]")
+    @FindBy(xpath = "//div[@class='ui-selectbox-popup']//li[2]")
     private WebElementFacade regMasterCitySelectorFirst;
 
     @FindBy(xpath = "//form[@method='post']//button[@type='submit']")

@@ -100,7 +100,7 @@ public class CatalogPage extends SearchBlock {
     //region Callback form
     @FindBy(xpath = "//a//button[@class='button-contacts icon']")
     private WebElementFacade callMasterButton;
-    @FindBy(xpath = "//div[contains(@class, 'master-info')]/div[@class='btn']")
+    @FindBy(xpath = "//div[contains(@class, 'master-info')]/div[contains(@class, 'btn-callback')]")
     private WebElementFacade callbackButton;
     @FindBy(xpath = "//input[@type='tel']")
     private WebElementFacade callbackPhoneInput;
