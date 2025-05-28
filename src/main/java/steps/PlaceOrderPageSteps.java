@@ -38,6 +38,9 @@ public class PlaceOrderPageSteps extends ScenarioSteps {
         var password = Admin.getInstance().getSmsPassword(customer.getPhoneNumber());
         customer.setPassword(password);
 
+        var customerId = Admin.getInstance().getCustomerId(customer.getPhoneNumber());
+        customer.setProfileId(customerId);
+
         verifySuccessPageIsVisible();
         clickFillRequest();
 

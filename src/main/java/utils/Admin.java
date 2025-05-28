@@ -95,6 +95,11 @@ public class Admin {
     }
 
     public void deleteCustomer(String customerId) {
+        if (customerId.isEmpty())
+        {
+            return;
+        }
+
         var url = Config.getAdminUrl() + String.format("customer/%s/delete", customerId);
 
         try {
@@ -211,6 +216,24 @@ public class Admin {
 
     private String getSmsLogPage() {
         var url = Config.getAdminUrl() + "logs/sms";
+
+        try {
+            return executor.execute(Request.Get(url)).returnContent().asString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    public String getCustomerId(String phoneNumber) {
+        var page = getCustomersPage();
+        var code = new NewXmlParser(page).getId(phoneNumber);
+
+        return code;
+    }
+
+    private String getCustomersPage() {
+        var url = Config.getAdminUrl() + "customer";
 
         try {
             return executor.execute(Request.Get(url)).returnContent().asString();

@@ -58,4 +58,20 @@ public class NewXmlParser {
 
         return nodes.get(0).toString();
     }
+
+    public String getId(String phoneNumber) {
+        String textXPath = "//tr/td/a[contains(text(), '%s')]";
+        String xpath = String.format(textXPath, phoneNumber);
+
+        var nodes = document.selN(xpath);
+
+        if (nodes.size() == 0) {
+            return "";
+        }
+
+        var href = nodes.get(0).asElement().attr("href");
+        var arr = href.split("/");
+
+        return arr[arr.length-1];
+    }
 }

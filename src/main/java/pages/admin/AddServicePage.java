@@ -50,6 +50,7 @@ public class AddServicePage extends BaseAdminPage {
 
         serviceNameInputRu.sendKeys(category.getService().getName());
         textTab.click();
+
         enterIframeText("ru", category.getService().getDescription());
         mainTab.click();
 
