@@ -59,12 +59,10 @@ public class PlaceOrderPage extends BasePage {
     @FindBy(xpath = "//a[contains(@href, 'continue')]")
     private WebElementFacade fillRequestButton;
 
-    public void nameInputShouldBeVisible() {
-        nameInput.shouldBeVisible();
-    }
-
-    public void additionalInfoFormShouldBeVisible() {
-        additionalInfoInput.shouldBeVisible();
+    public void descriptionShouldBeVisible() { description.shouldBeVisible(); }
+    public void phoneInputShouldBeVisible() { phoneInput.shouldBeVisible(); }
+    public void confirmButtonShouldBeVisible() {
+        confirmBtn.shouldBeVisible();
     }
 
     public void enterName(String userName) {

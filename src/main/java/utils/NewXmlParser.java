@@ -44,7 +44,14 @@ public class NewXmlParser {
 
     public String getSmsPassword(String phoneNumber, String text) {
         var sms = getSmsText(phoneNumber, text);
-        return sms.substring(sms.lastIndexOf(':') + 2, sms.lastIndexOf('<'));
+        var beginIndex = sms.lastIndexOf(':');
+        var endIndex = sms.lastIndexOf('<');
+
+        if (beginIndex == -1 || endIndex == -1) {
+            return "";
+        }
+
+        return sms.substring(beginIndex + 2, endIndex);
     }
 
     public String getSmsText(String phoneNumber, String text) {
@@ -52,7 +59,7 @@ public class NewXmlParser {
         String xpath = String.format(textXpath, phoneNumber, text);
         var nodes = document.selN(xpath);
 
-        if (nodes.size() == 0) {
+        if (nodes.isEmpty()) {
             return "";
         }
 
@@ -65,12 +72,16 @@ public class NewXmlParser {
 
         var nodes = document.selN(xpath);
 
-        if (nodes.size() == 0) {
+        if (nodes.isEmpty()) {
             return "";
         }
 
         var href = nodes.get(0).asElement().attr("href");
         var arr = href.split("/");
+
+        if (arr.length <= 1) {
+            return "";
+        }
 
         return arr[arr.length-1];
     }

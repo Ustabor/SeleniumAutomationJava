@@ -184,6 +184,9 @@ public class HomePage extends SearchBlock {
     @FindBy(xpath = "//div[@class='row row-faq']//div[@class='item']")
     private List<WebElementFacade> faqItemsList;
 
+    @FindBy(xpath = "//div[@class='row row-faq']//div[@class='item']")
+    private WebElementFacade faqItem;
+
     @FindBy(xpath = "//div[@class='row row-faq']//div[@class='item expanded']//div[@class='text']")
     private WebElementFacade faqOpenedItemText;
 
@@ -432,6 +435,7 @@ public class HomePage extends SearchBlock {
     }
 
     public void openRandomFaqItem() {
+        faqItem.shouldBeVisible();
         faqItemsList
                 .get(new Random().nextInt(faqItemsList.size()))
                 .findElement(By.xpath(".//i"))

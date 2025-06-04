@@ -14,12 +14,9 @@ public class PlaceOrderPageSteps extends ScenarioSteps {
 
     @Step
     public void verifyPage() {
-//        placeOrderPage.makeSureFormIsVisible();
-//        placeOrderPage.nameInputShouldBeVisible();
-//        placeOrderPage.domainDropdownShouldBeVisible();
-//        placeOrderPage.categoryDropdownShouldBeVisible();
-//        placeOrderPage.photoFormShouldBeVisible();
-//        placeOrderPage.additionalInfoFormShouldBeVisible();
+        placeOrderPage.descriptionShouldBeVisible();
+        placeOrderPage.phoneInputShouldBeVisible();
+        placeOrderPage.confirmButtonShouldBeVisible();
     }
 
     @Step
@@ -35,11 +32,11 @@ public class PlaceOrderPageSteps extends ScenarioSteps {
         var smsCode = getSmsCode(customer);
         confirmPhoneNumber(smsCode, customer.getPhoneNumber());
 
-        var password = Admin.getInstance().getSmsPassword(customer.getPhoneNumber());
-        customer.setPassword(password);
-
         var customerId = Admin.getInstance().getCustomerId(customer.getPhoneNumber());
         customer.setProfileId(customerId);
+
+        var password = Admin.getInstance().getSmsPassword(customer.getPhoneNumber());
+        customer.setPassword(password);
 
         verifySuccessPageIsVisible();
         clickFillRequest();
@@ -53,11 +50,6 @@ public class PlaceOrderPageSteps extends ScenarioSteps {
         clickPlaceOrder();
 
         verifySuccessPageIsVisible();
-    }
-
-    @Step
-    public void selectBuildDomain() {
-        placeOrderPage.selectBuildDomain();
     }
 
     @Step

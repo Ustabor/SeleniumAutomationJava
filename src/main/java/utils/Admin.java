@@ -124,7 +124,7 @@ public class Admin {
             logger.info("Getting service url for phone number: {}", phoneNumber);
             var smsLog = getSmsLogPage();
             var code = new NewXmlParser(smsLog).getUrl(phoneNumber);
-            if (code.equals("")) {
+            if (code.isEmpty()) {
                 logger.info("Url not found, retry");
                 Thread.sleep(1000);
             } else {
@@ -141,7 +141,7 @@ public class Admin {
             logger.info("Getting SMS code for phone number: {}", phoneNumber);
             var smsLog = getSmsLogPage();
             var code = new NewXmlParser(smsLog).getSmsCode(phoneNumber);
-            if (code.equals("")) {
+            if (code.isEmpty()) {
                 logger.info("Code not found, retry");
                 Thread.sleep(1000);
             } else {
@@ -153,17 +153,46 @@ public class Admin {
         throw new NullPointerException("No SMS code found after 10 attempts");
     }
 
-    public String getSmsPassword(String phoneNumber) {
+    public String getSmsPassword(String phoneNumber) throws InterruptedException {
         var stringKey = "SmsRegistration";
         if (Config.isFixinglist()) {
             stringKey += "_fixinglist";
         }
+        if (Config.isUstabor()) {
+            stringKey += "_ustabor";
+        }
 
-        var smsLog = getSmsLogPage();
-        var password = new NewXmlParser(smsLog).getSmsPassword(phoneNumber, XmlParser.getTextByKey(stringKey));
-        logger.info("Get SMS password {} for phone number: {}", password, phoneNumber);
+        for (int i = 0; i < 10; i++) {
+            logger.info("Getting SMS password for phone number: {}", phoneNumber);
+            var smsLog = getSmsLogPage();
+            var password = new NewXmlParser(smsLog).getSmsPassword(phoneNumber, XmlParser.getTextByKey(stringKey));
+            if (password.isEmpty()) {
+                logger.info("Password not found, retry");
+                Thread.sleep(1000);
+            } else {
+                logger.info("SMS password: {}", password);
+                return password;
+            }
+        }
 
-        return password;
+        throw new NullPointerException("No SMS password found after 10 attempts");
+    }
+
+    public String getCustomerId(String phoneNumber) throws InterruptedException {
+        for (int i = 0; i < 10; i++) {
+            logger.info("Getting customer id for phone number: {}", phoneNumber);
+            var page = getCustomersPage();
+            var code = new NewXmlParser(page).getId(phoneNumber);
+            if (code.equals("")) {
+                logger.info("Url not found, retry");
+                Thread.sleep(1000);
+            } else {
+                logger.info("Customer id: {}", code);
+                return code;
+            }
+        }
+
+        throw new NullPointerException("No SMS code found after 10 attempts");
     }
 
     public String getSmsByText(String phoneNumber, String sms) {
@@ -199,21 +228,6 @@ public class Admin {
         }
     }
 
-    public void runCron(String id) {
-        var url = Config.getAdminUrl() + String.format("system/cron/%s/run", id);
-
-        try {
-            logger.info("Run cron task");
-            executor.execute(Request.Get(url))
-                    .returnResponse()
-                    .getStatusLine()
-                    .getStatusCode();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     private String getSmsLogPage() {
         var url = Config.getAdminUrl() + "logs/sms";
 
@@ -223,13 +237,6 @@ public class Admin {
             e.printStackTrace();
         }
         return "";
-    }
-
-    public String getCustomerId(String phoneNumber) {
-        var page = getCustomersPage();
-        var code = new NewXmlParser(page).getId(phoneNumber);
-
-        return code;
     }
 
     private String getCustomersPage() {
