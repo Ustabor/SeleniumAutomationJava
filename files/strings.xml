@@ -104,7 +104,7 @@
 
     <string name="SmsServiceUrl">Ссылка на оплату:</string>
     <string name="SmsAuthCode">Код подтверждения</string>
-    <string name="SmsRegistration">Вы зарегистрированы Логин</string>
+    <string name="SmsRegistration">Регистрация на Ustabor Логин</string>
     <string name="SmsRegistration_ustabor">Регистрация на Ustabor</string>
     <string name="SmsRegistration_fixinglist">Вы зарегистрированы Ваш логин</string>
     <string name="SmsMasterMessage">сообщение</string>

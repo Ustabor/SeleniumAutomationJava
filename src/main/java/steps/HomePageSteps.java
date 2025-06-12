@@ -29,7 +29,6 @@ public class HomePageSteps extends ScenarioSteps {
         homePage.regFormEnterUserPhone(customer.getPhoneNumber());
         homePage.regFormClickSubmit();
         homePage.waitForSubmitCodeForm();
-
     }
 
     @Step
