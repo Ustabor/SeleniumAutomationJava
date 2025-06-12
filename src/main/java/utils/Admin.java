@@ -183,8 +183,8 @@ public class Admin {
             logger.info("Getting customer id for phone number: {}", phoneNumber);
             var page = getCustomersPage();
             var code = new NewXmlParser(page).getId(phoneNumber);
-            if (code.equals("")) {
-                logger.info("Url not found, retry");
+            if (code.isEmpty()) {
+                logger.info("Customer id not found, retry");
                 Thread.sleep(1000);
             } else {
                 logger.info("Customer id: {}", code);

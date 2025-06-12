@@ -97,7 +97,7 @@ public class HomePageSteps extends ScenarioSteps {
     }
 
     @Step
-    public void registerAsMaster(Master master, boolean randomCategory) {
+    public void registerAsMaster(Master master, boolean randomCategory) throws InterruptedException {
         homePage.openRegistrationForm();
         homePage.clickMasterBtnRegister();
         homePage.regMasterFormEnterFirstName(master.getFirstName());
@@ -125,11 +125,7 @@ public class HomePageSteps extends ScenarioSteps {
 
         homePage.regMasterClickSubmit();
 
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Thread.sleep(5000);
 
         homePage.waitForSubmitCodeForm();
     }

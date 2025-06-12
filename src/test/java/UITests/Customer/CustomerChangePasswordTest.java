@@ -44,6 +44,5 @@ public class CustomerChangePasswordTest extends TestBase {
         user.atHomePage.openHomePage();
         user.atCustomerProfilePersonalInfoPage.openCustomerProfilePage();
         user.atCustomerProfilePersonalInfoPage.deleteProfile();
-        customer.setProfileId(null);
     }
 }

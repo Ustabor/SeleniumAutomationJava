@@ -20,6 +20,5 @@ public class CustomerRegistrationTest extends TestBase {
 
         user.registerAsCustomer(customer);
         user.atCustomerProfilePersonalInfoPage.deleteProfile();
-        customer.setProfileId(null);
     }
 }

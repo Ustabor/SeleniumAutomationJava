@@ -117,7 +117,6 @@ public class TestBase {
         user.atCustomerProfilePersonalInfoPage.openCustomerProfilePage();
         user.atPlaceOrderPage.openRequestsPage();
 
-        guest.setProfileId(user.atCustomerProfileRequestsPage.getCustomerProfileId());
         var requestId = user.atCustomerProfileRequestsPage.getRequestId();
 
         if (logout) {

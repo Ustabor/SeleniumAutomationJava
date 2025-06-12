@@ -69,8 +69,9 @@ public class UserSteps extends ScenarioSteps {
 
         var smsCode = getSmsCode(customer);
         atHomePage.enterAuthCodeAndSubmit(smsCode, customer.getPhoneNumber());
-        atCustomerProfilePersonalInfoPage.openCustomerProfilePage();
-        customer.setProfileId(atCustomerProfilePersonalInfoPage.getCustomerProfileId());
+
+        var customerId = Admin.getInstance().getCustomerId(customer.getPhoneNumber());
+        customer.setProfileId(customerId);
 
         var password = Admin.getInstance().getSmsPassword(customer.getPhoneNumber());
         customer.setPassword(password);

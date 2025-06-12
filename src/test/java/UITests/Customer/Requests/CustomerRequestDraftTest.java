@@ -5,6 +5,7 @@ import annotations.AddCategory;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import utils.Admin;
 import utils.DataGenerator;
 
 import java.util.concurrent.TimeoutException;
@@ -30,6 +31,9 @@ public class CustomerRequestDraftTest extends TestBase {
         user.atPlaceOrderPage.waitForCodeForm();
         var smsCode = user.atPlaceOrderPage.getSmsCode(guest);
         user.atPlaceOrderPage.confirmPhoneNumber(smsCode, guest.getPhoneNumber());
+
+        var customerId = Admin.getInstance().getCustomerId(guest.getPhoneNumber());
+        guest.setProfileId(customerId);
 
         user.atPlaceOrderPage.verifySuccessPageIsVisible();
         var requestId = user.atPlaceOrderPage.getRequestId();

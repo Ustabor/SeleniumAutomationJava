@@ -7,6 +7,7 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import utils.Admin;
 import utils.DataGenerator;
 import utils.XmlParser;
 
@@ -44,6 +45,9 @@ public class CustomerRequestMastersFilterTest extends TestBase {
         user.atPlaceOrderPage.waitForCodeForm();
         var smsCode = user.atPlaceOrderPage.getSmsCode(guest);
         user.atPlaceOrderPage.confirmPhoneNumber(smsCode, guest.getPhoneNumber());
+
+        var customerId = Admin.getInstance().getCustomerId(guest.getPhoneNumber());
+        guest.setProfileId(customerId);
 
         user.atPlaceOrderPage.verifySuccessPageIsVisible();
         user.atPlaceOrderPage.clickFillRequest();

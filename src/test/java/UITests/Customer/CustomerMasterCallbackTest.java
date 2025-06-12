@@ -24,7 +24,6 @@ public class CustomerMasterCallbackTest extends TestBase {
     private User customer;
     private Master master;
 
-
     @Before
     public void setup() throws TimeoutException, InterruptedException, URISyntaxException {
         master = watcher.getMaster();
@@ -40,8 +39,9 @@ public class CustomerMasterCallbackTest extends TestBase {
         var smsCode = Admin.getInstance().getSmsCode(customer.getPhoneNumber());
         customer.setLastSmsCode(smsCode);
         user.atHomePage.enterAuthCodeAndSubmit(smsCode, customer.getPhoneNumber());
-        user.atCustomerProfilePersonalInfoPage.openCustomerProfilePage();
-        customer.setProfileId(user.atCustomerProfilePersonalInfoPage.getCustomerProfileId());
+
+        var customerId = Admin.getInstance().getCustomerId(customer.getPhoneNumber());
+        customer.setProfileId(customerId);
     }
 
     @Test
