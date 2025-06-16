@@ -36,8 +36,10 @@ public class CustomerMasterCallbackTest extends TestBase {
         user.atHomePage.openHomePage();
 
         user.atHomePage.registerAsCustomer(customer);
+
         var smsCode = Admin.getInstance().getSmsCode(customer.getPhoneNumber());
         customer.setLastSmsCode(smsCode);
+
         user.atHomePage.enterAuthCodeAndSubmit(smsCode, customer.getPhoneNumber());
 
         var customerId = Admin.getInstance().getCustomerId(customer.getPhoneNumber());

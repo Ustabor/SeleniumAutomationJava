@@ -192,7 +192,7 @@ public class Admin {
             }
         }
 
-        throw new NullPointerException("No SMS code found after 10 attempts");
+        throw new NullPointerException("No customer id found after 10 attempts");
     }
 
     public String getSmsByText(String phoneNumber, String sms) {

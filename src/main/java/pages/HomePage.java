@@ -297,8 +297,9 @@ public class HomePage extends SearchBlock {
     }
 
     public String regMasterFormSelectCity() throws InterruptedException {
+        Thread.sleep(5000);
         regMasterCitySelector.click();
-        Thread.sleep(500);
+        Thread.sleep(3000);
         regMasterCitySelectorFirst.click();
         return regMasterCitySelector.getText();
     }

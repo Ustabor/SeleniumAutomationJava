@@ -9,7 +9,7 @@ public class MasterNotificationsPage extends MasterProfileBasePage{
     private WebElementFacade notificationsBtn;
     @FindBy(xpath = "//a[@href='#reviews']")
     private WebElementFacade feedbacksBtn;
-    @FindBy(xpath = "//div[contains(@class,'requestcallback')]")
+    @FindBy(xpath = "//div[contains(@class,'notification-item')]")
     private WebElementFacade callbackNotification;
 
     public void notificationsBtnShouldBeVisible() {

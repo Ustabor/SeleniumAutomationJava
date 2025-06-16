@@ -67,7 +67,7 @@ public class NewXmlParser {
     }
 
     public String getId(String phoneNumber) {
-        String textXPath = "//tr/td/a[contains(text(), '%s')]";
+        String textXPath = "//tr[./td[contains(text(), '%s')]]/td/a";
         String xpath = String.format(textXPath, phoneNumber);
 
         var nodes = document.selN(xpath);

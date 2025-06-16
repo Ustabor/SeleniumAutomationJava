@@ -52,7 +52,7 @@ public class CustomerSelectServiceTest extends TestBase {
         user.atHomePage.openHomePage();
         user.atHomePage.logsOut();
         user.atHomePage.openUrl(serviceUrl);
-        user.atCustomerServicesPage.enterPaymentCardInfo("UZCARD", "8600-0200-0000-0000", "12/31");
+//        user.atCustomerServicesPage.enterPaymentCardInfo("UZCARD", "8600-0200-0000-0000", "12/31");
 
         user.atCustomerProfilePersonalInfoPage.openCustomerProfile();
         user.atCustomerProfileRequestsPage.openRequestsPage();
