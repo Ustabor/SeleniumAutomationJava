@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import utils.DataGenerator;
 
+import java.util.concurrent.TimeoutException;
+
 //Заказчик - удаление профиля
 
 @WithTag("smoke")
@@ -14,11 +16,12 @@ import utils.DataGenerator;
 public class CustomerRegistrationTest extends TestBase {
 
     @Test
-    public void customerRegistration() throws InterruptedException {
+    public void customerRegistration() throws InterruptedException, TimeoutException {
         var customer = DataGenerator.getCustomer();
         watcher.users.add(customer);
 
         user.registerAsCustomer(customer);
+        user.atCustomerProfilePersonalInfoPage.openCustomerProfilePage();
         user.atCustomerProfilePersonalInfoPage.deleteProfile();
     }
 }

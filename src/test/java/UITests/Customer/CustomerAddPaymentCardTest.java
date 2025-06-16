@@ -21,6 +21,7 @@ public class CustomerAddPaymentCardTest extends TestBase {
 
     @Test
     public void customerAddPaymentCard() {
+        user.atCustomerProfilePersonalInfoPage.openCustomerProfilePage();
         user.atCustomerProfileWalletPage.openWalletTab();
         user.atCustomerProfileWalletPage.openPaymentCardsSection();
 

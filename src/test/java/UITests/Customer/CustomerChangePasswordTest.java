@@ -29,6 +29,7 @@ public class CustomerChangePasswordTest extends TestBase {
     @Test
     public void customerChangePassword() {
         var newPassword = DataGenerator.getPassword();
+        user.atCustomerProfilePersonalInfoPage.openCustomerProfilePage();
         user.atCustomerProfilePersonalInfoPage.changePassword(newPassword);
 
         user.atCustomerProfilePersonalInfoPage.logsOut();
