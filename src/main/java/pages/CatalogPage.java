@@ -23,7 +23,7 @@ public class CatalogPage extends SearchBlock {
     private static final String avatarXpath = ".//div[@class='image']";
     private static final String districtXpath = "//div[@class='item-wrapper' and text()='%s']";
     private static final String sortXpath = "//div[@class='item-wrapper' and text()='%s']";
-    private static final String filterSite = "//div[@id='categories']//li[text()='%s']";
+    private static final String filterSite = "//div[@class='swiper-slide' and text()='%s']";
     private static final String filterCategory = "//a[./span[text()='%s']]";
 
     private static final Logger logger = LoggerFactory.getLogger(CatalogPage.class);
@@ -87,14 +87,17 @@ public class CatalogPage extends SearchBlock {
     @FindBy(xpath = "//button[@type='reset']")
     private WebElementFacade filterResetBtn;
 
-    @FindBy(xpath = "//div[@class='window window-categories']//div[@id='categories']")
+    @FindBy(xpath = "//div[contains(@class, 'categories-tabs')]//div[@id='categories']")
     private WebElementFacade filterCategoryWindow;
 
-    @FindBy(xpath = "//div[@class='window window-categories']//div[@class='btn-close']")
+    @FindBy(xpath = "//div[contains(@class, 'categories-tabs')]//div[@class='btn-close']")
     private WebElementFacade filterCategoryWindowCloseBtn;
 
     @FindBy(xpath = "//div[contains(@class, 'ui-selectbox icon order')]")
     private WebElementFacade filterOrderButton;
+
+    @FindBy(xpath = "//div[contains(@class, 'swiper-slide')]")
+    private List<WebElementFacade> filterCategories;
     //endregion
 
     //region Callback form
@@ -197,6 +200,14 @@ public class CatalogPage extends SearchBlock {
 
     public void filterSearchBtnShouldBeVisible() {
         filterSubmitBtn.shouldBeVisible();
+    }
+
+    public void verifyFilterCategoriesButtonsAreVisible() {
+        assertThat(filterCategories.size()).isGreaterThan(0);
+    }
+
+    public void verifyCategoriesFilterPopupIsVisible() {
+        filterCategoryWindow.shouldBeVisible();
     }
 
     public void filterResetBtnShouldBeVisible() {

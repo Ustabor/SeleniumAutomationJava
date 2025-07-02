@@ -134,7 +134,8 @@ public class CatalogPageSteps extends CommonSteps {
 
     @Step
     public void verifyFilterCategoriesAreVisible() {
-        catalogPage.filterSearchBtnShouldBeVisible();
+        catalogPage.verifyCategoriesFilterPopupIsVisible();
+        catalogPage.verifyFilterCategoriesButtonsAreVisible();
         catalogPage.closeFilterCategoryWindow();
     }
 
