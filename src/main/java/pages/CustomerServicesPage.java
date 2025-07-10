@@ -51,7 +51,7 @@ public class CustomerServicesPage extends BasePage {
     private WebElementFacade orderConfirmed;
 
     public void selectCategory(String name) {
-        var xpath = String.format("//div[@class='service-categories']/a[text()='%s']", name);
+        var xpath = String.format("//div[contains(@class,'service-categories')]//a[text()='%s']", name);
         getDriver().findElement(By.xpath(xpath)).click();
         waitForLoaderDisappears();
     }
