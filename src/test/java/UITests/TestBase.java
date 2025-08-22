@@ -2,6 +2,7 @@ package UITests;
 
 import annotations.AddCategory;
 import annotations.AddMasters;
+import com.google.common.net.MediaType;
 import entities.Category;
 import entities.RequestResult;
 import net.serenitybdd.annotations.Managed;
@@ -12,11 +13,17 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.devtools.NetworkInterceptor;
+import org.openqa.selenium.remote.http.HttpResponse;
+import org.openqa.selenium.remote.http.Route;
 import steps.UserSteps;
 import steps.adminSteps.AdminSteps;
 import utils.*;
 
+import java.io.IOException;
 import java.util.concurrent.TimeoutException;
+
+import static org.openqa.selenium.remote.http.Contents.utf8String;
 
 
 public class TestBase {
@@ -35,9 +42,8 @@ public class TestBase {
     public WebDriver driver;
 
     @Before
-    public void setUp() throws TimeoutException, InterruptedException {
+    public void setUp() throws TimeoutException, InterruptedException, IOException {
         Serenity.throwExceptionsImmediately();
-        Admin.getInstance();
 
         var annotation = this.getClass().getAnnotation(AddCategory.class);
         if (annotation != null) {
@@ -107,7 +113,7 @@ public class TestBase {
         user.atHomePage.selectLocation(Config.getCountry(), getText(Config.getCountryCode() + "_city"));
     }
 
-    public RequestResult createRequest(boolean logout, boolean assignFree) throws TimeoutException, InterruptedException {
+    public RequestResult createRequest(boolean logout, boolean assignFree) throws TimeoutException, InterruptedException, IOException {
         var guest = DataGenerator.getGuestCustomer();
         watcher.users.add(guest);
 

@@ -6,6 +6,8 @@ import net.serenitybdd.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
 import pages.CustomerServicesPage;
 
+import java.io.IOException;
+
 public class CustomerServicePageSteps extends ScenarioSteps {
 
     private CustomerServicesPage customerServicesPage;
@@ -94,7 +96,7 @@ public class CustomerServicePageSteps extends ScenarioSteps {
     }
 
     @Step
-    public String getSmsCode(User customer) throws InterruptedException {
+    public String getSmsCode(User customer) throws InterruptedException, IOException {
         return customerServicesPage.getSmsCode(customer);
     }
 
@@ -116,7 +118,7 @@ public class CustomerServicePageSteps extends ScenarioSteps {
     }
 
     @Step
-    public String getUrlFromSms(User customer) throws InterruptedException {
+    public String getUrlFromSms(User customer) throws InterruptedException, IOException {
         return customerServicesPage.getUrlFromSms(customer);
     }
 

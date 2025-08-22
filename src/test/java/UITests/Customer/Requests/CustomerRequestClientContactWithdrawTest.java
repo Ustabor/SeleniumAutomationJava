@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 @WithTag("smoke")
@@ -23,7 +24,7 @@ public class CustomerRequestClientContactWithdrawTest extends TestBase {
     }
 
     @Test
-    public void verifyWithdrawForCustomerContacts() throws TimeoutException, InterruptedException {
+    public void verifyWithdrawForCustomerContacts() throws TimeoutException, InterruptedException, IOException {
         var result1 = createRequest(true, true);
         var result2 = createRequest(false, true);
 

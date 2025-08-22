@@ -9,6 +9,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import utils.DataGenerator;
 
+import java.io.IOException;
+
 // Мастер - Создать/удалить профиль
 
 @WithTag("smoke")
@@ -18,7 +20,7 @@ public class MasterRegistrationTest extends TestBase {
     private final Master master = DataGenerator.getMaster();
 
     @Test
-    public void verifyMasterCanCreateProfile() throws InterruptedException {
+    public void verifyMasterCanCreateProfile() throws InterruptedException, IOException {
         watcher.users.add(master);
 
         user.register(master, true);

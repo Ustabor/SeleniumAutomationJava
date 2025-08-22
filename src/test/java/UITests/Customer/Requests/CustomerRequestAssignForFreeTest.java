@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 @RunWith(SerenityRunner.class)
@@ -21,7 +22,7 @@ public class CustomerRequestAssignForFreeTest extends TestBase {
     }
 
     @Test
-    public void verifyRequestAssignToMasterForFree() throws TimeoutException, InterruptedException {
+    public void verifyRequestAssignToMasterForFree() throws TimeoutException, InterruptedException, IOException {
         var result = createRequest(true, true);
 
         user.atHomePage.openHomePage();

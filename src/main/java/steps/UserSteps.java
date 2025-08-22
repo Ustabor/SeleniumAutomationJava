@@ -13,6 +13,7 @@ import steps.customerProfileSteps.CustomerProfileWalletPageSteps;
 import steps.masterProfileSteps.*;
 import utils.Admin;
 
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.concurrent.TimeoutException;
 
@@ -54,7 +55,7 @@ public class UserSteps extends ScenarioSteps {
     public CustomerServicePageSteps atCustomerServicesPage;
 
     @Step
-    public void register(Master master, boolean randomCategory) throws InterruptedException {
+    public void register(Master master, boolean randomCategory) throws InterruptedException, IOException {
         atHomePage.registerAsMaster(master, randomCategory);
 
         var smsCode = Admin.getInstance().getSmsCode(master.getPhoneNumber());
@@ -64,7 +65,7 @@ public class UserSteps extends ScenarioSteps {
     }
 
     @Step
-    public void registerAsCustomer(User customer) throws InterruptedException {
+    public void registerAsCustomer(User customer) throws InterruptedException, IOException {
         atHomePage.registerAsCustomer(customer);
 
         var smsCode = getSmsCode(customer);
@@ -78,7 +79,7 @@ public class UserSteps extends ScenarioSteps {
     }
 
     @Step
-    public String getSmsCode(User user) throws InterruptedException {
+    public String getSmsCode(User user) throws InterruptedException, IOException {
         var smsCode = Admin.getInstance().getSmsCode(user.getPhoneNumber());
 
         if (smsCode == null) {

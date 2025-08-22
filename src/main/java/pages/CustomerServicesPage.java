@@ -6,6 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import utils.Admin;
 
+import java.io.IOException;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomerServicesPage extends BasePage {
@@ -150,7 +152,7 @@ public class CustomerServicesPage extends BasePage {
         orderConfirmed.shouldBeVisible();
     }
 
-    public String getUrlFromSms(User user) throws InterruptedException {
+    public String getUrlFromSms(User user) throws InterruptedException, IOException {
         var attempts = 5;
 
         for (int i = 0; i < attempts; i++) {

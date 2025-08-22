@@ -7,6 +7,10 @@ import net.thucydides.core.steps.ScenarioSteps;
 import pages.HomePage;
 import utils.Admin;
 
+import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.TimeoutException;
 
 public class HomePageSteps extends ScenarioSteps {
@@ -32,7 +36,7 @@ public class HomePageSteps extends ScenarioSteps {
     }
 
     @Step
-    public void enterAuthCodeAndSubmit(String code, String phoneNumber) throws InterruptedException {
+    public void enterAuthCodeAndSubmit(String code, String phoneNumber) throws InterruptedException, IOException {
         homePage.regFormEnterAuthCode(code);
         homePage.regFormClickSubmitAuthCode();
 
@@ -44,7 +48,7 @@ public class HomePageSteps extends ScenarioSteps {
     }
 
     @Step
-    public void retryEnterCode(String phoneNumber) throws InterruptedException {
+    public void retryEnterCode(String phoneNumber) throws InterruptedException, IOException {
         homePage.resendCode();
         homePage.waitForLoaderDisappears();
         var smsCode = Admin.getInstance().getSmsCode(phoneNumber);

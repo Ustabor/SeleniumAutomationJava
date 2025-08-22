@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import utils.DataGenerator;
 
+import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,7 +22,7 @@ public class CustomerChangePasswordTest extends TestBase {
     private final User customer = DataGenerator.getCustomer();
 
     @Before
-    public void setup() throws InterruptedException {
+    public void setup() throws InterruptedException, IOException {
         watcher.users.add(customer);
         user.registerAsCustomer(customer);
     }
@@ -45,5 +46,6 @@ public class CustomerChangePasswordTest extends TestBase {
         user.atHomePage.openHomePage();
         user.atCustomerProfilePersonalInfoPage.openCustomerProfilePage();
         user.atCustomerProfilePersonalInfoPage.deleteProfile();
+        customer.setProfileId("");
     }
 }

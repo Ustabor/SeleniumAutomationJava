@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import utils.Admin;
 import utils.DataGenerator;
 
+import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 //Сервисы - заказ
@@ -19,7 +20,7 @@ import java.util.concurrent.TimeoutException;
 public class CustomerSelectServiceTest extends TestBase {
 
     @Test
-    public void customerSelectServiceTest() throws InterruptedException, TimeoutException {
+    public void customerSelectServiceTest() throws InterruptedException, TimeoutException, IOException {
         var customer = DataGenerator.getGuestCustomer();
         watcher.users.add(customer);
 

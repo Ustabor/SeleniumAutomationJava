@@ -6,6 +6,10 @@ import entities.User;
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 
+import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,19 +21,31 @@ public class Watcher extends TestWatcher {
 
     @Override
     protected void finished(Description description) {
-        cleanUp();
+        try {
+            cleanUp();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    private void cleanUp() {
+    private void cleanUp() throws IOException {
         users.forEach((user) -> {
             if (user.getProfileId() != null) {
 
                 switch (user.getClass().getSimpleName()) {
                     case "Master":
-                        Admin.getInstance().deleteMaster(user.getProfileId());
+                        try {
+                            Admin.getInstance().deleteMaster(user.getProfileId());
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                         break;
                     case "User":
-                        Admin.getInstance().deleteCustomer(user.getProfileId());
+                        try {
+                            Admin.getInstance().deleteCustomer(user.getProfileId());
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                         break;
                 }
             }

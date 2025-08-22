@@ -7,6 +7,7 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 //Гость - создание заявки
@@ -17,7 +18,7 @@ import java.util.concurrent.TimeoutException;
 public class CustomerRequestTest extends TestBase {
 
     @Test
-    public void verifyUserCanCreateCustomerRequest() throws TimeoutException, InterruptedException {
+    public void verifyUserCanCreateCustomerRequest() throws TimeoutException, InterruptedException, IOException {
         var result = createRequest(false, true);
 
         user.atCustomerProfileRequestsPage.openRequestsPage();

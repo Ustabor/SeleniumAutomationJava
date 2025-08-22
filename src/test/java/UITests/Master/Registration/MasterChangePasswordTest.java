@@ -8,6 +8,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import utils.DataGenerator;
 
+import java.io.IOException;
+
 // Мастер - изменить пароль
 
 @RunWith(SerenityRunner.class)
@@ -16,7 +18,7 @@ public class MasterChangePasswordTest extends TestBase {
     private final Master master = DataGenerator.getMaster();
 
     @Before
-    public void setup() throws InterruptedException {
+    public void setup() throws InterruptedException, IOException {
         watcher.users.add(master);
 
         user.register(master, true);

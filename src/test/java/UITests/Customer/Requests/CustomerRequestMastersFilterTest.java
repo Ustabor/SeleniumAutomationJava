@@ -11,6 +11,7 @@ import utils.Admin;
 import utils.DataGenerator;
 import utils.XmlParser;
 
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.concurrent.TimeoutException;
 
@@ -29,7 +30,7 @@ public class CustomerRequestMastersFilterTest extends TestBase {
         user.atMasterProfilePage.logsOut();
     }
     @Test
-    public void verifyMastersCount() throws TimeoutException, InterruptedException {
+    public void verifyMastersCount() throws TimeoutException, InterruptedException, IOException {
         var request = XmlParser.getTextByKey("Service");
         var guest = DataGenerator.getGuestCustomer();
 

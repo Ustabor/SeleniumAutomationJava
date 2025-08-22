@@ -7,11 +7,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import utils.DataGenerator;
 
+import java.io.IOException;
+
 @RunWith(SerenityRunner.class)
 public class MasterLoginTest extends TestBase {
 
     @Before
-    public void setup() throws InterruptedException {
+    public void setup() throws InterruptedException, IOException {
         var master = DataGenerator.getMaster();
         watcher.users.add(master);
 

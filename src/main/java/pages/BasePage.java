@@ -13,6 +13,7 @@ import utils.Config;
 import utils.WaitHelper;
 import utils.XmlParser;
 
+import java.io.IOException;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalUnit;
@@ -123,7 +124,7 @@ public class BasePage extends PageObject {
         codeInput.sendKeys(smsCode);
     }
 
-    public String getSmsCode(User user) throws InterruptedException {
+    public String getSmsCode(User user) throws InterruptedException, IOException {
         var attempts = 5;
 
         for (int i = 0; i < attempts; i++) {

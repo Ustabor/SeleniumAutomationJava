@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import utils.Admin;
 
+import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
@@ -18,7 +19,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 public class CustomerRequestStatusesTest extends TestBase {
 
     @Test
-    public void verifyCustomerRequestStatuses() throws TimeoutException, InterruptedException {
+    public void verifyCustomerRequestStatuses() throws TimeoutException, InterruptedException, IOException {
         var result = createRequest(true, true);
 
         user.atHomePage.openHomePage();

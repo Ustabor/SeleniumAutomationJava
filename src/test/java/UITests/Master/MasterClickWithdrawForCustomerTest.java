@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 import pages.masterProfile.MasterPromotionPage;
 import utils.DataGenerator;
 
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.concurrent.TimeoutException;
 
@@ -28,7 +29,7 @@ public class MasterClickWithdrawForCustomerTest extends TestBase {
     private Master master;
 
     @Before
-    public void setup() throws InterruptedException, TimeoutException, URISyntaxException {
+    public void setup() throws InterruptedException, TimeoutException, URISyntaxException, IOException {
         master = watcher.getMaster();
         admin.addMoneyToMaster(10000, master, false);
         user.addMasterProfileImage(master, true);

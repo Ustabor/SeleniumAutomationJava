@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 @WithTag("smoke")
@@ -18,14 +19,14 @@ import java.util.concurrent.TimeoutException;
 public class CustomerRequestAssignForMoneyTest extends TestBase {
 
     @Before
-    public void setUp() throws TimeoutException, InterruptedException {
+    public void setUp() throws TimeoutException, InterruptedException, IOException {
         super.setUp();
         admin.addMoneyToMaster(10000, watcher.getMaster(0), false);
         admin.addMoneyToMaster(10000, watcher.getMaster(1), false);
     }
 
     @Test
-    public void verifyRequestAssignToMasterForAmount() throws TimeoutException, InterruptedException {
+    public void verifyRequestAssignToMasterForAmount() throws TimeoutException, InterruptedException, IOException {
         var result = createRequest(true, false);
 
         user.atHomePage.openHomePage();

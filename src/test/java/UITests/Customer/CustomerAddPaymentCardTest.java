@@ -7,13 +7,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import utils.DataGenerator;
 
+import java.io.IOException;
+
 //Заказчик - Удаление/добавление карты
 
 @RunWith(SerenityRunner.class)
 public class CustomerAddPaymentCardTest extends TestBase {
 
     @Before
-    public void setup() throws InterruptedException {
+    public void setup() throws InterruptedException, IOException {
         var customer = DataGenerator.getCustomer();
         watcher.users.add(customer);
         user.registerAsCustomer(customer);

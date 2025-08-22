@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import utils.Admin;
 import utils.DataGenerator;
 
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.concurrent.TimeoutException;
 
@@ -25,7 +26,7 @@ public class CustomerMasterCallbackTest extends TestBase {
     private Master master;
 
     @Before
-    public void setup() throws TimeoutException, InterruptedException, URISyntaxException {
+    public void setup() throws TimeoutException, InterruptedException, URISyntaxException, IOException {
         master = watcher.getMaster();
         user.addMasterProfileImage(master, false);
         user.atMasterProfilePage.selectService();

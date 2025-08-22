@@ -8,6 +8,8 @@ import pages.PlaceOrderPage;
 import utils.Admin;
 import utils.XmlParser;
 
+import java.io.IOException;
+
 public class PlaceOrderPageSteps extends ScenarioSteps {
 
     private PlaceOrderPage placeOrderPage;
@@ -20,7 +22,7 @@ public class PlaceOrderPageSteps extends ScenarioSteps {
     }
 
     @Step
-    public void placeOrder(User customer, Category category) throws InterruptedException {
+    public void placeOrder(User customer, Category category) throws InterruptedException, IOException {
         var request = XmlParser.getTextByKey("Service");
         var question = XmlParser.getTextByKey("Question_main");
 
@@ -91,7 +93,7 @@ public class PlaceOrderPageSteps extends ScenarioSteps {
     }
 
     @Step
-    public void confirmPhoneNumber(String code, String number) throws InterruptedException {
+    public void confirmPhoneNumber(String code, String number) throws InterruptedException, IOException {
         placeOrderPage.enterSmsCode(code);
         placeOrderPage.clickCodeConfirm();
 
@@ -101,7 +103,7 @@ public class PlaceOrderPageSteps extends ScenarioSteps {
     }
 
     @Step
-    public void retryEnterCode(String phoneNumber) throws InterruptedException {
+    public void retryEnterCode(String phoneNumber) throws InterruptedException, IOException {
         placeOrderPage.resendCode();
         placeOrderPage.waitForLoaderDisappears();
 
@@ -121,7 +123,7 @@ public class PlaceOrderPageSteps extends ScenarioSteps {
     }
 
     @Step
-    public String getSmsCode(User customer) throws InterruptedException {
+    public String getSmsCode(User customer) throws InterruptedException, IOException {
         return placeOrderPage.getSmsCode(customer);
     }
 

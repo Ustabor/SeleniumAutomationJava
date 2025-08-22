@@ -9,13 +9,15 @@ import org.junit.runner.RunWith;
 import utils.Admin;
 import utils.DataGenerator;
 
+import java.io.IOException;
+
 @RunWith(SerenityRunner.class)
 public class MasterForgotPasswordTest extends TestBase {
 
     private final Master master = DataGenerator.getMaster();
 
     @Before
-    public void setup() throws InterruptedException {
+    public void setup() throws InterruptedException, IOException {
         watcher.users.add(master);
 
         user.register(master, true);
@@ -23,7 +25,7 @@ public class MasterForgotPasswordTest extends TestBase {
     }
 
     @Test
-    public void verifyMasterCanResetPassword() throws InterruptedException {
+    public void verifyMasterCanResetPassword() throws InterruptedException, IOException {
         user.atHomePage.openLoginFormAndVerify();
         user.atHomePage.clickForgotPassword();
         user.atHomePage.requestNewPassword(master.getLogin());

@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import utils.DataGenerator;
 
-import java.util.concurrent.TimeoutException;
+import java.io.IOException;
 
 //Заказчик - удаление профиля
 
@@ -16,12 +16,13 @@ import java.util.concurrent.TimeoutException;
 public class CustomerRegistrationTest extends TestBase {
 
     @Test
-    public void customerRegistration() throws InterruptedException, TimeoutException {
+    public void customerRegistration() throws InterruptedException, IOException {
         var customer = DataGenerator.getCustomer();
         watcher.users.add(customer);
 
         user.registerAsCustomer(customer);
         user.atCustomerProfilePersonalInfoPage.openCustomerProfilePage();
         user.atCustomerProfilePersonalInfoPage.deleteProfile();
+        customer.setProfileId("");
     }
 }

@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import utils.Admin;
 import utils.DataGenerator;
 
+import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 //Гость - создание черновика заявки
@@ -17,7 +18,7 @@ import java.util.concurrent.TimeoutException;
 public class CustomerRequestDraftTest extends TestBase {
 
     @Test
-    public void verifyUserCanCreateCustomerRequestDraft() throws TimeoutException, InterruptedException {
+    public void verifyUserCanCreateCustomerRequestDraft() throws TimeoutException, InterruptedException, IOException {
         var guest = DataGenerator.getGuestCustomer();
 
         watcher.users.add(guest);

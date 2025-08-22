@@ -1,125 +1,82 @@
 package utils;
 
 import org.apache.http.client.HttpResponseException;
-import org.apache.http.client.config.CookieSpecs;
-import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.fluent.Executor;
 import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
-import org.apache.http.conn.ssl.NoopHostnameVerifier;
-import org.apache.http.conn.ssl.TrustAllStrategy;
-import org.apache.http.impl.client.DefaultRedirectStrategy;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.impl.client.LaxRedirectStrategy;
-import org.apache.http.ssl.SSLContextBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.security.KeyManagementException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
 
 public class Admin {
-
     private static final Logger logger = LoggerFactory.getLogger(Admin.class);
-
-    private Executor executor;
+    private static Executor executor;
     private static Admin instance;
+    private static boolean isAuthenticated = false;
 
-    private Admin() {
-        try {
-            var redirect = new LaxRedirectStrategy();
-            var ssl = new SSLContextBuilder().loadTrustMaterial(null, TrustAllStrategy.INSTANCE).build();
-            var config = RequestConfig.custom().setCookieSpec(CookieSpecs.STANDARD).build();
-            executor = Executor.newInstance(
-                    HttpClientBuilder
-                            .create()
-                            .setRedirectStrategy(redirect)
-                            .setSSLContext(ssl)
-                            .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE)
-                            .setDefaultRequestConfig(config)
-                            .build());
-        } catch (NoSuchAlgorithmException | KeyManagementException | KeyStoreException e) {
-            e.printStackTrace();
-        }
-        login();
-    }
+    private Admin() {}
 
-    public static Admin getInstance() {
+    public static Admin getInstance() throws IOException {
         if (instance == null) {
+            executor = RequestsExecutor.create();
             instance = new Admin();
         }
 
         return instance;
     }
 
-    public void deleteMaster(String id) {
+    public void deleteMaster(String id) throws IOException {
+        loginIfNeeded();
         var url = Config.getAdminUrl() + String.format("master/%s/delete", id);
 
-        try {
-            var result = executor.execute(Request.Get(url))
-                    .returnResponse()
-                    .getStatusLine()
-                    .getStatusCode();
+        var result = executor.execute(Request.Get(url))
+                .returnResponse()
+                .getStatusLine()
+                .getStatusCode();
 
-            if (result != 200) {
-                logger.info("Delete master request failed");
-                throw new HttpResponseException(result, "Delete master request failed");
-            }
-            logger.info("Master profile deleted. Id: {}", id);
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (result != 200) {
+            logger.info("Delete master request failed");
+            throw new HttpResponseException(result, "Delete master request failed");
         }
+        logger.info("Master profile deleted. Id: {}", id);
     }
 
-    public void deleteCategory(String id) {
+    public void deleteCategory(String id) throws IOException {
+        loginIfNeeded();
         var url = Config.getAdminUrl() + String.format("reference/category/%s/delete", id);
 
-        try {
-            var result = executor.execute(Request.Get(url))
-                    .returnResponse()
-                    .getStatusLine()
-                    .getStatusCode();
+        var result = executor.execute(Request.Get(url))
+                .returnResponse()
+                .getStatusLine()
+                .getStatusCode();
 
-            if (result != 200) {
-                logger.info("Delete category request failed");
-                throw new HttpResponseException(result, "Delete category request failed");
-            }
-            logger.info("Category deleted. Id: {}", id);
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (result != 200) {
+            logger.info("Delete category request failed");
+            throw new HttpResponseException(result, "Delete category request failed");
         }
+        logger.info("Category deleted. Id: {}", id);
     }
 
-    public void deleteCustomer(String customerId) {
-        if (customerId.isEmpty())
-        {
-            return;
-        }
+    public void deleteCustomer(String customerId) throws IOException {
+        loginIfNeeded();
+        if (customerId.isEmpty()) return;
 
         var url = Config.getAdminUrl() + String.format("customer/%s/delete", customerId);
 
-        try {
-            var result = executor.execute(Request.Get(url))
-                    .returnResponse()
-                    .getStatusLine()
-                    .getStatusCode();
+        var result = executor.execute(Request.Get(url))
+                .returnResponse()
+                .getStatusLine()
+                .getStatusCode();
 
-            if (result != 200) {
-                logger.info("Delete customer request failed");
-                throw new HttpResponseException(result, "Delete customer request failed");
-            }
-            logger.info("Customer deleted. Id: {}", customerId);
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (result != 200) {
+            logger.info("Delete customer request failed");
+            throw new HttpResponseException(result, "Delete customer request failed");
         }
+        logger.info("Customer deleted. Id: {}", customerId);
     }
 
-    public String getSmsUrl(String phoneNumber) throws InterruptedException {
+    public String getSmsUrl(String phoneNumber) throws InterruptedException, IOException {
         for (int i = 0; i < 10; i++) {
             logger.info("Getting service url for phone number: {}", phoneNumber);
             var smsLog = getSmsLogPage();
@@ -136,7 +93,7 @@ public class Admin {
         throw new NullPointerException("No SMS code found after 10 attempts");
     }
 
-    public String getSmsCode(String phoneNumber) throws InterruptedException {
+    public String getSmsCode(String phoneNumber) throws InterruptedException, IOException {
         for (int i = 0; i < 10; i++) {
             logger.info("Getting SMS code for phone number: {}", phoneNumber);
             var smsLog = getSmsLogPage();
@@ -153,7 +110,7 @@ public class Admin {
         throw new NullPointerException("No SMS code found after 10 attempts");
     }
 
-    public String getSmsPassword(String phoneNumber) throws InterruptedException {
+    public String getSmsPassword(String phoneNumber) throws InterruptedException, IOException {
         var stringKey = "SmsRegistration";
         if (Config.isFixinglist()) {
             stringKey += "_fixinglist";
@@ -178,7 +135,7 @@ public class Admin {
         throw new NullPointerException("No SMS password found after 10 attempts");
     }
 
-    public String getCustomerId(String phoneNumber) throws InterruptedException {
+    public String getCustomerId(String phoneNumber) throws InterruptedException, IOException {
         for (int i = 0; i < 10; i++) {
             logger.info("Getting customer id for phone number: {}", phoneNumber);
             var page = getCustomersPage();
@@ -195,7 +152,7 @@ public class Admin {
         throw new NullPointerException("No customer id found after 10 attempts");
     }
 
-    public String getSmsByText(String phoneNumber, String sms) {
+    public String getSmsByText(String phoneNumber, String sms) throws IOException {
         var smsLog = getSmsLogPage();
         var smsText = new NewXmlParser(smsLog).getSmsText(phoneNumber, sms);
         logger.info("Get SMS by piece of text for phone number: {}", phoneNumber);
@@ -203,50 +160,43 @@ public class Admin {
         return smsText;
     }
 
-    private void login() {
+    private void loginIfNeeded() throws IOException {
+        if (isAuthenticated) return;
+
         var url = Config.getAdminUrl() + "login";
 
-        try {
-            var result = executor.execute(Request.Post(url)
-                    .bodyForm(Form.form()
-                            .add("data[login]", Config.getUsers().getAdmin().getEmail())
-                            .add("data[password]", Config.getUsers().getAdmin().getPassword())
-                            .build()))
-                    .returnResponse()
-                    .getStatusLine()
-                    .getStatusCode();
+        var loginResult = executor.execute(Request.Post(url)
+                        .bodyForm(Form.form()
+                                .add("data[login]", Config.getUsers().getAdmin().getEmail())
+                                .add("data[password]", Config.getUsers().getAdmin().getPassword())
+                                .build()))
+                .returnResponse()
+                .getStatusLine()
+                .getStatusCode();
 
-            if (result != 200) {
-                logger.info("Admin login failed");
-                throw new HttpResponseException(result, "Login failed");
-            }
-            logger.info("Admin login successfully");
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (loginResult != 200) {
+            logger.info("Admin login failed");
+            throw new HttpResponseException(loginResult, "Login failed");
         }
+        isAuthenticated = true;
+        logger.info("Admin login successfully");
     }
 
-    private String getSmsLogPage() {
+    private String getSmsLogPage() throws IOException {
+        loginIfNeeded();
         var url = Config.getAdminUrl() + "logs/sms";
-
-        try {
-            return executor.execute(Request.Get(url)).returnContent().asString();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "";
+        return executor
+                .execute(Request.Get(url))
+                .returnContent()
+                .asString();
     }
 
-    private String getCustomersPage() {
+    private String getCustomersPage() throws IOException {
+        loginIfNeeded();
         var url = Config.getAdminUrl() + "customer";
-
-        try {
-            return executor.execute(Request.Get(url)).returnContent().asString();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "";
+        return executor
+                .execute(Request.Get(url))
+                .returnContent()
+                .asString();
     }
 }
