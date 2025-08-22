@@ -30,8 +30,7 @@ public class MasterForgotPasswordTest extends TestBase {
         user.atHomePage.clickForgotPassword();
         user.atHomePage.requestNewPassword(master.getLogin());
 
-        var smsCode = Admin.getInstance().getSmsCode(master.getLogin());
-        user.atHomePage.enterAuthCodeAndSubmit(smsCode, master.getPhoneNumber());
+        user.atHomePage.enterAuthCodeAndSubmit(master);
 
         var newPassword = DataGenerator.getPassword();
         user.atMasterProfileSettingsPage.changePassword(newPassword);

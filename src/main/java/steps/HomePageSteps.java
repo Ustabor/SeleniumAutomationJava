@@ -36,6 +36,19 @@ public class HomePageSteps extends ScenarioSteps {
     }
 
     @Step
+    public void enterAuthCodeAndSubmit(User user) throws InterruptedException, IOException {
+        var code = homePage.getSmsCode(user);
+        homePage.regFormEnterAuthCode(code);
+        homePage.regFormClickSubmitAuthCode();
+
+        if (homePage.isRefreshLinkVisible()) {
+            retryEnterCode(user.getPhoneNumber());
+        }
+
+        homePage.waitForLoaderDisappears();
+    }
+
+    @Step
     public void enterAuthCodeAndSubmit(String code, String phoneNumber) throws InterruptedException, IOException {
         homePage.regFormEnterAuthCode(code);
         homePage.regFormClickSubmitAuthCode();
