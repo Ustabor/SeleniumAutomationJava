@@ -99,7 +99,7 @@ public class PlaceOrderPage extends BasePage {
     }
 
     public String getCountryCode() {
-        return phoneInput.getAttribute("placeholder").replaceAll("[^\\d]", "");
+        return phoneInput.getDomAttribute("placeholder").replaceAll("[^\\d]", "");
     }
 
     public void enterAdditionalInfo(String info) {

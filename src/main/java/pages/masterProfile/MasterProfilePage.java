@@ -64,7 +64,7 @@ public class MasterProfilePage extends MasterProfileBasePage {
     }
 
     public void masterRatingShouldBe(String rating) {
-        assertThat(masterRating.getAttribute("class")).contains(rating);
+        assertThat(masterRating.getDomAttribute("class")).contains(rating);
     }
 
     public void masterFeedbackShouldContain(String feedback) {

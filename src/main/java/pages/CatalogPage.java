@@ -374,7 +374,7 @@ public class CatalogPage extends SearchBlock {
     private Master getMasterInfo(WebElementFacade selectedMaster) {
         var master = new Master();
         master.setFirstName(selectedMaster.findElement(By.xpath(masterNameXpath)).getText());
-        master.setRating(selectedMaster.findElement(By.xpath(ratingXpath)).getAttribute("class"));
+        master.setRating(selectedMaster.findElement(By.xpath(ratingXpath)).getDomAttribute("class"));
 
         if (!selectedMaster.findElements(By.xpath(reviewsCountXpath)).isEmpty()) {
             master.setFeedback(selectedMaster.findElement(By.xpath(reviewsCountXpath)).getText().replaceAll("[^0-9]", ""));
@@ -384,7 +384,7 @@ public class CatalogPage extends SearchBlock {
     }
 
     public void verifyMasterWithBadges(Master master) {
-        int badge = Integer.parseInt(mastersList.get(0).getAttribute("data-id"));
+        int badge = Integer.parseInt(mastersList.get(0).getDomAttribute("data-id"));
         int expected = Integer.parseInt(master.getProfileId());
         assertThat(badge).isEqualTo(expected);
     }
@@ -393,8 +393,8 @@ public class CatalogPage extends SearchBlock {
         logger.info("Master id: " + master.getProfileId());
         logger.info("Promo id: " + master.getCategory().getPromoId());
         var firstMaster = mastersList.stream().findFirst();
-        int dataId = Integer.parseInt(firstMaster.get().getAttribute("data-id"));
-        int promoId = Integer.parseInt(firstMaster.get().getAttribute("data-promotion").replaceAll("\\s", ""));
+        int dataId = Integer.parseInt(firstMaster.get().getDomAttribute("data-id"));
+        int promoId = Integer.parseInt(firstMaster.get().getDomAttribute("data-promotion").replaceAll("\\s", ""));
 
         assertThat(dataId).isEqualTo(Integer.parseInt(master.getProfileId()));
         assertThat(promoId).isEqualTo(1);
@@ -407,7 +407,7 @@ public class CatalogPage extends SearchBlock {
                 .get(0)
                 .findElements(By.xpath(ratingXpath))
                 .get(0)
-                .getAttribute("class");
+                .getDomAttribute("class");
 
         var ratingString = attribute.substring(attribute.length() - 1);
 
@@ -415,7 +415,7 @@ public class CatalogPage extends SearchBlock {
             masterRating = Integer.parseInt(ratingString);
         }
 
-        assertThat(mastersList.get(0).getAttribute("data-id")).isEqualTo(master.getProfileId());
+        assertThat(mastersList.get(0).getDomAttribute("data-id")).isEqualTo(master.getProfileId());
         assertThat(masterRating).isEqualTo(rating);
     }
 

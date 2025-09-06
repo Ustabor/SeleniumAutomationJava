@@ -6,7 +6,6 @@ import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.core.pages.WebElementState;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.Admin;
 import utils.Config;
@@ -151,7 +150,7 @@ public class BasePage extends PageObject {
 
     public void setTimeouts(int duration, TemporalUnit timeUnit) {
         setImplicitTimeout(duration, timeUnit);
-        setWaitForTimeout(duration * 1000);
+        setWaitForTimeout(duration * 1000L);
     }
 
     public void resetTimeouts() {
@@ -312,20 +311,20 @@ public class BasePage extends PageObject {
         openHeaderCountriesDropDown();
         return countriesList
                 .stream()
-                .map(x -> x.getAttribute("class"))
+                .map(x -> x.getDomAttribute("class"))
                 .map(x -> x.substring(0, x.lastIndexOf(" ")))
                 .collect(Collectors.toList());
     }
 
     public void setCountryByCode(String countryCode) {
-        if (!isCountrySelectorVisible() || headerCountriesBtn.getAttribute("class").contains(countryCode)) {
+        if (!isCountrySelectorVisible() || headerCountriesBtn.getDomAttribute("class").contains(countryCode)) {
             return;
         }
 
         openHeaderCountriesDropDown();
         WebElementFacade item = countriesList
                 .stream()
-                .filter(s -> s.getAttribute("class").contains(countryCode))
+                .filter(s -> s.getDomAttribute("class").contains(countryCode))
                 .findFirst()
                 .orElse(null);
 
@@ -337,7 +336,7 @@ public class BasePage extends PageObject {
     }
 
     public void currentDomainNameShouldBe(String country) {
-        assertThat(headerCountriesBtn.getAttribute("class")).contains(country);
+        assertThat(headerCountriesBtn.getDomAttribute("class")).contains(country);
     }
 
     public void clickProfileBtn() {

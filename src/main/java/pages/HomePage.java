@@ -268,7 +268,7 @@ public class HomePage extends SearchBlock {
         category.click();
 
         master.getCategory().setName(category.getText());
-        master.getCategory().setSystemId(category.getAttribute("data-id"));
+        master.getCategory().setSystemId(category.getDomAttribute("data-id"));
     }
 
     public void regMasterFormSelectCategory(Master master) {
@@ -489,11 +489,11 @@ public class HomePage extends SearchBlock {
     }
 
     public String getMasterPhoneCountryCode() {
-        return regMasterPhoneNumber.getAttribute("placeholder").replaceAll("[^\\d]", "");
+        return regMasterPhoneNumber.getDomAttribute("placeholder").replaceAll("[^\\d]", "");
     }
 
     public String getCustomerPhoneCountryCode() {
-        return regFormUserPhoneNumberInput.getAttribute("placeholder").replaceAll("[^\\d]", "");
+        return regFormUserPhoneNumberInput.getDomAttribute("placeholder").replaceAll("[^\\d]", "");
     }
 
     public void openLocationPopup() {

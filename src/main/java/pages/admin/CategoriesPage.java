@@ -78,7 +78,7 @@ public class CategoriesPage extends BaseAdminPage {
     public String getCategoryIdByName(String categoryName) {
         var url = getDriver()
                 .findElement(By.xpath(String.format(categoryUrlByNameXpath, categoryName)))
-                .getAttribute("href");
+                .getDomAttribute("href");
 
         var matcher = Pattern.compile("(?<=/)\\d{3,}(?=/)").matcher(url);
         if (matcher.find()) {
