@@ -47,7 +47,7 @@ public class CatalogPage extends SearchBlock {
     private WebElementFacade chatTab;
     @FindBy(xpath = "//div[@id='btn-filter']")
     private WebElementFacade filterButton;
-    @FindBy(xpath = "//div[@class='ui-selectbox-button']")
+    @FindBy(xpath = "//div[@class='raw-head']")
     private WebElementFacade dropdownSelectedCategory;
     @FindBy(xpath = "//div[@id='projects-gallery']//a[not(contains(@data-ad, '1'))]")
     private List<WebElementFacade> mastersCards;

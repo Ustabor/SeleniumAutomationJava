@@ -1,9 +1,9 @@
 package pages.admin;
 
 import net.serenitybdd.core.pages.WebElementFacade;
-import org.openqa.selenium.devtools.v137.log.Log;
-import org.openqa.selenium.devtools.v137.network.Network;
-import org.openqa.selenium.devtools.v137.network.model.Headers;
+import org.openqa.selenium.devtools.v142.log.Log;
+import org.openqa.selenium.devtools.v142.network.Network;
+import org.openqa.selenium.devtools.v142.network.model.Headers;
 import org.openqa.selenium.support.FindBy;
 import utils.Config;
 
@@ -36,6 +36,8 @@ public class AdminLoginPage extends BaseAdminPage {
         devTools.send(Log.disable());
         devTools.send(
                 Network.enable(
+                        java.util.Optional.empty(),
+                        java.util.Optional.empty(),
                         java.util.Optional.empty(),
                         java.util.Optional.empty(),
                         java.util.Optional.empty()));
