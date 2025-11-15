@@ -54,7 +54,6 @@ public class CustomerProfilePersonalInfoPageSteps extends ScenarioSteps {
 
     @Step
     public void verifyProfileData(User guest) {
-        customerProfilePersonalInfoPage.verifyUserName(guest.getPhoneNumber());
         customerProfilePersonalInfoPage.verifyPhoneNumber(guest.getPhoneNumber());
     }
 

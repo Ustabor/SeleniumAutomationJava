@@ -74,7 +74,8 @@ public class MasterProfilePageSteps extends MasterProfileSteps {
     }
 
     @Step
-    public void uploadProfileImage() throws URISyntaxException {
+    public void uploadProfileImage() {
+        masterProfilePage.verifyUploadProfileImageIsVisible();
         masterProfilePage.uploadProfileImage();
     }
 }

@@ -14,6 +14,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MasterProfilePage extends MasterProfileBasePage {
 
+    @FindBy(xpath = "//input[@id='form_user_image']")
+    private WebElementFacade imageUploadButton;
     @FindBy(xpath = "//div[@class='presentation']")
     private WebElementFacade masterName;
     @FindBy(xpath = "//input[@id='form_user_presentation']")
@@ -42,7 +44,7 @@ public class MasterProfilePage extends MasterProfileBasePage {
     private WebElementFacade masterReviews;
     @FindBy(xpath = "//button[@type='submit']")
     private WebElementFacade saveButton;
-    @FindBy(xpath = "//table[@class='services']//td[@class='main']/div")
+    @FindBy(xpath = "//table[@class='services']//td[@class='main']/input")
     private WebElementFacade service;
     @FindBy(xpath = "//table[@class='services']//input[@type='text']")
     private WebElementFacade servicePrice;
@@ -61,14 +63,6 @@ public class MasterProfilePage extends MasterProfileBasePage {
 
     public void openProfileSettings() {
         profileSettingsBtn.click();
-    }
-
-    public void masterRatingShouldBe(String rating) {
-        assertThat(masterRating.getDomAttribute("class")).contains(rating);
-    }
-
-    public void masterFeedbackShouldContain(String feedback) {
-        masterReviews.shouldContainText(feedback);
     }
 
     public void selectService() throws InterruptedException {
@@ -126,5 +120,9 @@ public class MasterProfilePage extends MasterProfileBasePage {
 
         fileInput.sendKeys(absolutePath);
         saveButton.click();
+    }
+
+    public void verifyUploadProfileImageIsVisible() {
+        imageUploadButton.waitUntilPresent();
     }
 }
