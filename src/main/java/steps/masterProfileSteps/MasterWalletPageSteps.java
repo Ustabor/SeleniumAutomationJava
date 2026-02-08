@@ -32,7 +32,7 @@ public class MasterWalletPageSteps extends MasterProfileSteps {
     }
 
     @Step
-    public void verifyClickPaymentSystemPageIsOpened() {
+    public void verifyClickPaymentSystemPageIsOpened() throws TimeoutException {
         masterWalletPage.verifyClickSystemPage();
     }
 

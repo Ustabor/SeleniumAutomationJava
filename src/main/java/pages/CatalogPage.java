@@ -23,7 +23,7 @@ public class CatalogPage extends SearchBlock {
     private static final String avatarXpath = ".//div[@class='image']";
     private static final String districtXpath = "//div[@class='item-wrapper' and text()='%s']";
     private static final String sortXpath = "//div[@class='item-wrapper' and text()='%s']";
-    private static final String filterSite = "//div[@class='swiper-slide' and text()='%s']";
+    private static final String filterSite = "//div[@class='swiper-slide' and contains(text(),'%s')]";
     private static final String filterCategory = "//a[./span[text()='%s']]";
 
     private static final Logger logger = LoggerFactory.getLogger(CatalogPage.class);

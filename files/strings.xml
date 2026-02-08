@@ -42,12 +42,12 @@
     <string name="FilterSortRating">По кол-ву оценок</string>
 
     <string name="SiteDomainBuild_Short1">Стро</string>
-    <string name="SiteDomainBuild_Short2">Строй</string>
+    <string name="SiteDomainBuild_Short2">Строительство</string>
     <string name="SiteDomainBuild_Full">Строительный</string>
     <string name="SearchRequestPlumber">Сантехник</string>
     <string name="FilterCategoryPlumber">Сантехники</string>
 
-    <string name="SiteDomainAuto">Авто</string>
+    <string name="SiteDomainAuto">Автоуслуги</string>
     <string name="FilterCategoryCallAuto">Вызов мастера на место</string>
 
     <string name="SiteDomainTech">Техника</string>

@@ -60,8 +60,12 @@ public class MasterWalletPage extends MasterProfileBasePage {
         submitFormButton.click();
     }
 
-    public void verifyClickSystemPage() {
-        assertTrue(getDriver().getCurrentUrl().contains("my.click.uz"));
+    public void verifyClickSystemPage() throws TimeoutException {
+        WaitHelper.pollingWait(
+                10000,
+                100,
+                () -> getDriver().getCurrentUrl().contains("my.click.uz")
+        );
     }
 
     public void verifyPaycomSystemPage() throws TimeoutException {
