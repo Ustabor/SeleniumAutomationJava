@@ -27,6 +27,7 @@ public class CustomerServiceDetailsTest extends TestBase {
         user.atCustomerServicesPage.verifyOrderFormIsVisible();
         user.atCustomerServicesPage.closeServiceDetails();
 
+        user.atCustomerServicesPage.selectCategory(category.getName());
         user.atCustomerServicesPage.clickOrderService();
         user.atCustomerServicesPage.verifyServiceDetails(category.getService());
         user.atCustomerServicesPage.verifyOrderFormIsVisible();

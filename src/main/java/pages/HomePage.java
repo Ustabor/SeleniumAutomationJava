@@ -106,7 +106,7 @@ public class HomePage extends SearchBlock {
     @FindBy(xpath = "//select[@id='form_registration_master_site_id']/../div")
     private WebElementFacade regMasterDomainSelector;
 
-    @FindBy(xpath = "//div[@class='ui-selectbox-popup']//li[1]")
+    @FindBy(xpath = "//div[contains(@class,'ui-selectbox-popup')]//li[1]")
     private WebElementFacade regMasterDomainSelectorFirst;
 
     @FindBy(xpath = "//div[@class='categories-list']//a")
@@ -118,13 +118,13 @@ public class HomePage extends SearchBlock {
     @FindBy(xpath = "//select[@id='form_registration_master_experience']/../div")
     private WebElementFacade regMasterExperienceSelector;
 
-    @FindBy(xpath = "//div[@class='ui-selectbox-popup']//li[2]")
+    @FindBy(xpath = "//div[contains(@class,'ui-selectbox-popup')]//li[2]")
     private WebElementFacade regMasterExperienceSelectorFirst;
 
     @FindBy(xpath = "//div[contains(@class, 'field-city_id')]")
     private WebElementFacade regMasterCitySelector;
 
-    @FindBy(xpath = "//div[@class='ui-selectbox-popup']//li[2]")
+    @FindBy(xpath = "//div[contains(@class,'ui-selectbox-popup')]//li[2]")
     private WebElementFacade regMasterCitySelectorFirst;
 
     @FindBy(xpath = "//form[@method='post']//button[@type='submit']")
