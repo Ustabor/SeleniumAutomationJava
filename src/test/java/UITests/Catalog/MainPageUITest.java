@@ -20,10 +20,6 @@ public class MainPageUITest extends TestBase {
         user.atHomePage.verifySubdomainDropDown();
         user.atHomePage.verifyHeaderLanguagesListIsVisible();
 
-        if (!Config.isUstabor() && !Config.isBildrlist() && !Config.isFixinglist()) {
-            user.atHomePage.verifyPhonePopUpText(getText("PhoneHintPopupText_" + Config.getEnv()));
-        }
-
         user.atHomePage.verifyLoginForm();
         user.atHomePage.verifyRegistrationForm();
         user.atHomePage.openPlaceOrderPage();

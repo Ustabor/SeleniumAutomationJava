@@ -23,7 +23,7 @@ public class CatalogPage extends SearchBlock {
     private static final String avatarXpath = ".//div[@class='image']";
     private static final String districtXpath = "//div[@class='item-wrapper' and text()='%s']";
     private static final String sortXpath = "//div[@class='item-wrapper' and text()='%s']";
-    private static final String filterSite = "//div[@class='swiper-slide' and contains(text(),'%s')]";
+    private static final String filterSite = "//div[@class='ui-selectbox-popup ui-site-section-popup']//li/div[contains(text(), '%s')]";
     private static final String filterCategory = "//a[./span[text()='%s']]";
 
     private static final Logger logger = LoggerFactory.getLogger(CatalogPage.class);
@@ -63,6 +63,9 @@ public class CatalogPage extends SearchBlock {
     @FindBy(xpath = "//div[@id='btn-filter']")
     private WebElementFacade filterBtn;
 
+    @FindBy(xpath = "//div[@class='ui-selectbox ui-site-section-select']")
+    private WebElementFacade filterSiteBtn;
+
     @FindBy(xpath = "//div[./input[@id='category_id']]/div")
     private WebElementFacade filterCategoryBtn;
 
@@ -96,7 +99,7 @@ public class CatalogPage extends SearchBlock {
     @FindBy(xpath = "//div[contains(@class, 'ui-selectbox icon order')]")
     private WebElementFacade filterOrderButton;
 
-    @FindBy(xpath = "//div[contains(@class, 'swiper-slide')]")
+    @FindBy(xpath = "//div[@class='categories-list']/a")
     private List<WebElementFacade> filterCategories;
     //endregion
 
@@ -220,6 +223,10 @@ public class CatalogPage extends SearchBlock {
 
     public void openFilterCategoryPopup() {
         filterCategoryBtn.click();
+    }
+
+    public void clickSiteFilterBtn() {
+        filterSiteBtn.click();
     }
 
     public void selectFilterSite(String site) {

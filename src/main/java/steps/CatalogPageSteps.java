@@ -156,8 +156,9 @@ public class CatalogPageSteps extends CommonSteps {
 
     @Step
     public void selectFilterSiteAndCategory(String site, String category) {
-        catalogPage.openFilterCategoryPopup();
+        catalogPage.clickSiteFilterBtn();
         catalogPage.selectFilterSite(site);
+        catalogPage.openFilterCategoryPopup();
         catalogPage.selectFilterCategory(category);
     }
 

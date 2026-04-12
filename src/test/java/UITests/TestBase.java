@@ -98,7 +98,7 @@ public class TestBase {
     }
 
     public void setBrowserMobileWindowSize() {
-        driver.manage().window().setSize(new Dimension(375, 667));
+        driver.manage().window().setSize(new Dimension(375, 900));
         driver.navigate().refresh();
     }
 
