@@ -2,7 +2,6 @@ package UITests;
 
 import annotations.AddCategory;
 import annotations.AddMasters;
-import com.google.common.net.MediaType;
 import entities.Category;
 import entities.RequestResult;
 import net.serenitybdd.annotations.Managed;
@@ -13,9 +12,6 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.devtools.NetworkInterceptor;
-import org.openqa.selenium.remote.http.HttpResponse;
-import org.openqa.selenium.remote.http.Route;
 import steps.UserSteps;
 import steps.adminSteps.AdminSteps;
 import utils.*;
@@ -123,13 +119,14 @@ public class TestBase {
         user.atCustomerProfilePersonalInfoPage.openCustomerProfilePage();
         user.atPlaceOrderPage.openRequestsPage();
 
-        var requestId = user.atCustomerProfileRequestsPage.getRequestId();
+        var requestInnerId = user.atCustomerProfileRequestsPage.getRequestInnerId();
+        var requestOuterId = user.atCustomerProfileRequestsPage.getRequestOuterId();
 
         if (logout) {
             user.atHomePage.logsOut();
         }
 
-        admin.atRequestsPage.openRequestById(requestId);
+        admin.atRequestsPage.openRequestById(requestInnerId);
         admin.atRequestsPage.verifyRequest(guest, category, getText("Question_main"));
 
         if (assignFree) {
@@ -146,6 +143,6 @@ public class TestBase {
             }
         }
 
-        return new RequestResult(requestId, guest);
+        return new RequestResult(requestInnerId, requestOuterId, guest);
     }
 }

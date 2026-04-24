@@ -1,11 +1,13 @@
 package entities;
 
 public class RequestResult {
-    public String requestId;
+    public String requestInnerId;
+    public String requestOuterId;
     public User guest;
 
-    public RequestResult(String requestId, User guest) {
-        this.requestId = requestId;
+    public RequestResult(String requestInnerId, String requestOuterId, User guest) {
+        this.requestInnerId = requestInnerId;
+        this.requestOuterId = requestOuterId;
         this.guest = guest;
     }
 }

@@ -15,6 +15,9 @@ public class CustomerProfileRequestsPage extends CustomerProfileBasePage {
     @FindBy(xpath = "//div[contains(@class, 'requests-list')]/div")
     private List<WebElementFacade> requests;
 
+    @FindBy(xpath = "//div[contains(@class,'requests-list')]//a[@class='btn-more']")
+    private WebElementFacade requestDetailsBtn;
+
     @FindBy(xpath = "//span[@class='id']")
     private WebElementFacade requestId;
 
@@ -34,8 +37,12 @@ public class CustomerProfileRequestsPage extends CustomerProfileBasePage {
         assertThat(requests).isNotEmpty();
     }
 
-    public String getRequestId() {
-        return requestId.getText().replaceAll("[^0-9.]", "");
+    public String getRequestInnerId() {
+        return requestDetailsBtn.getDomAttribute("href").replaceAll("[^0-9]", "");
+    }
+
+    public String getRequestOuterId() {
+        return requestId.getText().replaceAll("[^0-9]", "");
     }
 
     public void openPage() {

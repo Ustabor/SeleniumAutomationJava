@@ -68,7 +68,7 @@ public class CustomerRequestStatusesTest extends TestBase {
         user.atMasterProfileRequestsPage.verifyRequestsTableIsEmpty();
         user.atHomePage.logsOut();
 
-        admin.atRequestsPage.deleteRequest(result.requestId);
+        admin.atRequestsPage.deleteRequest(result.requestInnerId);
 
         user.atHomePage.openHomePage();
         user.atHomePage.login(result.guest, true);

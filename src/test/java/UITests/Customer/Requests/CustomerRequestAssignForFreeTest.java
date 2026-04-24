@@ -28,7 +28,7 @@ public class CustomerRequestAssignForFreeTest extends TestBase {
         user.atHomePage.openHomePage();
         user.atHomePage.login(watcher.getMaster(), true);
         user.atMasterProfileRequestsPage.openRequestsPage();
-        user.atMasterProfileRequestsPage.verifyRequestId(result.requestId);
+        user.atMasterProfileRequestsPage.verifyRequestId(result.requestOuterId);
         user.atMasterProfileRequestsPage.verifyBalance(10000);
     }
 }

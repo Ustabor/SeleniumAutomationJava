@@ -1,6 +1,5 @@
 package steps.customerProfileSteps;
 
-import entities.Service;
 import net.serenitybdd.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
 import pages.customerProfile.CustomerProfileRequestsPage;
@@ -19,8 +18,12 @@ public class CustomerProfileRequestsPageSteps extends ScenarioSteps {
         customerProfileRequestsPage.requestShouldBeVisible();
     }
 
-    public String getRequestId() {
-        return customerProfileRequestsPage.getRequestId();
+    public String getRequestInnerId() {
+        return customerProfileRequestsPage.getRequestInnerId();
+    }
+
+    public String getRequestOuterId() {
+        return customerProfileRequestsPage.getRequestOuterId();
     }
 
     public String getCustomerProfileId() {

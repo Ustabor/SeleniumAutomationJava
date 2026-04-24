@@ -32,12 +32,12 @@ public class CustomerRequestClientContactWithdrawTest extends TestBase {
         user.atHomePage.logsOut();
         user.atHomePage.login(watcher.getMaster(), true);
         user.atMasterProfileRequestsPage.openRequestsPage();
-        user.atMasterProfileRequestsPage.openRequestWithId(result1.requestId);
+        user.atMasterProfileRequestsPage.openRequestWithId(result1.requestOuterId);
         user.atMasterRequestPage.clickConnectClientButton();
         user.atMasterRequestPage.closeConnectCustomerPopup();
 
         user.atMasterProfileRequestsPage.openRequestsPage();
-        user.atMasterProfileRequestsPage.openRequestWithId(result2.requestId);
+        user.atMasterProfileRequestsPage.openRequestWithId(result2.requestOuterId);
         user.atMasterRequestPage.clickConnectClientButton();
         user.atMasterRequestPage.verifyErrorMessage(getText("InsufficientFunds"));
 
