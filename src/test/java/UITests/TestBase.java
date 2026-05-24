@@ -19,9 +19,6 @@ import utils.*;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-import static org.openqa.selenium.remote.http.Contents.utf8String;
-
-
 public class TestBase {
     public final Category category = new Category();
 

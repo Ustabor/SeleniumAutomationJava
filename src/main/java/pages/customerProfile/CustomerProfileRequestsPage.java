@@ -42,7 +42,7 @@ public class CustomerProfileRequestsPage extends CustomerProfileBasePage {
     }
 
     public String getRequestOuterId() {
-        return requestId.getText().replaceAll("[^0-9]", "");
+        return requestId.getText().replaceAll("[^0-9\\-]", "");
     }
 
     public void openPage() {

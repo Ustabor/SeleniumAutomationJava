@@ -6,6 +6,7 @@ import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.core.pages.WebElementState;
 import org.openqa.selenium.By;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import utils.Admin;
 import utils.Config;
@@ -40,7 +41,7 @@ public class BasePage extends PageObject {
     @FindBy(xpath = "//div[@class='header']//a[@class='logo']")
     private WebElementFacade logoBtn;
 
-    @FindBy(xpath = "//nav[@class='user']/a[1]")
+    @FindBy(xpath = "//a[@id='header-account-btn']")
     private WebElementFacade profileBtn;
 
     @FindBy(xpath = "//a[contains(@href, 'logout')]")
@@ -220,19 +221,22 @@ public class BasePage extends PageObject {
     }
 
     public void logsOut() {
+        new Actions(getDriver())
+                .moveToElement(profileBtn)
+                .perform();
         logoutBtn.waitUntilClickable();
         logoutBtn.click();
     }
 
-    boolean isLogoutBtnVisible() {
+    boolean isProfileBtnVisible() {
         setTimeouts(1, ChronoUnit.SECONDS);
-        boolean result = logoutBtn.isVisible();
+        boolean result = profileBtn.isVisible();
         resetTimeouts();
         return result;
     }
 
     public void logoutBtnShouldBeVisible() {
-        assertThat(isLogoutBtnVisible()).isTrue();
+        assertThat(isProfileBtnVisible()).isTrue();
     }
 
     protected void focusElementJS(WebElementFacade element) {
