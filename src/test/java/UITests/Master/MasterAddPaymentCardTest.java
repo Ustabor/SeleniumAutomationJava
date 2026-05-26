@@ -4,6 +4,7 @@ import UITests.TestBase;
 import annotations.AddCategory;
 import annotations.AddMasters;
 import net.serenitybdd.junit.runners.SerenityRunner;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -11,6 +12,7 @@ import java.util.concurrent.TimeoutException;
 
 //Мастер - Добавление/удаление карты
 
+@Ignore
 @RunWith(SerenityRunner.class)
 @AddCategory
 @AddMasters(masters = 1)

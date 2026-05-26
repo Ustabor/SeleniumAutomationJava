@@ -38,7 +38,7 @@ public class MasterProfileRequestsPage extends BasePage {
     }
 
     public void verifyRequestId(String requestId) {
-        assertThat(requestIdForm.getText().replaceAll("[^0-9.]", "")).isEqualTo(requestId);
+        assertThat(requestIdForm.getText().replaceAll("[^0-9\\-]", "")).isEqualTo(requestId);
     }
 
     public void openRequest() {

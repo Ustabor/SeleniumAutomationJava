@@ -18,7 +18,7 @@ public class MasterWalletPage extends MasterProfileBasePage {
     private WebElementFacade amountInput;
     @FindBy(xpath = "//select[@id='form_data_payment']")
     private WebElementFacade paymentSystemSelect;
-    @FindBy(xpath = "//form[@data-cls='window-credit-card']//button")
+    @FindBy(xpath = "//div[@class='wallet-form']//button")
     private WebElementFacade submitFormButton;
     @FindBy(xpath = "//div[@class='wallet-tabs']/a[last()]")
     private WebElementFacade cardsSection;

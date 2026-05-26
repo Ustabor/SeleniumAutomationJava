@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 @RunWith(SerenityRunner.class)
-@AddCategory(addRequest = true)
+@AddCategory(addRequest = true, promotionAndClickPrice = true)
 @AddMasters(masters = 1)
 public class CustomerRequestAssignForFreeTest extends TestBase {
 
