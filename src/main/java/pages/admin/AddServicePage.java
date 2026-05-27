@@ -49,12 +49,22 @@ public class AddServicePage extends BaseAdminPage {
         isCountableCheckbox.click();
 
         serviceNameInputRu.sendKeys(category.getService().getName());
-        serviceNameInputEn.sendKeys(category.getService().getName());
-        serviceNameInputUz.sendKeys(category.getService().getName());
+        textTab.click();
 
-        serviceDescriptionRu.sendKeys(category.getService().getDescription());
-        serviceDescriptionEn.sendKeys(category.getService().getDescription());
-        serviceDescriptionUz.sendKeys(category.getService().getDescription());
+        enterIframeText("ru", category.getService().getDescription());
+        mainTab.click();
+
+        switchLang("en");
+        serviceNameInputEn.sendKeys(category.getService().getName());
+        textTab.click();
+        enterIframeText("en", category.getService().getDescription());
+        mainTab.click();
+
+        switchLang("uz");
+        serviceNameInputUz.sendKeys(category.getService().getName());
+        textTab.click();
+        enterIframeText("uz", category.getService().getDescription());
+        mainTab.click();
 
         submit.click();
     }
