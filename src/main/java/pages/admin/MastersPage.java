@@ -51,7 +51,7 @@ public class MastersPage extends BaseAdminPage {
         assertThat(transactions.size()).isEqualTo(1);
     }
 
-    public void verifyMasterBalance(int balance) {
-        assertThat(masterBalance.getText()).contains(String.valueOf(balance));
+    public void verifyMasterBalance(String balance) {
+        assertThat(masterBalance.getText()).contains(balance);
     }
 }

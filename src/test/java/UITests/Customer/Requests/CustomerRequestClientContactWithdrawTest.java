@@ -39,9 +39,10 @@ public class CustomerRequestClientContactWithdrawTest extends TestBase {
         user.atMasterProfileRequestsPage.openRequestsPage();
         user.atMasterProfileRequestsPage.openRequestWithId(result2.requestOuterId);
         user.atMasterRequestPage.clickConnectClientButton();
-        user.atMasterRequestPage.verifyErrorMessage(getText("InsufficientFunds"));
+        user.atMasterRequestPage.closeConnectCustomerPopup(); // allows to have negative balance
+//        user.atMasterRequestPage.verifyErrorMessage(getText("InsufficientFunds"));
 
         admin.atMastersPage.openMasterPage(watcher.getMaster().getProfileId());
-        admin.atMastersPage.verifyBalance(-500);
+        admin.atMastersPage.verifyBalance("-1 500,00");
     }
 }

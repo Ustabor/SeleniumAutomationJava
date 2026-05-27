@@ -26,7 +26,7 @@ public class MastersPageSteps extends ScenarioSteps {
     }
 
     @Step
-    public void verifyBalance(int balance) {
+    public void verifyBalance(String balance) {
         mastersPage.verifyMasterBalance(balance);
     }
 }
