@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import pages.masterProfile.MasterPromotionPage;
+import utils.Admin;
 import utils.DataGenerator;
 
 import java.io.IOException;
@@ -52,8 +53,7 @@ public class MasterClickWithdrawForCustomerTest extends TestBase {
                 MasterPromotionPage.PromotionType.MinimalPrice);
         user.atMasterProjectsPage.logsOut();
 
-        admin.atAdminHomePage.loginAsAdmin();
-        admin.atPromotionPage.approvePromotion(master.getCategory());
+        admin.approvePromotion(master.getCategory());
 
         user.atHomePage.openHomePage();
         user.atHomePage.login(customer, true);
@@ -62,6 +62,9 @@ public class MasterClickWithdrawForCustomerTest extends TestBase {
         user.atHomePage.openBuilderTab();
         user.atHomePage.openCategory(master.getCategory().getName());
         user.atCatalogPage.openMasterContactsAndVerify(master.getFirstName());
+
+        user.atCatalogPage.hideFeedbackPopUpIfNeeded();
+
         user.atCustomerProfilePersonalInfoPage.openCustomerProfilePage();
         user.atCustomerProfilePersonalInfoPage.verifyMyMastersListContains(watcher.getMaster().getFirstName());
 

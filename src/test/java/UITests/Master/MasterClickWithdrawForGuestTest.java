@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import pages.masterProfile.MasterPromotionPage;
+import utils.Admin;
 
 import java.net.URISyntaxException;
 import java.util.concurrent.TimeoutException;
@@ -40,8 +41,7 @@ public class MasterClickWithdrawForGuestTest extends TestBase {
                 MasterPromotionPage.PromotionType.MinimalPrice);
         user.atMasterProjectsPage.logsOut();
 
-        admin.atAdminHomePage.loginAsAdmin();
-        admin.atPromotionPage.approvePromotion(master.getCategory());
+        admin.approvePromotion(master.getCategory());
 
         user.atHomePage.openHomePage();
         user.atHomePage.openBuilderTab();

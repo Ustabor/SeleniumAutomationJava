@@ -14,6 +14,10 @@ public class CronTasksPage extends BaseAdminPage {
 
     @FindBy(xpath = "//a[@data-id='1' and not(@style='display: none;')]")
     private WebElementFacade task;
+    @FindBy(xpath = "//select[@name='command']")
+    private WebElementFacade taskSelector;
+    @FindBy(xpath = "//button[@type='submit']")
+    private WebElementFacade submitButton;
 
     public void openPage() {
         getDriver().get(Config.getAdminUrl() + "system/cron");
@@ -34,5 +38,15 @@ public class CronTasksPage extends BaseAdminPage {
         }
 
         logger.info(String.format("Cron task %s failed", taskId));
+    }
+
+    public void runCategoriesUpdate() {
+        taskSelector.selectByValue("dictionary:refresh-categories");
+        submitButton.click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

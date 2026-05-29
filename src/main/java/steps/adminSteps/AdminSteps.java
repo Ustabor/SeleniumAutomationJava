@@ -32,6 +32,8 @@ public class AdminSteps extends ScenarioSteps {
     @Steps
     public ServiceDetailsPageSteps atServiceDetailsPage;
     @Steps
+    public CronTasksPageSteps atCronePage;
+    @Steps
     AddServicePage atAddServicePage;
 
     public void addTestCategory(Category category) {
@@ -51,6 +53,7 @@ public class AdminSteps extends ScenarioSteps {
     public void approvePromotion(Category category) {
         atAdminHomePage.loginAsAdmin();
         atPromotionPage.approvePromotion(category);
+        atCronePage.performCategoriesUpdate();
     }
 
     public void addRequestRootQuestion(Category category, String question) {

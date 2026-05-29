@@ -144,6 +144,12 @@ public class CatalogPage extends SearchBlock {
     private List<WebElementFacade> mastersList;
     //endregion
 
+    @FindBy(xpath = "//div[@class='window feedback-window']")
+    private WebElementFacade feedbackPopup;
+
+    @FindBy(xpath = "//div[@class='window feedback-window']//div[@class='btn-close']")
+    private WebElementFacade closeFeedbackPopup;
+
     public void openPage() {
         catalogButton.click();
     }
@@ -457,5 +463,11 @@ public class CatalogPage extends SearchBlock {
     public void verifyMasterServicePresent() {
         masterServicesTable.shouldContainText("Autotest");
         masterServicesTable.shouldContainText("100");
+    }
+
+    public void hideFeedbackPopUpIfNeeded() {
+        if (feedbackPopup.isVisible()) {
+            closeFeedbackPopup.click();
+        }
     }
 }

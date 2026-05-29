@@ -19,7 +19,7 @@ public class MastersPage extends BaseAdminPage {
     private WebElementFacade submitBtn;
     @FindBy(xpath = "//div[@class='form-buttons']//button[@type='submit']")
     private WebElementFacade saveBtn;
-    @FindBy(xpath = "//table[@class='table-grid']/tbody//tr")
+    @FindBy(xpath = "//table[@class='table table-grid']/tbody//tr")
     private List<WebElementFacade> transactionsList;
     @FindBy(xpath = "//span[@class='price-value']")
     private WebElementFacade masterBalance;

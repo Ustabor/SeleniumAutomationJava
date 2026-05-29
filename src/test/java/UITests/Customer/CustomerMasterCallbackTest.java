@@ -48,7 +48,9 @@ public class CustomerMasterCallbackTest extends TestBase {
     }
 
     @Test
-    public void masterCallback() throws TimeoutException {
+    public void masterCallback() throws TimeoutException, IOException {
+        admin.atCronePage.performCategoriesUpdate();
+
         user.atHomePage.openHomePage();
         user.atHomePage.openBuilderTab();
         user.atHomePage.openCategory(master.getCategory().getName());

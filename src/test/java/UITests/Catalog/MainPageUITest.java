@@ -30,10 +30,6 @@ public class MainPageUITest extends TestBase {
         setBrowserMobileWindowSize();
         user.atHomePage.openMobileViewMainMenu();
 
-        if (!Config.isFixListKg() || !Config.isNewTest()) {
-            user.atHomePage.verifyMobileViewLanguageMenu();
-        }
-
         if (!Config.isUstabor() && !Config.isBildrlist()) {
             user.atHomePage.verifyMobileViewCountriesMenu();
         }

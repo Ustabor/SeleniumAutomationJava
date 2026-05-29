@@ -10,4 +10,9 @@ public class CronTasksPageSteps extends ScenarioSteps {
         cronTasksPage.openPage();
         cronTasksPage.waitForCronTaskCompleted(taskId, timeout);
     }
+
+    public void performCategoriesUpdate() {
+        cronTasksPage.openPage();
+        cronTasksPage.runCategoriesUpdate();
+    }
 }

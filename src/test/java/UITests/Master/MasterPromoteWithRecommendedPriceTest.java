@@ -9,7 +9,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import pages.masterProfile.MasterPromotionPage;
+import utils.Admin;
 
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.concurrent.TimeoutException;
 
@@ -30,7 +32,7 @@ public class MasterPromoteWithRecommendedPriceTest extends TestBase {
     }
 
     @Test
-    public void promoteWithRecommendedPrice() throws TimeoutException {
+    public void promoteWithRecommendedPrice() throws TimeoutException, IOException {
         user.atMasterProfilePage.openProfilePage();
         user.atMasterPromotionPage.openPromotionTab();
         user.atMasterPromotionPage.promoteCategory(

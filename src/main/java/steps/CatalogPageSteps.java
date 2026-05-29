@@ -224,4 +224,9 @@ public class CatalogPageSteps extends CommonSteps {
     public void verifyMasterServicePresent() {
         catalogPage.verifyMasterServicePresent();
     }
+
+    @Step
+    public void hideFeedbackPopUpIfNeeded() {
+        catalogPage.hideFeedbackPopUpIfNeeded();
+    }
 }
