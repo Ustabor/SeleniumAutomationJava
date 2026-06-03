@@ -42,13 +42,17 @@ public class CategoriesPageSteps extends ScenarioSteps {
     }
 
     @Step
-    public void setPromotionAndClickPrice(String categoryId, String minPrice, String maxPrice, String clickPrice) {
+    public void setPromotionAndClickPrice(Category category, String minPrice, String maxPrice, String clickPrice) {
         categoriesPage.openPromotionPage();
-        categoriesPage.selectCategory(categoryId);
+        categoriesPage.selectCategory(category.getSystemId());
         categoriesPage.selectCurrentCountry();
         categoriesPage.setPrice(minPrice, maxPrice);
         categoriesPage.setClickPrice(clickPrice);
         categoriesPage.submitPromotion();
         categoriesPage.waitForQuickSearchIsVisible();
+
+        categoriesPage.findPromotedCategory(category.getSystemId());
+        var promotionAndClickId = categoriesPage.getPromotionAndClickId(category.getName());
+        category.setPromotionAndClickId(promotionAndClickId);
     }
 }

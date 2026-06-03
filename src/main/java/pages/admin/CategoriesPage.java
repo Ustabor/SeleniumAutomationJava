@@ -1,5 +1,6 @@
 package pages.admin;
 
+import entities.Category;
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
@@ -51,6 +52,13 @@ public class CategoriesPage extends BaseAdminPage {
 
     @FindBy(xpath = "//button[@type='submit']")
     private WebElementFacade submitBtn;
+    //endregion
+
+    //region Promotion
+    @FindBy(xpath = "//select[@id='category_id']")
+    private WebElementFacade categoryPromotionSelector;
+    @FindBy(xpath = "//form[@class='grid-form']//button[@type='submit']")
+    private WebElementFacade categoryPromotionSearchBtn;
     //endregion
 
 
@@ -117,5 +125,23 @@ public class CategoriesPage extends BaseAdminPage {
 
     public void selectCurrentCountry() {
         selectCountry.selectByVisibleText(Config.getCountry());
+    }
+
+    public void findPromotedCategory(String categoryId) {
+        categoryPromotionSelector.selectByValue(categoryId);
+        categoryPromotionSearchBtn.click();
+    }
+
+    public String getPromotionAndClickId(String categoryName) {
+        var url = getDriver()
+                .findElement(By.xpath(String.format(categoryUrlByNameXpath, categoryName)))
+                .getDomAttribute("href");
+
+        var matcher = Pattern.compile("(?<=/)\\d{3,}(?=/)").matcher(url);
+        if (matcher.find()) {
+            return matcher.group(0);
+        }
+
+        return null;
     }
 }

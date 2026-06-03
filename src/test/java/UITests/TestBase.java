@@ -61,7 +61,7 @@ public class TestBase {
 
             if (annotation.promotionAndClickPrice()) {
                 admin.atCategoriesPage.setPromotionAndClickPrice(
-                        category.getSystemId(),
+                        category,
                         "100",
                         "200",
                         "1000");

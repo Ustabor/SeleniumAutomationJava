@@ -58,6 +58,22 @@ public class Admin {
         logger.info("Category deleted. Id: {}", id);
     }
 
+    public void deletePromotionAndClick(String id) throws IOException {
+        loginIfNeeded();
+        var url = Config.getAdminUrl() + String.format("reference/category-country/%s/delete", id);
+
+        var result = executor.execute(Request.Get(url))
+                .returnResponse()
+                .getStatusLine()
+                .getStatusCode();
+
+        if (result != 200) {
+            logger.info("Delete category promotion and click price request failed");
+            throw new HttpResponseException(result, "Delete category promotion and click price request failed");
+        }
+        logger.info("Promotion and click price deleted. Id: {}", id);
+    }
+
     public void deleteCustomer(String customerId) throws IOException {
         loginIfNeeded();
         if (customerId.isEmpty()) return;

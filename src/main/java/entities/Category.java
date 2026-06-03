@@ -9,6 +9,7 @@ public class Category {
     private String systemId;
     private String promoId;
     private Service service;
+    private String promotionAndClickId;
 
     public Category() {
         service = new Service();
@@ -51,5 +52,13 @@ public class Category {
 
     public void setService(Service service) {
         this.service = service;
+    }
+
+    public String getPromotionAndClickId() {
+        return promotionAndClickId;
+    }
+
+    public void setPromotionAndClickId(String promotionAndClickId) {
+        this.promotionAndClickId = promotionAndClickId;
     }
 }
