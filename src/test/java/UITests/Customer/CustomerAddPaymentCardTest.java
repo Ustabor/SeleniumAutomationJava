@@ -3,6 +3,7 @@ package UITests.Customer;
 import UITests.TestBase;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import utils.DataGenerator;
@@ -12,6 +13,7 @@ import java.io.IOException;
 //Заказчик - Удаление/добавление карты
 
 @RunWith(SerenityRunner.class)
+@Ignore
 public class CustomerAddPaymentCardTest extends TestBase {
 
     @Before

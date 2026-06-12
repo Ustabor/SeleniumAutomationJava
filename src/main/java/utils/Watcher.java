@@ -58,6 +58,9 @@ public class Watcher extends TestWatcher {
             if (category.getSystemId() != null) {
                 Admin.getInstance().deleteCategory(category.getSystemId());
             }
+            if (category.getRequestInnerId() != null) {
+                Admin.getInstance().deleteRequest(category.getSystemId());
+            }
         }
     }
 

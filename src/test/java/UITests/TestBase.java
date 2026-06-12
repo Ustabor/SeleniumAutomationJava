@@ -117,6 +117,7 @@ public class TestBase {
         user.atPlaceOrderPage.openRequestsPage();
 
         var requestInnerId = user.atCustomerProfileRequestsPage.getRequestInnerId();
+        category.setRequestInnerId(requestInnerId);
         var requestOuterId = user.atCustomerProfileRequestsPage.getRequestOuterId();
 
         if (logout) {

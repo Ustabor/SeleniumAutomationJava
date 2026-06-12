@@ -74,6 +74,22 @@ public class Admin {
         logger.info("Promotion and click price deleted. Id: {}", id);
     }
 
+    public void deleteRequest(String id) throws IOException {
+        loginIfNeeded();
+        var url = Config.getAdminUrl() + String.format("request/%s/delete", id);
+
+        var result = executor.execute(Request.Get(url))
+                .returnResponse()
+                .getStatusLine()
+                .getStatusCode();
+
+        if (result != 200) {
+            logger.info("Customer request delete failed");
+            return;
+        }
+        logger.info("Customer request deleted. Id: {}", id);
+    }
+
     public void deleteCustomer(String customerId) throws IOException {
         loginIfNeeded();
         if (customerId.isEmpty()) return;
