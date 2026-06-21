@@ -6,7 +6,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import utils.Config;
 
+import java.util.regex.Pattern;
+
 public class AddServicePage extends BaseAdminPage {
+
+    private static final String categoryUrlByNameXpath = "//tr[./td[text()='%s']]//a";
 
     @FindBy(xpath = "//div[@class='locale-menu']")
     private WebElementFacade flagButton;
@@ -67,6 +71,7 @@ public class AddServicePage extends BaseAdminPage {
         mainTab.click();
 
         submit.click();
+        System.out.println("test");
     }
 
     private void enterIframeText(String lang, String text) {
@@ -80,6 +85,7 @@ public class AddServicePage extends BaseAdminPage {
         var iFrame = getDriver().findElement(By.xpath(xpath));
         getDriver().switchTo().frame(iFrame);
 
+        getDriver().findElement(By.xpath("//body")).click();
         getDriver().findElement(By.xpath("//body")).sendKeys(text);
 
         getDriver().switchTo().defaultContent();
@@ -91,5 +97,18 @@ public class AddServicePage extends BaseAdminPage {
         flagButton.click();
         getDriver().findElement(By.xpath(String.format(xpath, lang))).click();
         flagButton.click();
+    }
+
+    public String getServiceId(String categoryName) {
+        var url = getDriver()
+                .findElement(By.xpath(String.format(categoryUrlByNameXpath, categoryName)))
+                .getDomAttribute("href");
+
+        var matcher = Pattern.compile("(?<=/)\\d{3,}(?=/)").matcher(url);
+        if (matcher.find()) {
+            return matcher.group(0);
+        }
+
+        return null;
     }
 }

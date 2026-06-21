@@ -3,6 +3,7 @@ package entities;
 import java.util.Random;
 
 public class Service {
+    private String id;
     private String name = "Autotest Service " ;
     private final String description = "Autotest Service Description";
     private final String url = "autotest";
@@ -27,5 +28,13 @@ public class Service {
 
     public String getUrl() {
         return url;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

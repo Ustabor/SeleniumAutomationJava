@@ -231,4 +231,23 @@ public class Admin {
                 .returnContent()
                 .asString();
     }
+
+    public void deleteUstaborService(String id) throws IOException {
+        loginIfNeeded();
+        var url = Config.getAdminUrl() + String.format("ustabor-services/%s", id);
+
+        var result = executor.execute(Request.Post(url)
+                        .bodyForm(Form.form()
+                                .add("_method", "delete")
+                                .build()))
+                .returnResponse()
+                .getStatusLine()
+                .getStatusCode();
+
+        if (result != 200) {
+            logger.info("Ustabor service with id: {} delete failed", id);
+            return;
+        }
+        logger.info("Ustabor service deleted. Id: {}", id);
+    }
 }

@@ -87,5 +87,8 @@ public class AdminSteps extends ScenarioSteps {
     public void addService(Category category) {
         atAddServicePage.openPage();
         atAddServicePage.createService(category);
+        atAddServicePage.waitForQuickSearchIsVisible();
+        var serviceId = atAddServicePage.getServiceId(category.getName());
+        category.getService().setId(serviceId);
     }
 }
