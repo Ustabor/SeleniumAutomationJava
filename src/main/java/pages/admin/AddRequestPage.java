@@ -26,6 +26,12 @@ public class AddRequestPage extends BaseAdminPage {
     @FindBy(xpath = "//input[contains(@name, 'prices')]")
     private List<WebElementFacade> priceInput;
 
+    @FindBy(xpath = "//select[@id='category_id']")
+    private WebElementFacade serviceCategorySearch;
+
+    @FindBy(xpath = "//form[@class='grid-form']//button[@type='submit']")
+    private WebElementFacade searchButton;
+
 
     public void openPage() {
         getDriver().get(Config.getAdminUrl() + "request/service/create");
@@ -52,5 +58,10 @@ public class AddRequestPage extends BaseAdminPage {
         for (WebElementFacade input: priceInput) {
             input.sendKeys("100");
         }
+    }
+
+    public void findCategory(String name) {
+        serviceCategorySearch.selectByVisibleText(name);
+        searchButton.click();
     }
 }

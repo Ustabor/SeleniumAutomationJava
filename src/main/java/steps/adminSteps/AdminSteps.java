@@ -4,10 +4,15 @@ import entities.Master;
 import entities.Category;
 import net.serenitybdd.annotations.Steps;
 import net.thucydides.core.steps.ScenarioSteps;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pages.admin.AddMasterPage;
 import pages.admin.AddServicePage;
+import utils.Admin;
 
 public class AdminSteps extends ScenarioSteps {
+
+    private static final Logger logger = LoggerFactory.getLogger(AdminSteps.class);
 
     @Steps
     public HomePageSteps atAdminHomePage;
@@ -67,6 +72,12 @@ public class AdminSteps extends ScenarioSteps {
         if (setPrice) atAddEditRequestPage.setPrices();
         atAddEditRequestPage.saveService();
         atRequestsPage.waitForPageIsOpened();
+
+        atAddEditRequestPage.findService(category);
+        var id = atAddEditRequestPage.getServiceIdByName(category.getName());
+
+        category.setRequestServiceId(id);
+        logger.info("Test service request with id '{}' has been created", id);
     }
 
     public void setRequestQuestionPrices(String country, String minPrice, String maxPrice) {

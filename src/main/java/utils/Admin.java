@@ -250,4 +250,20 @@ public class Admin {
         }
         logger.info("Ustabor service deleted. Id: {}", id);
     }
+
+    public void deleteServiceRequest(String id) throws IOException {
+        loginIfNeeded();
+        var url = Config.getAdminUrl() + String.format("request/service/%s/delete", id);
+
+        var result = executor.execute(Request.Get(url))
+                .returnResponse()
+                .getStatusLine()
+                .getStatusCode();
+
+        if (result != 200) {
+            logger.info("Service request with id: {} delete failed", id);
+            return;
+        }
+        logger.info("Service request deleted. Id: {}", id);
+    }
 }

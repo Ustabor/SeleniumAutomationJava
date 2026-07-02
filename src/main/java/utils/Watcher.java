@@ -55,14 +55,17 @@ public class Watcher extends TestWatcher {
             if (category.getPromotionAndClickId() != null) {
                 Admin.getInstance().deletePromotionAndClick(category.getPromotionAndClickId());
             }
-            if (category.getSystemId() != null) {
-                Admin.getInstance().deleteCategory(category.getSystemId());
-            }
             if (category.getRequestInnerId() != null) {
                 Admin.getInstance().deleteRequest(category.getSystemId());
             }
             if (category.getService().getId() != null) {
                 Admin.getInstance().deleteUstaborService(category.getService().getId());
+            }
+            if (category.getRequestServiceId() != null) {
+                Admin.getInstance().deleteServiceRequest(category.getRequestServiceId());
+            }
+            if (category.getSystemId() != null) {
+                Admin.getInstance().deleteCategory(category.getSystemId());
             }
         }
     }

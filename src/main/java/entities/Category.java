@@ -8,6 +8,7 @@ public class Category {
     private String url = "autotest";
     private String systemId;
     private String promoId;
+    private String requestServiceId;
     private Service service;
     private String promotionAndClickId;
     private String requestInnerId;
@@ -69,5 +70,13 @@ public class Category {
 
     public void setRequestInnerId(String requestInnerId) {
         this.requestInnerId = requestInnerId;
+    }
+
+    public String getRequestServiceId() {
+        return requestServiceId;
+    }
+
+    public void setRequestServiceId(String requestServiceId) {
+        this.requestServiceId = requestServiceId;
     }
 }
