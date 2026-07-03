@@ -1,10 +1,10 @@
 package steps.adminSteps;
 
 import entities.Category;
-import net.thucydides.core.steps.ScenarioSteps;
+import net.serenitybdd.core.steps.UIInteractions;
 import utils.XmlParser;
 
-public class ServicePricePageSteps extends ScenarioSteps {
+public class ServicePricePageSteps extends UIInteractions {
 
     private ServicePricePage servicePricePage;
 

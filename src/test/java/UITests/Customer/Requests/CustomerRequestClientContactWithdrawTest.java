@@ -4,23 +4,23 @@ import UITests.TestBase;
 import annotations.AddCategory;
 import annotations.AddMasters;
 import net.serenitybdd.annotations.WithTag;
-import net.serenitybdd.junit.runners.SerenityRunner;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import net.serenitybdd.junit5.SerenityJUnit5Extension;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 @WithTag("smoke")
-@RunWith(SerenityRunner.class)
+@ExtendWith(SerenityJUnit5Extension.class)
 @AddCategory(addRequest = true, promotionAndClickPrice = true)
 @AddMasters(masters = 1)
 public class CustomerRequestClientContactWithdrawTest extends TestBase {
 
-    @Before
+    @BeforeEach
     public void setup() throws TimeoutException, InterruptedException {
-        admin.addMoneyToMaster(500, watcher.getMaster(), false);
+        admin.addMoneyToMaster(500, getMaster(), false);
     }
 
     @Test
@@ -30,7 +30,7 @@ public class CustomerRequestClientContactWithdrawTest extends TestBase {
 
         user.atHomePage.openHomePage();
         user.atHomePage.logsOut();
-        user.atHomePage.login(watcher.getMaster(), true);
+        user.atHomePage.login(getMaster(), true);
         user.atMasterProfileRequestsPage.openRequestsPage();
         user.atMasterProfileRequestsPage.openRequestWithId(result1.requestOuterId);
         user.atMasterRequestPage.clickConnectClientButton();
@@ -42,7 +42,7 @@ public class CustomerRequestClientContactWithdrawTest extends TestBase {
         user.atMasterRequestPage.closeConnectCustomerPopup(); // allows to have negative balance
 //        user.atMasterRequestPage.verifyErrorMessage(getText("InsufficientFunds"));
 
-        admin.atMastersPage.openMasterPage(watcher.getMaster().getProfileId());
+        admin.atMastersPage.openMasterPage(getMaster().getProfileId());
         admin.atMastersPage.verifyBalance("-1 500,00");
     }
 }

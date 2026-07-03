@@ -1,10 +1,10 @@
 package steps.adminSteps;
 
 import entities.Category;
-import net.thucydides.core.steps.ScenarioSteps;
+import net.serenitybdd.core.steps.UIInteractions;
 import pages.admin.AddCategoryPage;
 
-public class AddCategoryPageSteps extends ScenarioSteps {
+public class AddCategoryPageSteps extends UIInteractions {
 
     private AddCategoryPage addCategoryPage;
 

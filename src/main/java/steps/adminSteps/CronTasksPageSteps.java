@@ -1,8 +1,8 @@
 package steps.adminSteps;
 
-import net.thucydides.core.steps.ScenarioSteps;
+import net.serenitybdd.core.steps.UIInteractions;
 
-public class CronTasksPageSteps extends ScenarioSteps {
+public class CronTasksPageSteps extends UIInteractions {
 
     private CronTasksPage cronTasksPage;
 

@@ -4,9 +4,7 @@ import entities.Master;
 import entities.User;
 import net.serenitybdd.annotations.Step;
 import net.serenitybdd.annotations.Steps;
-import net.thucydides.core.steps.ScenarioSteps;
-import pages.admin.AddServicePage;
-import pages.customerProfile.CustomerProfileWalletPage;
+import net.serenitybdd.core.steps.UIInteractions;
 import steps.customerProfileSteps.CustomerProfilePersonalInfoPageSteps;
 import steps.customerProfileSteps.CustomerProfileRequestsPageSteps;
 import steps.customerProfileSteps.CustomerProfileWalletPageSteps;
@@ -17,7 +15,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.concurrent.TimeoutException;
 
-public class UserSteps extends ScenarioSteps {
+public class UserSteps extends UIInteractions {
 
     @Steps
     public HomePageSteps atHomePage;

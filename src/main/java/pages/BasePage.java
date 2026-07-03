@@ -77,7 +77,7 @@ public class BasePage extends PageObject {
     @FindBy(xpath = "//div[@class='header-menu']//nav[@class='nav-menu language']//a")
     private List<WebElementFacade> langsList;
 
-    @FindBy(xpath = "//div[./input[@id='catalog-input']]/button")
+    @FindBy(xpath = "//button[@id='main-btn-order']")
     private WebElementFacade placeOrderBtn;
 
     @FindBy(xpath = "//a[@class='btn-services']")
@@ -202,7 +202,7 @@ public class BasePage extends PageObject {
     }
 
     public void openPageWithConfigUrl() throws TimeoutException {
-        getDriver().get(Config.getFullUrl());
+        openUrl(Config.getFullUrl());
         longWaitForDocument();
         scrollPageUpJS();
     }

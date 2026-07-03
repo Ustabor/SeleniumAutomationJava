@@ -1,13 +1,13 @@
 package steps.adminSteps;
 
 import entities.Category;
-import net.thucydides.core.steps.ScenarioSteps;
+import net.serenitybdd.core.steps.UIInteractions;
 import org.openqa.selenium.By;
 import pages.admin.AddRequestPage;
 
 import java.util.regex.Pattern;
 
-public class AddRequestPageSteps extends ScenarioSteps {
+public class AddRequestPageSteps extends UIInteractions {
 
     private static final String categoryUrlByNameXpath = "//tr[./td[text()='%s']]//a";
 

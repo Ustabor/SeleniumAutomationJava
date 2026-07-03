@@ -1,10 +1,10 @@
 package steps.customerProfileSteps;
 
 import net.serenitybdd.annotations.Step;
-import net.thucydides.core.steps.ScenarioSteps;
+import net.serenitybdd.core.steps.UIInteractions;
 import pages.customerProfile.CustomerProfileWalletPage;
 
-public class CustomerProfileWalletPageSteps extends ScenarioSteps {
+public class CustomerProfileWalletPageSteps extends UIInteractions {
 
     private CustomerProfileWalletPage customerProfileWalletPage;
 

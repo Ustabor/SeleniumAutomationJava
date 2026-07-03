@@ -2,9 +2,9 @@ package UITests.Customer;
 
 import UITests.TestBase;
 import net.serenitybdd.annotations.WithTag;
-import net.serenitybdd.junit.runners.SerenityRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import net.serenitybdd.junit5.SerenityJUnit5Extension;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import utils.DataGenerator;
 
 import java.io.IOException;
@@ -12,13 +12,13 @@ import java.io.IOException;
 //Заказчик - удаление профиля
 
 @WithTag("smoke")
-@RunWith(SerenityRunner.class)
+@ExtendWith(SerenityJUnit5Extension.class)
 public class CustomerRegistrationTest extends TestBase {
 
     @Test
     public void customerRegistration() throws InterruptedException, IOException {
         var customer = DataGenerator.getCustomer();
-        watcher.users.add(customer);
+        users.add(customer);
 
         user.registerAsCustomer(customer);
         user.atCustomerProfilePersonalInfoPage.openCustomerProfilePage();

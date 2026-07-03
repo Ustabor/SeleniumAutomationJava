@@ -5,12 +5,11 @@ import annotations.AddCategory;
 import annotations.AddMasters;
 import entities.Master;
 import net.serenitybdd.annotations.WithTag;
-import net.serenitybdd.junit.runners.SerenityRunner;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import net.serenitybdd.junit5.SerenityJUnit5Extension;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import pages.masterProfile.MasterPromotionPage;
-import utils.Admin;
 
 import java.net.URISyntaxException;
 import java.util.concurrent.TimeoutException;
@@ -18,16 +17,16 @@ import java.util.concurrent.TimeoutException;
 //Гость - Списывание средств за клик
 
 @WithTag("smoke")
-@RunWith(SerenityRunner.class)
+@ExtendWith(SerenityJUnit5Extension.class)
 @AddCategory(promotionAndClickPrice = true)
 @AddMasters(masters = 1)
 public class MasterClickWithdrawForGuestTest extends TestBase {
 
     private Master master;
 
-    @Before
+    @BeforeEach
     public void setup() throws TimeoutException, URISyntaxException, InterruptedException {
-        master = watcher.getMaster();
+        master = getMaster();
         admin.addMoneyToMaster(10000, master, false);
         user.addMasterProfileImage(master, false);
     }

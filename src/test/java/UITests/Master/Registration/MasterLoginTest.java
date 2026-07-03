@@ -1,21 +1,21 @@
 package UITests.Master.Registration;
 
 import UITests.TestBase;
-import net.serenitybdd.junit.runners.SerenityRunner;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import net.serenitybdd.junit5.SerenityJUnit5Extension;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import utils.DataGenerator;
 
 import java.io.IOException;
 
-@RunWith(SerenityRunner.class)
+@ExtendWith(SerenityJUnit5Extension.class)
 public class MasterLoginTest extends TestBase {
 
-    @Before
+    @BeforeEach
     public void setup() throws InterruptedException, IOException {
         var master = DataGenerator.getMaster();
-        watcher.users.add(master);
+        users.add(master);
 
         user.register(master, true);
     }

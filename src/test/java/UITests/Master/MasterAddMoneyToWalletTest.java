@@ -3,22 +3,22 @@ package UITests.Master;
 import UITests.TestBase;
 import annotations.AddCategory;
 import annotations.AddMasters;
-import net.serenitybdd.junit.runners.SerenityRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import net.serenitybdd.junit5.SerenityJUnit5Extension;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.concurrent.TimeoutException;
 
 //Мастер - пополнение кошелька
 
-@RunWith(SerenityRunner.class)
+@ExtendWith(SerenityJUnit5Extension.class)
 @AddCategory
 @AddMasters(masters = 1)
 public class MasterAddMoneyToWalletTest extends TestBase {
 
     @Test
     public void addMoneyToWallet() throws TimeoutException {
-        var master = watcher.getMaster();
+        var master = getMaster();
 
         user.atHomePage.openHomePage();
         user.atHomePage.login(master, true);

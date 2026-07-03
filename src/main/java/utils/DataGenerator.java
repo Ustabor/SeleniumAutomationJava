@@ -1,15 +1,15 @@
 package utils;
 
-import com.github.javafaker.Faker;
 import entities.Master;
 import entities.Category;
 import entities.User;
+import net.datafaker.Faker;
 
 public class DataGenerator {
     private static final String password = "Password1!";
 
     public static String getPassword() {
-        return new Faker().internet().password();
+        return new Faker().credentials().password();
     }
 
     public static User getCustomer() {

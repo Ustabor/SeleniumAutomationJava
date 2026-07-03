@@ -4,13 +4,13 @@ import static org.assertj.core.api.Assertions.*;
 
 import UITests.TestBase;
 import net.serenitybdd.annotations.WithTag;
-import net.serenitybdd.junit.runners.SerenityRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import net.serenitybdd.junit5.SerenityJUnit5Extension;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import utils.Config;
 
 @WithTag("smoke")
-@RunWith(SerenityRunner.class)
+@ExtendWith(SerenityJUnit5Extension.class)
 public class CatalogUITest extends TestBase {
 
     @Test

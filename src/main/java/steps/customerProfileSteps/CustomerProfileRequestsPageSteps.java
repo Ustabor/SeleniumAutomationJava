@@ -1,14 +1,14 @@
 package steps.customerProfileSteps;
 
 import net.serenitybdd.annotations.Step;
-import net.thucydides.core.steps.ScenarioSteps;
+import net.serenitybdd.core.steps.UIInteractions;
 import pages.customerProfile.CustomerProfileRequestsPage;
 
-public class CustomerProfileRequestsPageSteps extends ScenarioSteps {
+public class CustomerProfileRequestsPageSteps extends UIInteractions {
 
     private CustomerProfileRequestsPage customerProfileRequestsPage;
 
-    @Step
+    @Step("Navigate to the requests page")
     public void openRequestsPage() {
         customerProfileRequestsPage.openPage();
     }

@@ -2,28 +2,26 @@ package UITests.Customer;
 
 import UITests.TestBase;
 import entities.User;
-import net.serenitybdd.junit.runners.SerenityRunner;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import net.serenitybdd.junit5.SerenityJUnit5Extension;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import utils.DataGenerator;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 //Заказчик - изменить пароль
 
-@RunWith(SerenityRunner.class)
+@ExtendWith(SerenityJUnit5Extension.class)
 public class CustomerChangePasswordTest extends TestBase {
 
     private final User customer = DataGenerator.getCustomer();
 
-    @Before
+    @BeforeEach
     public void setup() throws InterruptedException, IOException {
-        watcher.users.add(customer);
+        users.add(customer);
         user.registerAsCustomer(customer);
     }
 
@@ -41,7 +39,7 @@ public class CustomerChangePasswordTest extends TestBase {
         user.atHomePage.verifyUserIsLoggedIn();
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws TimeoutException {
         user.atHomePage.openHomePage();
         user.atCustomerProfilePersonalInfoPage.openCustomerProfilePage();

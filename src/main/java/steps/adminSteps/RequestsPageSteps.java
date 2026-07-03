@@ -4,10 +4,10 @@ import entities.Master;
 import entities.Category;
 import entities.User;
 import net.serenitybdd.annotations.Step;
-import net.thucydides.core.steps.ScenarioSteps;
+import net.serenitybdd.core.steps.UIInteractions;
 import pages.admin.RequestsPage;
 
-public class RequestsPageSteps extends ScenarioSteps {
+public class RequestsPageSteps extends UIInteractions {
 
     private RequestsPage requestsPage;
 

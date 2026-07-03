@@ -3,14 +3,14 @@ package steps;
 import entities.Category;
 import entities.User;
 import net.serenitybdd.annotations.Step;
-import net.thucydides.core.steps.ScenarioSteps;
+import net.serenitybdd.core.steps.UIInteractions;
 import pages.PlaceOrderPage;
 import utils.Admin;
 import utils.XmlParser;
 
 import java.io.IOException;
 
-public class PlaceOrderPageSteps extends ScenarioSteps {
+public class PlaceOrderPageSteps extends UIInteractions {
 
     private PlaceOrderPage placeOrderPage;
 

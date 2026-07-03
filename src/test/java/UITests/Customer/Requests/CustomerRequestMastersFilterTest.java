@@ -3,10 +3,10 @@ package UITests.Customer.Requests;
 import UITests.TestBase;
 import annotations.AddCategory;
 import annotations.AddMasters;
-import net.serenitybdd.junit.runners.SerenityRunner;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import net.serenitybdd.junit5.SerenityJUnit5Extension;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import utils.Admin;
 import utils.DataGenerator;
 import utils.XmlParser;
@@ -17,15 +17,15 @@ import java.util.concurrent.TimeoutException;
 
 //Создание заявки - количество мастеров в индикаторе
 
-@RunWith(SerenityRunner.class)
+@ExtendWith(SerenityJUnit5Extension.class)
 @AddCategory(addRequest = true, addRequestPrice = true)
 @AddMasters(masters = 2)
 public class CustomerRequestMastersFilterTest extends TestBase {
 
-    @Before
+    @BeforeEach
     public void setup() throws TimeoutException, URISyntaxException, InterruptedException {
-        user.addMasterProfileImage(watcher.getMaster(0), true);
-        user.addMasterProfileImage(watcher.getMaster(1), false);
+        user.addMasterProfileImage(getMaster(0), true);
+        user.addMasterProfileImage(getMaster(1), false);
         user.atMasterProfilePage.selectService();
         user.atMasterProfilePage.logsOut();
     }

@@ -4,26 +4,26 @@ import UITests.TestBase;
 import annotations.AddCategory;
 import annotations.AddMasters;
 import entities.Master;
-import net.serenitybdd.junit.runners.SerenityRunner;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import net.serenitybdd.junit5.SerenityJUnit5Extension;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.net.URISyntaxException;
 import java.util.concurrent.TimeoutException;
 
 // Мастер - выставление цен для услуг
 
-@RunWith(SerenityRunner.class)
+@ExtendWith(SerenityJUnit5Extension.class)
 @AddCategory(addRequest = true, addRequestPrice = true)
 @AddMasters(masters = 1)
 public class MasterServicesPricesTests extends TestBase {
 
     private Master master;
 
-    @Before
+    @BeforeEach
     public void setup() throws TimeoutException, URISyntaxException, InterruptedException {
-        master = watcher.getMaster();
+        master = getMaster();
         user.addMasterProfileImage(master, false);
         user.atMasterProfilePage.selectService();
         user.atMasterProfilePage.logsOut();

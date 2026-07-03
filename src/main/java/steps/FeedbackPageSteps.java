@@ -1,10 +1,10 @@
 package steps;
 
 import net.serenitybdd.annotations.Step;
-import net.thucydides.core.steps.ScenarioSteps;
+import net.serenitybdd.core.steps.UIInteractions;
 import pages.FeedbackPage;
 
-public class FeedbackPageSteps extends ScenarioSteps {
+public class FeedbackPageSteps extends UIInteractions {
 
     private FeedbackPage feedbackPage;
 

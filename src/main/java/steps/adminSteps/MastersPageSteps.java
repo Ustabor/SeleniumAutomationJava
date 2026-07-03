@@ -2,10 +2,10 @@ package steps.adminSteps;
 
 import entities.Master;
 import net.serenitybdd.annotations.Step;
-import net.thucydides.core.steps.ScenarioSteps;
+import net.serenitybdd.core.steps.UIInteractions;
 import pages.admin.MastersPage;
 
-public class MastersPageSteps extends ScenarioSteps {
+public class MastersPageSteps extends UIInteractions {
 
     private MastersPage mastersPage;
 

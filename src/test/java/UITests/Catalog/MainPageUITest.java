@@ -2,15 +2,15 @@ package UITests.Catalog;
 
 import UITests.TestBase;
 import net.serenitybdd.annotations.WithTag;
-import net.serenitybdd.junit.runners.SerenityRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import net.serenitybdd.junit5.SerenityJUnit5Extension;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import utils.Config;
 
 import java.util.concurrent.TimeoutException;
 
 @WithTag("smoke")
-@RunWith(SerenityRunner.class)
+@ExtendWith(SerenityJUnit5Extension.class)
 public class MainPageUITest extends TestBase {
 
     @Test

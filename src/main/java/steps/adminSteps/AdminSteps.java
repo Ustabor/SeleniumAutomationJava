@@ -3,14 +3,14 @@ package steps.adminSteps;
 import entities.Master;
 import entities.Category;
 import net.serenitybdd.annotations.Steps;
-import net.thucydides.core.steps.ScenarioSteps;
+import net.serenitybdd.core.steps.UIInteractions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pages.admin.AddMasterPage;
 import pages.admin.AddServicePage;
 import utils.Admin;
 
-public class AdminSteps extends ScenarioSteps {
+public class AdminSteps extends UIInteractions {
 
     private static final Logger logger = LoggerFactory.getLogger(AdminSteps.class);
 

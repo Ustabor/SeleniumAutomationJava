@@ -2,21 +2,21 @@ package UITests.Customer.Services;
 
 import UITests.TestBase;
 import annotations.AddCategory;
-import net.serenitybdd.junit.runners.SerenityRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import net.serenitybdd.junit5.SerenityJUnit5Extension;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import utils.DataGenerator;
 
 //Сервисы - подробнее
 
-@RunWith(SerenityRunner.class)
+@ExtendWith(SerenityJUnit5Extension.class)
 @AddCategory(addService = true)
 public class CustomerServiceDetailsTest extends TestBase {
 
     @Test
     public void customerSelectServiceTest() {
         var customer = DataGenerator.getGuestCustomer();
-        watcher.users.add(customer);
+        users.add(customer);
 
         user.atCustomerServicesPage.openPage();
         user.atCustomerServicesPage.selectCategory(category.getName());

@@ -3,9 +3,9 @@ package UITests.Customer.Requests;
 import UITests.TestBase;
 import annotations.AddCategory;
 import annotations.AddMasters;
-import net.serenitybdd.junit.runners.SerenityRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import net.serenitybdd.junit5.SerenityJUnit5Extension;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import utils.Admin;
 
 import java.io.IOException;
@@ -13,7 +13,7 @@ import java.util.concurrent.TimeoutException;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-@RunWith(SerenityRunner.class)
+@ExtendWith(SerenityJUnit5Extension.class)
 @AddCategory(addRequest = true, promotionAndClickPrice = true)
 @AddMasters(masters = 1)
 public class CustomerRequestStatusesTest extends TestBase {
@@ -23,7 +23,7 @@ public class CustomerRequestStatusesTest extends TestBase {
         var result = createRequest(true, true);
 
         user.atHomePage.openHomePage();
-        user.atHomePage.login(watcher.getMaster(), true);
+        user.atHomePage.login(getMaster(), true);
         user.atMasterProfileRequestsPage.openRequestsPage();
         user.atMasterProfileRequestsPage.verifyRequestStatus(getText("RequestNew"));
         user.atMasterProfileRequestsPage.openRequest();
@@ -63,7 +63,7 @@ public class CustomerRequestStatusesTest extends TestBase {
         user.atCustomerProfileRequestsPage.verifyRequestStatus(getText("RequestClosed"));
         user.atHomePage.logsOut();
 
-        user.atHomePage.login(watcher.getMaster(), true);
+        user.atHomePage.login(getMaster(), true);
         user.atMasterProfileRequestsPage.openRequestsPage();
         user.atMasterProfileRequestsPage.verifyRequestsTableIsEmpty();
         user.atHomePage.logsOut();

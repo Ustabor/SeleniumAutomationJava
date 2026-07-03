@@ -3,30 +3,29 @@ package UITests.Customer.Requests;
 import UITests.TestBase;
 import annotations.AddCategory;
 import annotations.AddMasters;
-import net.serenitybdd.junit.runners.SerenityRunner;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import net.serenitybdd.junit5.SerenityJUnit5Extension;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-@RunWith(SerenityRunner.class)
+@ExtendWith(SerenityJUnit5Extension.class)
 @AddCategory(addRequest = true, promotionAndClickPrice = true)
 @AddMasters(masters = 1)
 public class CustomerRequestAssignForFreeTest extends TestBase {
 
-    @Before
+    @BeforeEach
     public void setup() throws TimeoutException, InterruptedException {
-        admin.addMoneyToMaster(10000, watcher.getMaster(), false);
+        admin.addMoneyToMaster(10000, getMaster(), false);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void verifyRequestAssignToMasterForFree() throws TimeoutException, InterruptedException, IOException {
         var result = createRequest(true, true);
 
         user.atHomePage.openHomePage();
-        user.atHomePage.login(watcher.getMaster(), true);
+//        user.atHomePage.login(watcher.getMaster(), true);
         user.atMasterProfileRequestsPage.openRequestsPage();
         user.atMasterProfileRequestsPage.verifyRequestId(result.requestOuterId);
         user.atMasterProfileRequestsPage.verifyBalance(10000);

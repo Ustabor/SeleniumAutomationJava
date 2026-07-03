@@ -3,10 +3,10 @@ package UITests.Master.Registration;
 import UITests.TestBase;
 import entities.Master;
 import net.serenitybdd.annotations.WithTag;
-import net.serenitybdd.junit.runners.SerenityRunner;
-import org.junit.After;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import net.serenitybdd.junit5.SerenityJUnit5Extension;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import utils.DataGenerator;
 
 import java.io.IOException;
@@ -14,14 +14,14 @@ import java.io.IOException;
 // Мастер - Создать/удалить профиль
 
 @WithTag("smoke")
-@RunWith(SerenityRunner.class)
+@ExtendWith(SerenityJUnit5Extension.class)
 public class MasterRegistrationTest extends TestBase {
 
     private final Master master = DataGenerator.getMaster();
 
     @Test
     public void verifyMasterCanCreateProfile() throws InterruptedException, IOException {
-        watcher.users.add(master);
+        users.add(master);
 
         user.register(master, true);
         user.atMasterProfilePage.masterFullNameShouldContain(master.getLastName());
@@ -29,7 +29,7 @@ public class MasterRegistrationTest extends TestBase {
         user.atMasterProfilePage.verifyMasterCity(master.getCity());
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         user.atMasterProfilePage.openProfileSettings();
         user.atMasterProfileSettingsPage.deleteProfile();

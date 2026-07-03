@@ -1,10 +1,10 @@
 package steps.masterProfileSteps;
 
 import net.serenitybdd.annotations.Step;
-import net.thucydides.core.steps.ScenarioSteps;
+import net.serenitybdd.core.steps.UIInteractions;
 import pages.masterProfile.MasterProfileBasePage;
 
-class MasterProfileSteps extends ScenarioSteps {
+class MasterProfileSteps extends UIInteractions {
 
     private MasterProfileBasePage masterProfileBasePage;
 

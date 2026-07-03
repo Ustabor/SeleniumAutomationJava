@@ -3,9 +3,9 @@ package UITests.Customer.Services;
 import UITests.TestBase;
 import annotations.AddCategory;
 import net.serenitybdd.annotations.WithTag;
-import net.serenitybdd.junit.runners.SerenityRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import net.serenitybdd.junit5.SerenityJUnit5Extension;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import utils.Admin;
 import utils.DataGenerator;
 
@@ -15,14 +15,14 @@ import java.util.concurrent.TimeoutException;
 //Сервисы - заказ
 
 @WithTag("smoke")
-@RunWith(SerenityRunner.class)
+@ExtendWith(SerenityJUnit5Extension.class)
 @AddCategory(addService = true)
 public class CustomerSelectServiceTest extends TestBase {
 
     @Test
     public void customerSelectServiceTest() throws InterruptedException, TimeoutException, IOException {
         var customer = DataGenerator.getGuestCustomer();
-        watcher.users.add(customer);
+        users.add(customer);
 
         user.atCustomerServicesPage.openPage();
         user.atCustomerServicesPage.selectCategory(category.getName());
@@ -52,7 +52,7 @@ public class CustomerSelectServiceTest extends TestBase {
         var serviceUrl = user.atCustomerServicesPage.getUrlFromSms(customer);
         user.atHomePage.openHomePage();
         user.atHomePage.logsOut();
-        user.atHomePage.openUrl(serviceUrl);
+        user.atHomePage.openPageByUrl(serviceUrl);
 //        user.atCustomerServicesPage.enterPaymentCardInfo("UZCARD", "8600-0200-0000-0000", "12/31");
 
         user.atCustomerProfilePersonalInfoPage.openCustomerProfile();

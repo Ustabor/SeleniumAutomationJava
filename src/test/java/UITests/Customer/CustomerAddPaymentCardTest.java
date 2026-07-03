@@ -1,25 +1,23 @@
 package UITests.Customer;
 
 import UITests.TestBase;
-import net.serenitybdd.junit.runners.SerenityRunner;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import net.serenitybdd.junit5.SerenityJUnit5Extension;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import utils.DataGenerator;
 
 import java.io.IOException;
 
 //Заказчик - Удаление/добавление карты
 
-@RunWith(SerenityRunner.class)
-@Ignore
+@ExtendWith(SerenityJUnit5Extension.class)
 public class CustomerAddPaymentCardTest extends TestBase {
 
-    @Before
+    @BeforeEach
     public void setup() throws InterruptedException, IOException {
         var customer = DataGenerator.getCustomer();
-        watcher.users.add(customer);
+        users.add(customer);
         user.registerAsCustomer(customer);
     }
 

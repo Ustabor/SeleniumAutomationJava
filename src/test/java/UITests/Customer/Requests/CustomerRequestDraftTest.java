@@ -2,9 +2,9 @@ package UITests.Customer.Requests;
 
 import UITests.TestBase;
 import annotations.AddCategory;
-import net.serenitybdd.junit.runners.SerenityRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import net.serenitybdd.junit5.SerenityJUnit5Extension;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import utils.Admin;
 import utils.DataGenerator;
 
@@ -13,7 +13,7 @@ import java.util.concurrent.TimeoutException;
 
 //Гость - создание черновика заявки
 
-@RunWith(SerenityRunner.class)
+@ExtendWith(SerenityJUnit5Extension.class)
 @AddCategory(addRequest = true)
 public class CustomerRequestDraftTest extends TestBase {
 
@@ -21,7 +21,7 @@ public class CustomerRequestDraftTest extends TestBase {
     public void verifyUserCanCreateCustomerRequestDraft() throws TimeoutException, InterruptedException, IOException {
         var guest = DataGenerator.getGuestCustomer();
 
-        watcher.users.add(guest);
+        users.add(guest);
 
         user.atHomePage.openPlaceOrderPage();
 

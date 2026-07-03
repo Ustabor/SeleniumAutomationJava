@@ -2,24 +2,24 @@ package UITests.Master.Registration;
 
 import UITests.TestBase;
 import entities.Master;
-import net.serenitybdd.junit.runners.SerenityRunner;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import io.cucumber.java.Before;
+import net.serenitybdd.junit5.SerenityJUnit5Extension;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import utils.DataGenerator;
 
 import java.io.IOException;
 
 // Мастер - изменить пароль
 
-@RunWith(SerenityRunner.class)
+@ExtendWith(SerenityJUnit5Extension.class)
 public class MasterChangePasswordTest extends TestBase {
 
     private final Master master = DataGenerator.getMaster();
 
     @Before
     public void setup() throws InterruptedException, IOException {
-        watcher.users.add(master);
+        users.add(master);
 
         user.register(master, true);
     }

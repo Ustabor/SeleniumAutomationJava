@@ -4,25 +4,25 @@ import UITests.TestBase;
 import annotations.AddCategory;
 import annotations.AddMasters;
 import net.serenitybdd.annotations.WithTag;
-import net.serenitybdd.junit.runners.SerenityRunner;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import net.serenitybdd.junit5.SerenityJUnit5Extension;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 @WithTag("smoke")
-@RunWith(SerenityRunner.class)
+@ExtendWith(SerenityJUnit5Extension.class)
 @AddCategory(promotionAndClickPrice = true, addRequest = true)
 @AddMasters(masters = 2)
 public class CustomerRequestAssignForMoneyTest extends TestBase {
 
-    @Before
+    @BeforeEach
     public void setUp() throws TimeoutException, InterruptedException, IOException {
         super.setUp();
-        admin.addMoneyToMaster(10000, watcher.getMaster(0), false);
-        admin.addMoneyToMaster(10000, watcher.getMaster(1), false);
+        admin.addMoneyToMaster(10000, getMaster(0), false);
+        admin.addMoneyToMaster(10000, getMaster(1), false);
     }
 
     @Test
@@ -30,7 +30,7 @@ public class CustomerRequestAssignForMoneyTest extends TestBase {
         var result = createRequest(true, false);
 
         user.atHomePage.openHomePage();
-        user.atHomePage.login(watcher.getMaster(0), true);
+        user.atHomePage.login(getMaster(0), true);
         user.atHomePage.waitForLoaderDisappears();
 
         user.atMasterProfileRequestsPage.openRequestsPage();

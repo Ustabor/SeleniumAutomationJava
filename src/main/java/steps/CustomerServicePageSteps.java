@@ -3,12 +3,12 @@ package steps;
 import entities.Service;
 import entities.User;
 import net.serenitybdd.annotations.Step;
-import net.thucydides.core.steps.ScenarioSteps;
+import net.serenitybdd.core.steps.UIInteractions;
 import pages.CustomerServicesPage;
 
 import java.io.IOException;
 
-public class CustomerServicePageSteps extends ScenarioSteps {
+public class CustomerServicePageSteps extends UIInteractions {
 
     private CustomerServicesPage customerServicesPage;
 

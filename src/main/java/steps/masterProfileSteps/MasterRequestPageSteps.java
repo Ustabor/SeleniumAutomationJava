@@ -3,10 +3,10 @@ package steps.masterProfileSteps;
 import entities.User;
 import enums.RequestPages;
 import net.serenitybdd.annotations.Step;
-import net.thucydides.core.steps.ScenarioSteps;
+import net.serenitybdd.core.steps.UIInteractions;
 import pages.masterProfile.MasterRequestPage;
 
-public class MasterRequestPageSteps extends ScenarioSteps {
+public class MasterRequestPageSteps extends UIInteractions {
 
     private MasterRequestPage masterRequestPage;
 

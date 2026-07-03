@@ -5,10 +5,10 @@ import annotations.AddCategory;
 import annotations.AddMasters;
 import entities.Master;
 import entities.User;
-import net.serenitybdd.junit.runners.SerenityRunner;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import net.serenitybdd.junit5.SerenityJUnit5Extension;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import utils.Admin;
 import utils.DataGenerator;
 
@@ -18,22 +18,22 @@ import java.util.concurrent.TimeoutException;
 
 //Заказчик - обратный звонок мастеру
 
-@RunWith(SerenityRunner.class)
+@ExtendWith(SerenityJUnit5Extension.class)
 @AddCategory(addRequest = true, addRequestPrice = true)
 @AddMasters(masters = 1)
 public class CustomerMasterCallbackTest extends TestBase {
     private User customer;
     private Master master;
 
-    @Before
+    @BeforeEach
     public void setup() throws TimeoutException, InterruptedException, URISyntaxException, IOException {
-        master = watcher.getMaster();
+        master = getMaster();
         user.addMasterProfileImage(master, false);
         user.atMasterProfilePage.selectService();
         user.atMasterProfilePage.logsOut();
 
         customer = DataGenerator.getCustomer();
-        watcher.users.add(customer);
+        users.add(customer);
         user.atHomePage.openHomePage();
 
         user.atHomePage.registerAsCustomer(customer);

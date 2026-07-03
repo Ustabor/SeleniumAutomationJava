@@ -2,10 +2,10 @@ package steps.adminSteps;
 
 import entities.Category;
 import net.serenitybdd.annotations.Step;
-import net.thucydides.core.steps.ScenarioSteps;
+import net.serenitybdd.core.steps.UIInteractions;
 import pages.admin.PromotionPage;
 
-public class PromotionPageSteps extends ScenarioSteps {
+public class PromotionPageSteps extends UIInteractions {
 
     private PromotionPage promotionPage;
 

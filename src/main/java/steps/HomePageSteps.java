@@ -3,17 +3,14 @@ package steps;
 import entities.Master;
 import entities.User;
 import net.serenitybdd.annotations.Step;
-import net.thucydides.core.steps.ScenarioSteps;
+import net.serenitybdd.core.steps.UIInteractions;
 import pages.HomePage;
 import utils.Admin;
 
 import java.io.IOException;
-import java.security.KeyManagementException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.TimeoutException;
 
-public class HomePageSteps extends ScenarioSteps {
+public class HomePageSteps extends UIInteractions {
 
     private HomePage homePage;
 
@@ -211,6 +208,7 @@ public class HomePageSteps extends ScenarioSteps {
     public void openPlaceOrderPage() throws TimeoutException {
         openHomePage();
         homePage.openPlaceOrderForm();
+        waitForLoaderDisappears();
     }
 
     @Step
@@ -291,7 +289,7 @@ public class HomePageSteps extends ScenarioSteps {
     }
 
     @Step
-    public void openUrl(String serviceUrl) {
+    public void openPageByUrl(String serviceUrl) {
         homePage.openUrl(serviceUrl);
     }
 

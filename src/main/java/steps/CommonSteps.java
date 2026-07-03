@@ -1,12 +1,12 @@
 package steps;
 
 import net.serenitybdd.annotations.Step;
-import net.thucydides.core.steps.ScenarioSteps;
+import net.serenitybdd.core.steps.UIInteractions;
 import pages.BasePage;
 
 import java.util.List;
 
-public class CommonSteps extends ScenarioSteps {
+public class CommonSteps extends UIInteractions {
 
     private BasePage basePage;
 

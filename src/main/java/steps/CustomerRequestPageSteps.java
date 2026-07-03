@@ -2,10 +2,10 @@ package steps;
 
 import entities.User;
 import net.serenitybdd.annotations.Step;
-import net.thucydides.core.steps.ScenarioSteps;
+import net.serenitybdd.core.steps.UIInteractions;
 import pages.CustomerRequestPage;
 
-public class CustomerRequestPageSteps extends ScenarioSteps {
+public class CustomerRequestPageSteps extends UIInteractions {
 
     private CustomerRequestPage customerRequestPage;
 
