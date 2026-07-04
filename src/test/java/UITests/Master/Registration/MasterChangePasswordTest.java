@@ -2,8 +2,8 @@ package UITests.Master.Registration;
 
 import UITests.TestBase;
 import entities.Master;
-import io.cucumber.java.Before;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import utils.DataGenerator;
@@ -17,7 +17,7 @@ public class MasterChangePasswordTest extends TestBase {
 
     private final Master master = DataGenerator.getMaster();
 
-    @Before
+    @BeforeEach
     public void setup() throws InterruptedException, IOException {
         users.add(master);
 

@@ -171,6 +171,14 @@ public class CatalogPageSteps extends CommonSteps {
     }
 
     @Step
+    public void selectFilterCategoryById(String categoryID) {
+        catalogPage.openFilter();
+        catalogPage.openFilterCategoryPopup();
+        catalogPage.selectFilterCategoryById(categoryID);
+        catalogPage.applyFilter();
+    }
+
+    @Step
     public void verifyOpenedCategory(String category) {
         catalogPage.verifyOpenedCategory(category);
     }

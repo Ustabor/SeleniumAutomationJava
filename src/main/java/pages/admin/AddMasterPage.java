@@ -44,7 +44,7 @@ public class AddMasterPage extends BaseAdminPage {
     private WebElementFacade photoTab;
 
     public void openPage() {
-        getDriver().get(Config.getAdminUrl() + "master/create");
+        openUrl(Config.getAdminUrl() + "master/create");
     }
 
     public void createMaster(Master master) {

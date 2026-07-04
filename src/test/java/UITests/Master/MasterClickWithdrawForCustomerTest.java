@@ -58,14 +58,14 @@ public class MasterClickWithdrawForCustomerTest extends TestBase {
         user.atHomePage.login(customer, true);
 
         user.atHomePage.openHomePage();
-        user.atHomePage.openBuilderTab();
-        user.atHomePage.openCategory(master.getCategory().getName());
+        user.atCatalogPage.openMastersCatalog();
+        user.atCatalogPage.selectFilterCategoryById(master.getCategory().getSystemId());
         user.atCatalogPage.openMasterContactsAndVerify(master.getFirstName());
 
         user.atCatalogPage.hideFeedbackPopUpIfNeeded();
 
         user.atCustomerProfilePersonalInfoPage.openCustomerProfilePage();
-//        user.atCustomerProfilePersonalInfoPage.verifyMyMastersListContains(watcher.getMaster().getFirstName());
+        user.atCustomerProfilePersonalInfoPage.verifyMyMastersListContains(getMaster().getFirstName());
 
         admin.atMastersPage.openMasterPage(master.getProfileId());
         admin.atMastersPage.verifyOnlyOneTransactionExist("-100");

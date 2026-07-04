@@ -152,7 +152,7 @@ public class TestBase {
 
     public RequestResult createRequest(boolean logout, boolean assignFree) throws TimeoutException, InterruptedException, IOException {
         var guest = DataGenerator.getGuestCustomer();
-//        watcher.users.add(guest);
+        users.add(guest);
 
         user.atHomePage.openPlaceOrderPage();
         user.atPlaceOrderPage.placeOrder(guest, category);
@@ -172,15 +172,15 @@ public class TestBase {
 
         if (assignFree) {
             if (!admin.atRequestsPage.isMasterAssigned()) {
-//                admin.atRequestsPage.assignRequestToMasterForFree(watcher.getMaster());
+                admin.atRequestsPage.assignRequestToMasterForFree(getMaster());
             }
         } else {
             if (!admin.atRequestsPage.isMasterAssigned()) {
-//                admin.atRequestsPage.assignRequestToMasterForPayment(watcher.getMaster(0));
-//                admin.atRequestsPage.assignRequestToMasterForPayment(watcher.getMaster(1));
+                admin.atRequestsPage.assignRequestToMasterForPayment(getMaster(0));
+                admin.atRequestsPage.assignRequestToMasterForPayment(getMaster(1));
             } else {
-//                admin.atRequestsPage.reassignRequestToMasterForPayment(watcher.getMaster(0));
-//                admin.atRequestsPage.reassignRequestToMasterForPayment(watcher.getMaster(1));
+                admin.atRequestsPage.reassignRequestToMasterForPayment(getMaster(0));
+                admin.atRequestsPage.reassignRequestToMasterForPayment(getMaster(1));
             }
         }
 

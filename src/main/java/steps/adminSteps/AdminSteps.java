@@ -31,7 +31,7 @@ public class AdminSteps extends UIInteractions {
     @Steps
     public AddRequestPageSteps atAddEditRequestPage;
     @Steps
-    public AddMasterPage atAddMasterPage;
+    public AddMasterPageSteps atAddMasterPage;
     @Steps
     public ServicePricePageSteps atServicePricesPage;
     @Steps
@@ -39,7 +39,7 @@ public class AdminSteps extends UIInteractions {
     @Steps
     public CronTasksPageSteps atCronePage;
     @Steps
-    AddServicePage atAddServicePage;
+    AddServicePageSteps atAddServicePage;
 
     public void addTestCategory(Category category) {
         atAdminHomePage.loginAsAdmin();
@@ -89,17 +89,10 @@ public class AdminSteps extends UIInteractions {
     }
 
     public void addMaster(Master master) {
-        atAddMasterPage.openPage();
-        atAddMasterPage.createMaster(master);
-        atAddMasterPage.openMasterPage(master);
-        atAddMasterPage.setCategoryToMaster(master);
+        atAddMasterPage.addMaster(master);
     }
 
     public void addService(Category category) {
-        atAddServicePage.openPage();
-        atAddServicePage.createService(category);
-        atAddServicePage.waitForQuickSearchIsVisible();
-        var serviceId = atAddServicePage.getServiceId(category.getName());
-        category.getService().setId(serviceId);
+        atAddServicePage.addService(category);
     }
 }

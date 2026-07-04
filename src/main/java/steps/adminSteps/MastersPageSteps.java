@@ -1,6 +1,5 @@
 package steps.adminSteps;
 
-import entities.Master;
 import net.serenitybdd.annotations.Step;
 import net.serenitybdd.core.steps.UIInteractions;
 import pages.admin.MastersPage;

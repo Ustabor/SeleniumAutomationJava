@@ -41,8 +41,8 @@ public class MasterPromoteWithMinPriceTest extends TestBase {
         admin.approvePromotion(master.getCategory());
 
         user.atHomePage.openHomePage();
-        user.atHomePage.openBuilderTab();
-        user.atHomePage.openCategory(master.getCategory().getName());
+        user.atCatalogPage.openMastersCatalog();
+        user.atCatalogPage.selectFilterCategoryById(master.getCategory().getSystemId());
         user.atCatalogPage.verifyMasterCategoryPromoted(master);
     }
 }

@@ -1,9 +1,9 @@
 package pages.admin;
 
 import net.serenitybdd.core.pages.WebElementFacade;
-//import org.openqa.selenium.devtools.v147.log.Log;
-//import org.openqa.selenium.devtools.v147.network.Network;
-//import org.openqa.selenium.devtools.v147.network.model.Headers;
+//import org.openqa.selenium.devtools.v145.log.Log;
+//import org.openqa.selenium.devtools.v145.network.Network;
+//import org.openqa.selenium.devtools.v145.network.model.Headers;
 import org.openqa.selenium.support.FindBy;
 import utils.Config;
 

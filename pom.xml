@@ -40,6 +40,12 @@
             <artifactId>serenity-junit5</artifactId>
             <scope>test</scope>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.seleniumhq.selenium</groupId>-->
+<!--            <artifactId>selenium-devtools-v146</artifactId>-->
+<!--            <version>4.42.0</version>-->
+<!--            <scope>compile</scope>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
@@ -96,7 +102,7 @@
                 <configuration>
                     <skipTests>true</skipTests>
                     <redirectTestOutputToFile>false</redirectTestOutputToFile>
-                    <rerunFailingTestsCount>1</rerunFailingTestsCount>
+<!--                    <rerunFailingTestsCount>1</rerunFailingTestsCount>-->
                 </configuration>
             </plugin>
             <plugin>
@@ -115,7 +121,7 @@
                         <redirectTestOutputToFile>false</redirectTestOutputToFile>
                         <include>*Test.java</include>>
                     </includes>
-                    <rerunFailingTestsCount>1</rerunFailingTestsCount>
+<!--                    <rerunFailingTestsCount>1</rerunFailingTestsCount>-->
                 </configuration>
                 <executions>
                     <execution>

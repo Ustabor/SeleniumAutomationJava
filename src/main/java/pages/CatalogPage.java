@@ -25,10 +25,11 @@ public class CatalogPage extends SearchBlock {
     private static final String sortXpath = "//div[@class='item-wrapper' and text()='%s']";
     private static final String filterSite = "//div[@class='ui-selectbox-popup ui-site-section-popup']//li/div[contains(text(), '%s')]";
     private static final String filterCategory = "//a[./span[text()='%s']]";
+    private static final String filterCategoryById = "//a[@data-id='%s']";
 
     private static final Logger logger = LoggerFactory.getLogger(CatalogPage.class);
 
-    @FindBy(xpath = "//div[contains(@class, 'row-sites')]//a[@class='btn-catalog']")
+    @FindBy(xpath = "//div[contains(@class, 'row-cards')]//a[@class='btn-catalog']")
     private WebElementFacade catalogButton;
 
     @FindBy(xpath = "//table[@class='services']")
@@ -241,6 +242,10 @@ public class CatalogPage extends SearchBlock {
 
     public void selectFilterCategory(String category) {
         getDriver().findElement(By.xpath(String.format(filterCategory, category))).click();
+    }
+
+    public void selectFilterCategoryById(String categoryId) {
+        getDriver().findElement(By.xpath(String.format(filterCategoryById, categoryId))).click();
     }
 
     public void closeFilterCategoryWindow() {

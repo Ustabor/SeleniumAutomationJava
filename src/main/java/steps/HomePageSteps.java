@@ -236,7 +236,7 @@ public class HomePageSteps extends UIInteractions {
     }
 
     @Step
-    public void openBuilderTab() {
+    public void openCatalog() {
         homePage.clickBuilderTab();
     }
 

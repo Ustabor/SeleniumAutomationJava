@@ -5,6 +5,7 @@ import annotations.AddCategory;
 import annotations.AddMasters;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.io.IOException;
@@ -20,12 +21,12 @@ public class CustomerRequestAssignForFreeTest extends TestBase {
         admin.addMoneyToMaster(10000, getMaster(), false);
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void verifyRequestAssignToMasterForFree() throws TimeoutException, InterruptedException, IOException {
         var result = createRequest(true, true);
 
         user.atHomePage.openHomePage();
-//        user.atHomePage.login(watcher.getMaster(), true);
+        user.atHomePage.login(getMaster(), true);
         user.atMasterProfileRequestsPage.openRequestsPage();
         user.atMasterProfileRequestsPage.verifyRequestId(result.requestOuterId);
         user.atMasterProfileRequestsPage.verifyBalance(10000);

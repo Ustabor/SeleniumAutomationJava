@@ -32,7 +32,7 @@ public class MasterServicesPricesTests extends TestBase {
     @Test
     public void masterServicePrice() throws TimeoutException {
         user.atHomePage.openHomePage();
-        user.atHomePage.openBuilderTab();
+        user.atHomePage.openCatalog();
         user.atHomePage.openCategory(master.getCategory().getName());
         user.atCatalogPage.verifyMasterServicePresent();
     }

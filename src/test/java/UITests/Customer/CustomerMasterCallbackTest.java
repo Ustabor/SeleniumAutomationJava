@@ -48,12 +48,12 @@ public class CustomerMasterCallbackTest extends TestBase {
     }
 
     @Test
-    public void masterCallback() throws TimeoutException, IOException {
+    public void masterCallback() throws TimeoutException {
         admin.atCronePage.performCategoriesUpdate();
 
         user.atHomePage.openHomePage();
-        user.atHomePage.openBuilderTab();
-        user.atHomePage.openCategory(master.getCategory().getName());
+        user.atCatalogPage.openMastersCatalog();
+        user.atCatalogPage.selectFilterCategoryById(master.getCategory().getSystemId());
         user.atCatalogPage.orderCallback(customer.getPhoneNumber());
         user.atHomePage.logsOut();
 

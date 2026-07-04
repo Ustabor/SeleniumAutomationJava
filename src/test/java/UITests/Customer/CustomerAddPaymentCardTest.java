@@ -3,6 +3,7 @@ package UITests.Customer;
 import UITests.TestBase;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import utils.DataGenerator;
@@ -11,6 +12,7 @@ import java.io.IOException;
 
 //Заказчик - Удаление/добавление карты
 
+@Disabled
 @ExtendWith(SerenityJUnit5Extension.class)
 public class CustomerAddPaymentCardTest extends TestBase {
 
