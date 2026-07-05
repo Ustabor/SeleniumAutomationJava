@@ -102,7 +102,7 @@
                 <configuration>
                     <skipTests>true</skipTests>
                     <redirectTestOutputToFile>false</redirectTestOutputToFile>
-<!--                    <rerunFailingTestsCount>1</rerunFailingTestsCount>-->
+                    <rerunFailingTestsCount>1</rerunFailingTestsCount>
                 </configuration>
             </plugin>
             <plugin>
@@ -121,7 +121,7 @@
                         <redirectTestOutputToFile>false</redirectTestOutputToFile>
                         <include>*Test.java</include>>
                     </includes>
-<!--                    <rerunFailingTestsCount>1</rerunFailingTestsCount>-->
+                    <rerunFailingTestsCount>1</rerunFailingTestsCount>
                 </configuration>
                 <executions>
                     <execution>
