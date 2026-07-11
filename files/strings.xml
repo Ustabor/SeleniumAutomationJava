@@ -117,5 +117,5 @@
     <string name="Domain_ustabor">Qurilish Ishlari</string>
     <string name="Category_ustabor">Chilangarlar</string>
 
-    <string name="InsufficientFunds">На вашем счете недостаточно средств</string>string>
+    <string name="InsufficientFunds">Недостаточно средств на вашем балансе</string>string>
 </resources>

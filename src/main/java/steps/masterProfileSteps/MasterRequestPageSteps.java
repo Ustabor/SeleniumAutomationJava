@@ -68,4 +68,14 @@ public class MasterRequestPageSteps extends UIInteractions {
         masterRequestPage.clickOfferPriceButton();
         masterRequestPage.waitForLoaderDisappears();
     }
+
+    @Step
+    public void verifyRequestStatusIsPaid() {
+        masterRequestPage.verifyPaidRequestStatusIsVisible();
+    }
+
+    @Step
+    public void verifyCustomerInfoInRequest(User user) {
+        masterRequestPage.verifyCustomerInfoInRequest(user);
+    }
 }

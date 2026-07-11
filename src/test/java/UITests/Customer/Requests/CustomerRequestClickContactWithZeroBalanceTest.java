@@ -5,7 +5,6 @@ import annotations.AddCategory;
 import annotations.AddMasters;
 import net.serenitybdd.annotations.WithTag;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -16,12 +15,7 @@ import java.util.concurrent.TimeoutException;
 @ExtendWith(SerenityJUnit5Extension.class)
 @AddCategory(addRequest = true, promotionAndClickPrice = true)
 @AddMasters(masters = 1)
-public class CustomerRequestClientContactWithdrawTest extends TestBase {
-
-    @BeforeEach
-    public void setup() throws TimeoutException, InterruptedException {
-        admin.addMoneyToMaster(500, getMaster(), false);
-    }
+public class CustomerRequestClickContactWithZeroBalanceTest extends TestBase {
 
     @Test
     public void verifyWithdrawForCustomerContacts() throws TimeoutException, InterruptedException, IOException {
@@ -39,10 +33,6 @@ public class CustomerRequestClientContactWithdrawTest extends TestBase {
         user.atMasterProfileRequestsPage.openRequestsPage();
         user.atMasterProfileRequestsPage.openRequestWithId(result2.requestOuterId);
         user.atMasterRequestPage.clickConnectClientButton();
-        user.atMasterRequestPage.closeConnectCustomerPopup(); // allows to have negative balance
-//        user.atMasterRequestPage.verifyErrorMessage(getText("InsufficientFunds"));
-
-        admin.atMastersPage.openMasterPage(getMaster().getProfileId());
-        admin.atMastersPage.verifyBalance("-1 500,00");
+        user.atMasterRequestPage.verifyErrorMessage(getText("InsufficientFunds"));
     }
 }

@@ -1,5 +1,6 @@
 package pages.masterProfile;
 
+import entities.User;
 import enums.RequestPages;
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.support.FindBy;
@@ -44,6 +45,12 @@ public class MasterRequestPage extends BasePage {
 
     @FindBy(xpath = "//button[@id='btn-send-price']")
     private WebElementFacade offerPriceBtn;
+
+    @FindBy(xpath = "//span[@class='ui-master-status PROCESSED']")
+    private WebElementFacade paidRequestStatus;
+
+    @FindBy(xpath = "//div[@class='customer-phone']")
+    private WebElementFacade customerInfoInRequest;
 
     public void clickConnectClientButton() {
         customerContactBtn.click();
@@ -102,5 +109,15 @@ public class MasterRequestPage extends BasePage {
 
     public void clickOfferPriceButton() {
         offerPriceBtn.click();
+    }
+
+    public void verifyPaidRequestStatusIsVisible() {
+        paidRequestStatus.shouldBeVisible();
+    }
+
+    public void verifyCustomerInfoInRequest(User user) {
+        var customerInfo = customerInfoInRequest.getText().replaceAll("[ -]", "");
+        assertThat(customerInfo).contains(user.getFirstName());
+        assertThat(customerInfo).contains(user.getPhoneNumber());
     }
 }

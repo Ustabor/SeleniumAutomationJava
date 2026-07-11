@@ -15,36 +15,42 @@ import java.util.concurrent.TimeoutException;
 @WithTag("smoke")
 @ExtendWith(SerenityJUnit5Extension.class)
 @AddCategory(promotionAndClickPrice = true, addRequest = true)
-@AddMasters(masters = 2)
+@AddMasters(masters = 1)
 public class CustomerRequestAssignForMoneyTest extends TestBase {
 
     @BeforeEach
     public void setUp() throws TimeoutException, InterruptedException, IOException {
         super.setUp();
-        admin.addMoneyToMaster(10000, getMaster(0), false);
-        admin.addMoneyToMaster(10000, getMaster(1), false);
+        admin.addMoneyToMaster(10000, getMaster(), false);
     }
 
     @Test
     public void verifyRequestAssignToMasterForAmount() throws TimeoutException, InterruptedException, IOException {
-        var result = createRequest(true, false);
+        var result = createRequest(true, true);
 
         user.atHomePage.openHomePage();
-        user.atHomePage.login(getMaster(0), true);
+        user.atHomePage.login(getMaster(), true);
         user.atHomePage.waitForLoaderDisappears();
 
         user.atMasterProfileRequestsPage.openRequestsPage();
-        user.atMasterProfileRequestsPage.verifyBalance(9000);
+        user.atMasterProfileRequestsPage.verifyBalance(10000);
         user.atMasterProfileRequestsPage.openRequest();
 
         user.atMasterRequestPage.clickConnectClientButton();
         user.atMasterRequestPage.verifyCustomerInfo(result.guest);
         user.atMasterRequestPage.closeConnectCustomerPopup();
 
+        user.atMasterRequestPage.verifyRequestStatusIsPaid();
+        user.atMasterRequestPage.verifyCustomerConnectButtonHasNoPrice();
+        user.atMasterRequestPage.verifyCustomerInfoInRequest(result.guest);
+
+        user.atMasterProfileRequestsPage.openRequestsPage();
+        user.atMasterProfileRequestsPage.verifyBalance(9000);
+
         user.atHomePage.logsOut();
         user.atHomePage.login(result.guest, true);
         user.atCustomerProfileRequestsPage.openRequestsPage();
         user.atCustomerRequestPage.openRequest();
-        user.atCustomerRequestPage.verifyMastersCount(2);
+        user.atCustomerRequestPage.verifyMastersCount(1);
     }
 }
