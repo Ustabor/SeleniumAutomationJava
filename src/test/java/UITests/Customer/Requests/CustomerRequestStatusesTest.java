@@ -20,6 +20,8 @@ public class CustomerRequestStatusesTest extends TestBase {
 
     @Test
     public void verifyCustomerRequestStatuses() throws TimeoutException, InterruptedException, IOException {
+        admin.addMoneyToMaster(10000, getMaster(), false);
+
         var result = createRequest(true, true);
 
         user.atHomePage.openHomePage();

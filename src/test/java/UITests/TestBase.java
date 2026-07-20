@@ -176,11 +176,9 @@ public class TestBase {
             }
         } else {
             if (!admin.atRequestsPage.isMasterAssigned()) {
-                admin.atRequestsPage.assignRequestToMasterForPayment(getMaster(0));
-                admin.atRequestsPage.assignRequestToMasterForPayment(getMaster(1));
+                admin.atRequestsPage.assignRequestToMasterForPayment(getMaster());
             } else {
-                admin.atRequestsPage.reassignRequestToMasterForPayment(getMaster(0));
-                admin.atRequestsPage.reassignRequestToMasterForPayment(getMaster(1));
+                admin.atRequestsPage.reassignRequestToMasterForPayment(getMaster());
             }
         }
 
