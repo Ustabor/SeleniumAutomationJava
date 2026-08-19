@@ -30,7 +30,12 @@ public class Admin {
         loginIfNeeded();
         var url = Config.getAdminUrl() + String.format("master/%s/delete", id);
 
-        var result = executor.execute(Request.Get(url))
+        var result = executor.execute(Request.Post(url)
+                        .bodyForm(Form.form()
+                                .add("_method", "delete")
+                                .add("reason", "rules_violation")
+                                .add("comment", "qwe")
+                                .build()))
                 .returnResponse()
                 .getStatusLine()
                 .getStatusCode();
