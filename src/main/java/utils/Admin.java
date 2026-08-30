@@ -33,7 +33,7 @@ public class Admin {
         var result = executor.execute(Request.Post(url)
                         .bodyForm(Form.form()
                                 .add("_method", "delete")
-                                .add("reason", "rules_violation")
+                                .add("reason", "deleted_by_user_request")
                                 .add("comment", "qwe")
                                 .build()))
                 .returnResponse()
@@ -41,8 +41,8 @@ public class Admin {
                 .getStatusCode();
 
         if (result != 200) {
-            logger.info("Delete master request failed");
-            throw new HttpResponseException(result, "Delete master request failed");
+            logger.info("ADMIN API FAILURE - Delete master with id: {} request failed", id);
+            return;
         }
         logger.info("Master profile deleted. Id: {}", id);
     }
@@ -57,8 +57,8 @@ public class Admin {
                 .getStatusCode();
 
         if (result != 200) {
-            logger.info("Delete category request failed");
-            throw new HttpResponseException(result, "Delete category request failed");
+            logger.info("ADMIN API FAILURE - Delete category with id: {} request failed", id);
+            return;
         }
         logger.info("Category deleted. Id: {}", id);
     }
@@ -73,8 +73,8 @@ public class Admin {
                 .getStatusCode();
 
         if (result != 200) {
-            logger.info("Delete category promotion and click price request failed");
-            throw new HttpResponseException(result, "Delete category promotion and click price request failed");
+            logger.info("ADMIN API FAILURE - Delete category promotion and click price request failed (id: {})", id);
+            return;
         }
         logger.info("Promotion and click price deleted. Id: {}", id);
     }
@@ -89,7 +89,7 @@ public class Admin {
                 .getStatusCode();
 
         if (result != 200) {
-            logger.info("Customer request delete failed");
+            logger.info("ADMIN API FAILURE - Customer request with id: {} delete failed", id);
             return;
         }
         logger.info("Customer request deleted. Id: {}", id);
@@ -107,8 +107,8 @@ public class Admin {
                 .getStatusCode();
 
         if (result != 200) {
-            logger.info("Delete customer request failed");
-            throw new HttpResponseException(result, "Delete customer request failed");
+            logger.info("ADMIN API FAILURE - Delete customer request with id: {} failed", customerId);
+            return;
         }
         logger.info("Customer deleted. Id: {}", customerId);
     }
@@ -250,7 +250,7 @@ public class Admin {
                 .getStatusCode();
 
         if (result != 200) {
-            logger.info("Ustabor service with id: {} delete failed", id);
+            logger.info("ADMIN API FAILURE - Ustabor service with id: {} delete failed", id);
             return;
         }
         logger.info("Ustabor service deleted. Id: {}", id);
@@ -266,7 +266,7 @@ public class Admin {
                 .getStatusCode();
 
         if (result != 200) {
-            logger.info("Service request with id: {} delete failed", id);
+            logger.info("ADMIN API FAILURE - Service request with id: {} delete failed", id);
             return;
         }
         logger.info("Service request deleted. Id: {}", id);

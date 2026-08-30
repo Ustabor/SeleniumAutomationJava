@@ -171,7 +171,7 @@ public class CatalogPage extends SearchBlock {
         requestsTab.shouldBeVisible();
         mastersTab.shouldBeVisible();
         pricesTab.shouldBeVisible();
-        servicesTab.shouldBeVisible();
+        chatTab.shouldBeVisible();
     }
 
     public void verifyFilterButtonIsVisible() {
