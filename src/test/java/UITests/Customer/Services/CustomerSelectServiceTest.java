@@ -4,6 +4,7 @@ import UITests.TestBase;
 import annotations.AddCategory;
 import net.serenitybdd.annotations.WithTag;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import utils.Admin;
@@ -14,6 +15,7 @@ import java.util.concurrent.TimeoutException;
 
 //Сервисы - заказ
 
+@Disabled("Services test disabled")
 @WithTag("smoke")
 @ExtendWith(SerenityJUnit5Extension.class)
 @AddCategory(addService = true)

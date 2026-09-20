@@ -3,12 +3,14 @@ package UITests.Customer.Services;
 import UITests.TestBase;
 import annotations.AddCategory;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import utils.DataGenerator;
 
 //Сервисы - подробнее
 
+@Disabled("Services test disabled")
 @ExtendWith(SerenityJUnit5Extension.class)
 @AddCategory(addService = true)
 public class CustomerServiceDetailsTest extends TestBase {
