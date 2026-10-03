@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MasterWalletPage extends MasterProfileBasePage {
 
-    @FindBy(xpath = "//div[@class='wallet-tabs']")
+    @FindBy(xpath = "//div[@class='wallet-wrapper']")
     private WebElementFacade walletTabs;
     @FindBy(xpath = "//input[@id='form_data_sum']")
     private WebElementFacade amountInput;
