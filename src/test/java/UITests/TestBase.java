@@ -154,6 +154,8 @@ public class TestBase {
         var guest = DataGenerator.getGuestCustomer();
         users.add(guest);
 
+        admin.atCronePage.performCategoriesUpdate();
+
         user.atHomePage.openPlaceOrderPage();
         user.atPlaceOrderPage.placeOrder(guest, category);
         user.atCustomerProfilePersonalInfoPage.openCustomerProfilePage();
