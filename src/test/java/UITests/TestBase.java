@@ -82,6 +82,8 @@ public class TestBase {
             }
         }
 
+        admin.atCronePage.performCategoriesUpdate();
+
         user.atHomePage.openHomePage();
         setCountryLanguageAndLocation();
     }
@@ -153,8 +155,6 @@ public class TestBase {
     public RequestResult createRequest(boolean logout, boolean assignFree) throws TimeoutException, InterruptedException, IOException {
         var guest = DataGenerator.getGuestCustomer();
         users.add(guest);
-
-        admin.atCronePage.performCategoriesUpdate();
 
         user.atHomePage.openPlaceOrderPage();
         user.atPlaceOrderPage.placeOrder(guest, category);
