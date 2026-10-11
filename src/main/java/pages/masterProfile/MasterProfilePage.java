@@ -48,6 +48,12 @@ public class MasterProfilePage extends MasterProfileBasePage {
     private WebElementFacade service;
     @FindBy(xpath = "//table[@class='services']//input[@type='text']")
     private WebElementFacade servicePrice;
+    @FindBy(xpath = "//a[contains(@class, 'button-white') and contains(@href, 'logout')]")
+    private WebElementFacade logoutBtn;
+
+    public void clickLogout() {
+        logoutBtn.click();
+    }
 
     public void masterFullNameShouldContain(String firstName) {
         masterName.shouldContainText(firstName);

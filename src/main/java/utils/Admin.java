@@ -31,11 +31,11 @@ public class Admin {
         var url = Config.getAdminUrl() + String.format("master/%s/delete", id);
 
         var result = executor.execute(Request.Post(url)
-                        .bodyForm(Form.form()
-                                .add("_method", "delete")
-                                .add("reason", "deleted_by_user_request")
-                                .add("comment", "qwe")
-                                .build()))
+                .bodyForm(Form.form()
+                        .add("_method", "delete")
+                        .add("reason", "deleted_by_user_request")
+                        .add("comment", "qwe")
+                        .build()))
                 .returnResponse()
                 .getStatusLine()
                 .getStatusCode();
@@ -83,10 +83,16 @@ public class Admin {
         loginIfNeeded();
         var url = Config.getAdminUrl() + String.format("request/%s/delete", id);
 
-        var result = executor.execute(Request.Get(url))
-                .returnResponse()
-                .getStatusLine()
-                .getStatusCode();
+        var result = executor.execute(Request.Post(url)
+                .bodyForm(Form.form()
+                        .add("data[note]", "test_request")
+                        .add("reason", "deleted_by_user_request")
+                        .add("comment", "qwe")
+                        .build()))
+                        .returnResponse()
+                        .getStatusLine()
+                        .getStatusCode();
+
 
         if (result != 200) {
             logger.info("ADMIN API FAILURE - Customer request with id: {} delete failed", id);
@@ -114,7 +120,7 @@ public class Admin {
     }
 
     public String getSmsUrl(String phoneNumber) throws InterruptedException, IOException {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 15; i++) {
             logger.info("Getting service url for phone number: {}", phoneNumber);
             var smsLog = getSmsLogPage();
             var code = new NewXmlParser(smsLog).getUrl(phoneNumber);
@@ -127,11 +133,11 @@ public class Admin {
             }
         }
 
-        throw new NullPointerException("No SMS code found after 10 attempts");
+        throw new NullPointerException("No SMS code found after 15 attempts");
     }
 
     public String getSmsCode(String phoneNumber) throws InterruptedException, IOException {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 15; i++) {
             logger.info("Getting SMS code for phone number: {}", phoneNumber);
             var smsLog = getSmsLogPage();
             var code = new NewXmlParser(smsLog).getSmsCode(phoneNumber);
@@ -144,7 +150,7 @@ public class Admin {
             }
         }
 
-        throw new NullPointerException("No SMS code found after 10 attempts");
+        throw new NullPointerException("No SMS code found after 15 attempts");
     }
 
     public String getSmsPassword(String phoneNumber) throws InterruptedException, IOException {

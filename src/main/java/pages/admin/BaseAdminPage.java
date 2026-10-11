@@ -45,6 +45,11 @@ public class BaseAdminPage extends PageObject {
     }
 
     public void waitForQuickSearchIsVisible() {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         withTimeoutOf(Duration.ofSeconds(25)).waitFor(quickSearchInput).isPresent();
     }
 

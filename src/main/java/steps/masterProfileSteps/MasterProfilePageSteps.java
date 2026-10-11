@@ -32,7 +32,7 @@ public class MasterProfilePageSteps extends MasterProfileSteps {
 
     @Step
     public void logsOut() {
-        masterProfilePage.logsOut();
+        masterProfilePage.clickLogout();
     }
 
     @Step
