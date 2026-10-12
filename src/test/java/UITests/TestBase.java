@@ -120,7 +120,7 @@ public class TestBase {
                 Admin.getInstance().deletePromotionAndClick(category.getPromotionAndClickId());
             }
             if (category.getRequestInnerId() != null) {
-                Admin.getInstance().deleteRequest(category.getSystemId());
+                Admin.getInstance().deleteRequest(category.getRequestInnerId());
             }
             if (category.getService().getId() != null) {
                 Admin.getInstance().deleteUstaborService(category.getService().getId());
