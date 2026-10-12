@@ -31,7 +31,7 @@ public class MasterChangePasswordTest extends TestBase {
         var newPassword = DataGenerator.getPassword();
         user.atMasterProfileSettingsPage.changePassword(newPassword);
 
-        user.atMasterProfilePage.logsOut();
+        user.atMasterProfilePage.logsOutWithTopMenu();
         user.atHomePage.loginIfNeeded(master);
         user.atHomePage.verifyUserIsLoggedOut();
 

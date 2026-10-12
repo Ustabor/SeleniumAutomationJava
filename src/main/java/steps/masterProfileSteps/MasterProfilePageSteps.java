@@ -36,6 +36,11 @@ public class MasterProfilePageSteps extends MasterProfileSteps {
     }
 
     @Step
+    public void logsOutWithTopMenu() {
+        masterProfilePage.logsOut();
+    }
+
+    @Step
     public void verifyMasterCity(String city) {
         masterProfilePage.verifyMasterCity(city);
     }
