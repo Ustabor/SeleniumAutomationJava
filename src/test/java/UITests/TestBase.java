@@ -82,7 +82,11 @@ public class TestBase {
             }
         }
 
-        admin.atCronePage.performCategoriesUpdate();
+        if (annotation != null)
+        {
+            admin.atCronePage.performCategoriesUpdate();
+            Thread.sleep(10000);
+        }
 
         user.atHomePage.openHomePage();
         setCountryLanguageAndLocation();
