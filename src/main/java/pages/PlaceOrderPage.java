@@ -4,6 +4,8 @@ import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.regex.Pattern;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PlaceOrderPage extends BasePage {
@@ -146,13 +148,20 @@ public class PlaceOrderPage extends BasePage {
         fillRequestButton.click();
     }
 
-    public String getRequestId() {
-        var splitUrl = getDriver().getCurrentUrl().split("/");
-        return splitUrl[splitUrl.length - 2];
-    }
-
     public void verifyMastersCountMoreThan(int i) {
         var count = Integer.parseInt(mastersCount.getText());
         assertThat(count).isGreaterThan(i);
+    }
+
+    public String getRequestInnerId() {
+        var url = getDriver().getCurrentUrl();
+        var pattern = Pattern.compile("/request/(\\d+)/created");
+        var matcher = pattern.matcher(url);
+
+        if (matcher.find()) {
+            return matcher.group(1);
+        } else {
+            return "";
+        }
     }
 }

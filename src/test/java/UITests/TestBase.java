@@ -161,12 +161,10 @@ public class TestBase {
         users.add(guest);
 
         user.atHomePage.openPlaceOrderPage();
-        user.atPlaceOrderPage.placeOrder(guest, category);
+        var requestInnerId = user.atPlaceOrderPage.placeOrder(guest, category);
         user.atCustomerProfilePersonalInfoPage.openCustomerProfilePage();
         user.atPlaceOrderPage.openRequestsPage();
 
-        var requestInnerId = user.atCustomerProfileRequestsPage.getRequestInnerId();
-        category.setRequestInnerId(requestInnerId);
         var requestOuterId = user.atCustomerProfileRequestsPage.getRequestOuterId();
 
         if (logout) {

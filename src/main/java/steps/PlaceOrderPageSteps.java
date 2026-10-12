@@ -22,7 +22,7 @@ public class PlaceOrderPageSteps extends UIInteractions {
     }
 
     @Step
-    public void placeOrder(User customer, Category category) throws InterruptedException, IOException {
+    public String placeOrder(User customer, Category category) throws InterruptedException, IOException {
         var request = XmlParser.getTextByKey("Service");
         var question = XmlParser.getTextByKey("Question_main");
 
@@ -41,6 +41,10 @@ public class PlaceOrderPageSteps extends UIInteractions {
         customer.setPassword(password);
 
         verifySuccessPageIsVisible();
+
+        var requestInnerId = placeOrderPage.getRequestInnerId();
+        category.setRequestInnerId(requestInnerId);
+
         clickFillRequest();
 
         selectCategory(category);
@@ -52,6 +56,7 @@ public class PlaceOrderPageSteps extends UIInteractions {
         clickPlaceOrder();
 
         verifySuccessPageIsVisible();
+        return requestInnerId;
     }
 
     @Step
@@ -170,7 +175,7 @@ public class PlaceOrderPageSteps extends UIInteractions {
     }
 
     public String getRequestId() {
-        return placeOrderPage.getRequestId();
+        return placeOrderPage.getRequestInnerId();
     }
 
     @Step

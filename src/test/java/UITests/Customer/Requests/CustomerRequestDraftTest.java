@@ -38,6 +38,7 @@ public class CustomerRequestDraftTest extends TestBase {
 
         user.atPlaceOrderPage.verifySuccessPageIsVisible();
         var requestId = user.atPlaceOrderPage.getRequestId();
+        category.setRequestInnerId(requestId);
 
         admin.atRequestsPage.openEditRequestById(requestId);
         admin.atRequestsPage.fillRequest(category);
